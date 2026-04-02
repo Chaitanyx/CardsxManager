@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import creditCardsData from "../../../data/creditCards";
 import { useCards } from "../../../hooks/useCards";
@@ -30,6 +30,7 @@ export default function CardDetailPage() {
   const cardId = params?.id as string;
   const { cards, updateCard, removeCard } = useCards();
   const { transactions, addTransaction, removeTransactions, updateTransaction, removeTransaction } = useTransactions();
+  const [isMounted, setIsMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<"unbilled" | "billed" | "rewards">("unbilled");
   const [showSpendModal, setShowSpendModal] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -48,6 +49,10 @@ export default function CardDetailPage() {
   const [editRewardRate, setEditRewardRate] = useState("");
   const [editRewardRateMode, setEditRewardRateMode] = useState<RewardRateMode>("percent");
   const [editRewardUnit, setEditRewardUnit] = useState("points");
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const card = cards.find((item) => item.id === cardId);
   const cardData = useMemo(
@@ -76,6 +81,14 @@ export default function CardDetailPage() {
   const showFeeWaiverTracker = !isCardLtf && configuredAnnualFee > 0 && feeWaiverTarget > 0;
   const sharedLimitSummary = card ? getSharedLimitSummary(cards, transactions, card) : null;
   const dueDate = card ? calculateDueDate(card.statementDate, card.gracePeriodDays) : null;
+
+  if (!isMounted) {
+    return (
+      <section className="glass-panel p-10 text-neutral-500 text-center">
+        Loading card details...
+      </section>
+    );
+  }
 
   if (!card) {
     return (

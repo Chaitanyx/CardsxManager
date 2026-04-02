@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Pie, PieChart, ResponsiveContainer, Tooltip, Cell, Legend } from "recharts";
 import { useCards } from "../hooks/useCards";
 import { useTransactions } from "../hooks/useTransactions";
@@ -17,6 +17,11 @@ export default function Home() {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const [activeSpendCardId, setActiveSpendCardId] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const activeSpendCard = useMemo(
     () => cards.find((card) => card.id === activeSpendCardId) ?? null,
@@ -32,6 +37,14 @@ export default function Home() {
   }, [transactions]);
 
   const categoryColors = ["#0ea5e9", "#22c55e", "#f97316", "#e11d48", "#6366f1", "#14b8a6", "#facc15"];
+
+  if (!isMounted) {
+    return (
+      <section className="p-8 max-w-5xl mx-auto">
+        <div className="glass-panel p-6 text-neutral-500">Loading cards...</div>
+      </section>
+    );
+  }
 
   return (
     <section className="p-8 max-w-5xl mx-auto">
