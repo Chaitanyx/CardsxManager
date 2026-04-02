@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import creditCardsData from "../../data/creditCards";
-import { Transaction, UserCard } from "../../types";
+import { BankCardData, Transaction, UserCard } from "../../types";
 import { getCategoryMeta, spendCategories } from "../../lib/categoryMeta";
 import { getRewardTabLabel } from "../../lib/rewardDisplay";
 
@@ -34,7 +34,7 @@ export default function AddSpendModal({
   onAdd: (tx: Transaction) => void;
 }) {
   const bankCard = useMemo(
-    () => (creditCardsData as any[]).find((item) => item.id === card.bankCardId),
+    () => (creditCardsData as BankCardData[]).find((item) => item.id === card.bankCardId),
     [card.bankCardId]
   );
 
@@ -55,7 +55,7 @@ export default function AddSpendModal({
     if (!bankCard) return [];
 
     if (card.type === "cashback") {
-      const presets = bankCard.rewardStructure?.accelerated?.map((item: any) => ({
+      const presets = bankCard.rewardStructure?.accelerated?.map((item) => ({
         label: `${item.category} - ${item.rate}%`,
         value: String(item.rate),
         mode: "percent" as const,

@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Transaction } from '../types';
 import { getStoredTransactions, saveTransactions } from '../lib/storage';
 
 export function useTransactions() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-  useEffect(() => {
-    setTransactions(getStoredTransactions());
-  }, []);
+  const [transactions, setTransactions] = useState<Transaction[]>(() => getStoredTransactions());
 
   const addTransaction = (transaction: Transaction) => {
     const updated = [...transactions, transaction];

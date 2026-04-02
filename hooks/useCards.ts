@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { UserCard } from '../types';
 import { getStoredCards, saveCards } from '../lib/storage';
 
 export function useCards() {
-  const [cards, setCards] = useState<UserCard[]>([]);
-
-  useEffect(() => {
-    setCards(getStoredCards());
-  }, []);
+  const [cards, setCards] = useState<UserCard[]>(() => getStoredCards());
 
   const addCard = (card: UserCard) => {
     const updatedCards = [...cards, card];

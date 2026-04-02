@@ -1,4 +1,4 @@
-import { getDate, setDate, addMonths, subMonths, isAfter, isEqual, isBefore } from 'date-fns';
+import { getDate, setDate, subMonths, isAfter, isEqual, isBefore } from 'date-fns';
 import { Transaction, UserCard } from '../types';
 
 export function getLastStatementDate(statementDay: number, referenceDate: Date = new Date()) {

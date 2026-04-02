@@ -10,7 +10,7 @@ import { CardIllustration } from "../../../components/cards/CardIllustration";
 import AddSpendModal from "../../../components/cards/AddSpendModal";
 import { RewardHistory } from "../../../components/detail/RewardHistory";
 import { TransactionList } from "../../../components/detail/TransactionList";
-import { CardNetwork, CardType, RewardRateMode, Transaction } from "../../../types";
+import { BankCardData, CardNetwork, CardType, RewardRateMode, Transaction } from "../../../types";
 import { getSharedLimitSummary } from "../../../lib/limitSharing";
 import { spendCategories } from "../../../lib/categoryMeta";
 import { getRewardTabLabel } from "../../../lib/rewardDisplay";
@@ -51,7 +51,7 @@ export default function CardDetailPage() {
 
   const card = cards.find((item) => item.id === cardId);
   const cardData = useMemo(
-    () => (creditCardsData as any[]).find((item) => item.id === card?.bankCardId),
+    () => (creditCardsData as BankCardData[]).find((item) => item.id === card?.bankCardId),
     [card?.bankCardId]
   );
 
@@ -63,6 +63,17 @@ export default function CardDetailPage() {
   const unbilledTotal = unbilled.reduce((acc, tx) => acc + tx.amount, 0);
   const billedTotal = billed.reduce((acc, tx) => acc + tx.amount, 0);
   const totalRewardsReceived = cardTransactions.reduce((acc, tx) => acc + (tx.rewardEarned ?? 0), 0);
+  const totalCardSpend = cardTransactions.reduce((acc, tx) => acc + tx.amount, 0);
+  const configuredAnnualFee = card?.annualFee ?? cardData?.annualFee ?? 0;
+  const isCardLtf = card?.isLtf ?? configuredAnnualFee === 0;
+  const feeWaiverTarget = card?.annualFeeWaiverTarget ?? (configuredAnnualFee > 0 ? configuredAnnualFee * 100 : 0);
+  const includePastCumulativeSpend = card?.includePastCumulativeSpend ?? false;
+  const pastCumulativeSpend = card?.pastCumulativeSpend ?? 0;
+  const effectiveWaiverSpend = totalCardSpend + (includePastCumulativeSpend ? pastCumulativeSpend : 0);
+  const restoredAnnualFee = configuredAnnualFee > 0 ? configuredAnnualFee : cardData?.annualFee ?? 0;
+  const restoredWaiverTarget = feeWaiverTarget > 0 ? feeWaiverTarget : restoredAnnualFee > 0 ? restoredAnnualFee * 100 : 0;
+  const feeWaiverRemaining = Math.max(feeWaiverTarget - effectiveWaiverSpend, 0);
+  const showFeeWaiverTracker = !isCardLtf && configuredAnnualFee > 0 && feeWaiverTarget > 0;
   const sharedLimitSummary = card ? getSharedLimitSummary(cards, transactions, card) : null;
   const dueDate = card ? calculateDueDate(card.statementDate, card.gracePeriodDays) : null;
 
@@ -79,6 +90,22 @@ export default function CardDetailPage() {
       </section>
     );
   }
+
+  const networkOptions = Array.from(
+    new Set<CardNetwork>([
+      ...((cardData?.networks as CardNetwork[] | undefined) ?? []),
+      ...(Object.keys(networkVariants) as CardNetwork[]),
+      card.network
+    ])
+  );
+
+  const subNetworkOptions = Array.from(
+    new Set<string>([
+      ...((cardData?.subNetworks?.[card.network] as string[] | undefined) ?? []),
+      ...(networkVariants[card.network] ?? []),
+      card.subNetwork
+    ])
+  );
 
   const handleClearDues = () => {
     if (billed.length === 0 || isClearing) return;
@@ -153,8 +180,8 @@ export default function CardDetailPage() {
       <div className="space-y-5">
         <CardIllustration
           card={card}
-          annualFee={card.annualFee ?? cardData?.annualFee ?? 0}
-          isLtf={card.isLtf ?? (card.annualFee ?? cardData?.annualFee ?? 0) === 0}
+          annualFee={configuredAnnualFee}
+          isLtf={isCardLtf}
           unbilledTotal={unbilledTotal}
           billedTotal={billedTotal}
           totalRewardsReceived={totalRewardsReceived}
@@ -193,6 +220,17 @@ export default function CardDetailPage() {
             <span>Statement Spend</span>
             <span className="font-semibold text-neutral-900">₹{billedTotal.toLocaleString("en-IN")}</span>
           </div>
+          {showFeeWaiverTracker && (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+              {feeWaiverRemaining > 0 ? (
+                <>
+                  Spend more <span className="font-semibold">₹{feeWaiverRemaining.toLocaleString("en-IN")}</span> to waive annual fee.
+                </>
+              ) : (
+                <span className="font-semibold">Annual fee waiver target achieved.</span>
+              )}
+            </div>
+          )}
         </div>
 
         <button
@@ -208,14 +246,24 @@ export default function CardDetailPage() {
               <label className="text-sm font-semibold">Network</label>
               <select
                 value={card.network}
-                onChange={(event) => handleUpdateSettings({ network: event.target.value as CardNetwork })}
+                onChange={(event) => {
+                  const nextNetwork = event.target.value as CardNetwork;
+                  const nextSubNetworkOptions = Array.from(
+                    new Set<string>([
+                      ...((cardData?.subNetworks?.[nextNetwork] as string[] | undefined) ?? []),
+                      ...(networkVariants[nextNetwork] ?? []),
+                      card.subNetwork
+                    ])
+                  );
+                  const nextSubNetwork = nextSubNetworkOptions.includes(card.subNetwork)
+                    ? card.subNetwork
+                    : nextSubNetworkOptions[0] ?? card.subNetwork;
+
+                  handleUpdateSettings({ network: nextNetwork, subNetwork: nextSubNetwork });
+                }}
                 className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
               >
-                {cardData?.networks?.map((network: CardNetwork) => (
-                  <option key={network} value={network}>
-                    {network}
-                  </option>
-                )) ?? Object.keys(networkVariants).map((network) => (
+                {networkOptions.map((network) => (
                   <option key={network} value={network}>
                     {network}
                   </option>
@@ -229,13 +277,11 @@ export default function CardDetailPage() {
                 onChange={(event) => handleUpdateSettings({ subNetwork: event.target.value })}
                 className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
               >
-                {(cardData?.subNetworks?.[card.network] ?? networkVariants[card.network] ?? [card.subNetwork]).map(
-                  (variant: string) => (
-                    <option key={variant} value={variant}>
-                      {variant}
-                    </option>
-                  )
-                )}
+                {subNetworkOptions.map((variant: string) => (
+                  <option key={variant} value={variant}>
+                    {variant}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="grid gap-2">
@@ -295,17 +341,20 @@ export default function CardDetailPage() {
                   type="button"
                   onClick={() =>
                     handleUpdateSettings({
-                      isLtf: !(card.isLtf ?? false),
-                      annualFee: !(card.isLtf ?? false) ? 0 : card.annualFee ?? cardData?.annualFee ?? 0
+                      isLtf: !isCardLtf,
+                      annualFee: isCardLtf ? restoredAnnualFee : configuredAnnualFee,
+                      annualFeeWaiverTarget: isCardLtf ? restoredWaiverTarget : 0,
+                      includePastCumulativeSpend: isCardLtf ? includePastCumulativeSpend : false,
+                      pastCumulativeSpend: isCardLtf ? pastCumulativeSpend : 0
                     })
                   }
                   className={`relative h-7 w-14 rounded-full transition ${
-                    card.isLtf ?? false ? "bg-emerald-500" : "bg-neutral-300"
+                    isCardLtf ? "bg-emerald-500" : "bg-neutral-300"
                   }`}
                 >
                   <span
                     className={`absolute top-1 h-5 w-5 rounded-full bg-white transition ${
-                      card.isLtf ?? false ? "left-8" : "left-1"
+                      isCardLtf ? "left-8" : "left-1"
                     }`}
                   />
                 </button>
@@ -315,9 +364,9 @@ export default function CardDetailPage() {
                 <label className="text-sm font-semibold">Annual Fee (before GST)</label>
                 <input
                   type="number"
-                  value={card.isLtf ? 0 : card.annualFee ?? cardData?.annualFee ?? 0}
+                  value={isCardLtf ? 0 : configuredAnnualFee}
                   min={0}
-                  disabled={card.isLtf ?? false}
+                  disabled={isCardLtf}
                   onChange={(event) =>
                     handleUpdateSettings({
                       annualFee: Math.max(Number(event.target.value) || 0, 0),
@@ -327,8 +376,86 @@ export default function CardDetailPage() {
                   className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm disabled:bg-neutral-100 disabled:text-neutral-500"
                 />
                 <p className="text-xs text-neutral-500">
-                  Effective annual fee = ₹{(((card.isLtf ? 0 : card.annualFee ?? cardData?.annualFee ?? 0) * 1.18)).toLocaleString("en-IN")} (includes 18% GST)
+                  Effective annual fee = ₹{((isCardLtf ? 0 : configuredAnnualFee) * 1.18).toLocaleString("en-IN")} (includes 18% GST)
                 </p>
+              </div>
+
+              {!isCardLtf && (
+                <div className="grid gap-2">
+                  <label className="text-sm font-semibold">Annual Fee Waiver Target Spend</label>
+                  <input
+                    type="number"
+                    value={feeWaiverTarget}
+                    min={0}
+                    onChange={(event) =>
+                      handleUpdateSettings({
+                        annualFeeWaiverTarget: Math.max(Number(event.target.value) || 0, 0)
+                      })
+                    }
+                    className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+                  />
+                  <div className="rounded-xl border border-white/60 bg-white/70 p-3">
+                    <div className="mb-3 flex items-center justify-between">
+                      <div>
+                        <h4 className="text-sm font-semibold">Include Past Cumulative Spend</h4>
+                        <p className="text-xs text-neutral-500">Adds historical spends to reduce remaining waiver target.</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleUpdateSettings({
+                            includePastCumulativeSpend: !includePastCumulativeSpend,
+                            pastCumulativeSpend: !includePastCumulativeSpend ? pastCumulativeSpend : 0
+                          })
+                        }
+                        className={`relative h-7 w-14 rounded-full transition ${
+                          includePastCumulativeSpend ? "bg-emerald-500" : "bg-neutral-300"
+                        }`}
+                      >
+                        <span
+                          className={`absolute top-1 h-5 w-5 rounded-full bg-white transition ${
+                            includePastCumulativeSpend ? "left-8" : "left-1"
+                          }`}
+                        />
+                      </button>
+                    </div>
+                    {includePastCumulativeSpend && (
+                      <div className="grid gap-2">
+                        <label className="text-xs font-semibold text-neutral-600">Past Cumulative Spend</label>
+                        <input
+                          type="number"
+                          min={0}
+                          value={pastCumulativeSpend}
+                          onChange={(event) =>
+                            handleUpdateSettings({
+                              pastCumulativeSpend: Math.max(Number(event.target.value) || 0, 0)
+                            })
+                          }
+                          className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-xs text-neutral-500">
+                    Spent so far: ₹{totalCardSpend.toLocaleString("en-IN")}
+                    {includePastCumulativeSpend && ` + ₹${pastCumulativeSpend.toLocaleString("en-IN")} (past)`}. Remaining: ₹
+                    {feeWaiverRemaining.toLocaleString("en-IN")}.
+                  </p>
+                </div>
+              )}
+
+              <div className="grid gap-2">
+                <label className="text-sm font-semibold">Card Opening / Renewal Month</label>
+                <input
+                  type="month"
+                  value={card.renewalMonth ?? card.createdAt.slice(0, 7)}
+                  onChange={(event) =>
+                    handleUpdateSettings({
+                      renewalMonth: event.target.value
+                    })
+                  }
+                  className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+                />
               </div>
             </div>
             <div className="grid gap-2">

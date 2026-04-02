@@ -210,6 +210,10 @@ export default function AddCardModal({
       creditLimit,
       annualFee: selectedCard.annualFee,
       isLtf: selectedCard.annualFee === 0,
+      annualFeeWaiverTarget: selectedCard.annualFee > 0 ? selectedCard.annualFee * 100 : 0,
+      includePastCumulativeSpend: false,
+      pastCumulativeSpend: 0,
+      renewalMonth: new Date().toISOString().slice(0, 7),
       sharedLimitGroupId,
       color: selectedCard.color as [string, string],
       createdAt: new Date().toISOString()

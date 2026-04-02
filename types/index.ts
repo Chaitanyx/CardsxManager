@@ -44,6 +44,10 @@ export interface UserCard {
   creditLimit: number;
   annualFee?: number;
   isLtf?: boolean;
+  annualFeeWaiverTarget?: number;
+  includePastCumulativeSpend?: boolean;
+  pastCumulativeSpend?: number;
+  renewalMonth?: string;
   sharedLimitGroupId?: string;
   color: [string, string];
   createdAt: string;

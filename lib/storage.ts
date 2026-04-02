@@ -11,6 +11,19 @@ function normalizeCard(card: UserCard): UserCard {
       ? Math.max(card.annualFee, 0)
       : 0;
   const normalizedIsLtf = card.isLtf ?? normalizedAnnualFee === 0;
+  const defaultWaiverTarget = normalizedIsLtf ? 0 : Math.max(normalizedAnnualFee * 100, 0);
+  const normalizedWaiverTarget =
+    typeof card.annualFeeWaiverTarget === "number" && Number.isFinite(card.annualFeeWaiverTarget)
+      ? Math.max(card.annualFeeWaiverTarget, 0)
+      : defaultWaiverTarget;
+  const normalizedPastCumulativeSpend =
+    typeof card.pastCumulativeSpend === "number" && Number.isFinite(card.pastCumulativeSpend)
+      ? Math.max(card.pastCumulativeSpend, 0)
+      : 0;
+  const normalizedRenewalMonth =
+    typeof card.renewalMonth === "string" && /^\d{4}-\d{2}$/.test(card.renewalMonth)
+      ? card.renewalMonth
+      : card.createdAt?.slice(0, 7) ?? new Date().toISOString().slice(0, 7);
 
   const normalizedLast4 = (card.last4 ?? card.id.slice(-4) ?? "0000")
     .replace(/\D/g, "")
@@ -22,8 +35,12 @@ function normalizeCard(card: UserCard): UserCard {
     last4: normalizedLast4,
     gracePeriodDays: card.gracePeriodDays ?? 20,
     dueDate: card.dueDate ?? 0,
-    annualFee: normalizedIsLtf ? 0 : normalizedAnnualFee,
+    annualFee: normalizedAnnualFee,
     isLtf: normalizedIsLtf,
+    annualFeeWaiverTarget: normalizedIsLtf ? 0 : normalizedWaiverTarget,
+    includePastCumulativeSpend: card.includePastCumulativeSpend ?? false,
+    pastCumulativeSpend: normalizedPastCumulativeSpend,
+    renewalMonth: normalizedRenewalMonth,
     sharedLimitGroupId: card.sharedLimitGroupId ?? undefined,
   };
 }
