@@ -1,0 +1,825 @@
+[
+  {
+    "id": "hdfc-infinia",
+    "bank": "HDFC Bank",
+    "name": "Infinia Metal Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 12500,
+    "joiningFee": 12500,
+    "rewardStructure": {
+      "baseRate": 5,
+      "accelerated": [
+        {
+          "category": "Travel (SmartBuy)",
+          "rate": 10,
+          "unit": "points per INR 150"
+        },
+        {
+          "category": "Dining",
+          "rate": 5,
+          "unit": "points per INR 150"
+        }
+      ],
+      "pointValue": 0.5,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Statement Credit",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 22,
+    "gracePeriodDays": 20,
+    "color": [
+      "#07111f",
+      "#d4af37"
+    ],
+    "features": [
+      "5 points per INR 150 on retail spends",
+      "10x SmartBuy rewards",
+      "Airport lounge access"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-regalia-gold",
+    "bank": "HDFC Bank",
+    "name": "Regalia Gold Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 2500,
+    "joiningFee": 2500,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [
+        {
+          "category": "SmartBuy Hotels & Flights",
+          "rate": 10,
+          "unit": "points per INR 150"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#d4a373"
+    ],
+    "features": [
+      "SmartBuy accelerators",
+      "Lounge access",
+      "Milestone rewards"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature",
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-regalia",
+    "bank": "HDFC Bank",
+    "name": "Regalia Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 2500,
+    "joiningFee": 2500,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#2563eb"
+    ],
+    "features": [
+      "Reward points on retail spends",
+      "Lounge access",
+      "Travel perks"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature",
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-diners-club-privilege",
+    "bank": "HDFC Bank",
+    "name": "Diners Club Privilege Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Diners Club",
+    "preferredSubNetwork": "Privilege",
+    "annualFee": 2500,
+    "joiningFee": 2500,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 17,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#0ea5e9"
+    ],
+    "features": [
+      "Dining rewards",
+      "Travel perks",
+      "Lounge access"
+    ],
+    "networks": [
+      "Diners Club"
+    ],
+    "subNetworks": {
+      "Diners Club": [
+        "Privilege"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-tata-neu-infinity",
+    "bank": "HDFC Bank",
+    "name": "Tata Neu Infinity HDFC Bank Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Select",
+    "annualFee": 1499,
+    "joiningFee": 1499,
+    "rewardStructure": {
+      "baseRate": 1.5,
+      "accelerated": [
+        {
+          "category": "Partner brands",
+          "rate": 10,
+          "unit": "% NeuCoins"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "NeuCoins",
+      "redemption": [
+        "Tata Neu",
+        "Partner merchants"
+      ]
+    },
+    "statementDate": 13,
+    "gracePeriodDays": 20,
+    "color": [
+      "#4c1d95",
+      "#2563eb"
+    ],
+    "features": [
+      "NeuCoins on Tata brands",
+      "Lounge access",
+      "Comprehensive insurance"
+    ],
+    "networks": [
+      "RuPay",
+      "Visa"
+    ],
+    "subNetworks": {
+      "RuPay": [
+        "Select"
+      ],
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-tata-neu-plus",
+    "bank": "HDFC Bank",
+    "name": "Tata Neu Plus HDFC Bank Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 499,
+    "joiningFee": 499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Tata Neu spends",
+          "rate": 2,
+          "unit": "% NeuCoins"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "NeuCoins",
+      "redemption": [
+        "Tata Neu",
+        "Partner merchants"
+      ]
+    },
+    "statementDate": 5,
+    "gracePeriodDays": 20,
+    "color": [
+      "#8b5cf6",
+      "#7c3aed"
+    ],
+    "features": [
+      "NeuCoins earning",
+      "Lounge access",
+      "Partner brand benefits"
+    ],
+    "networks": [
+      "RuPay",
+      "Visa"
+    ],
+    "subNetworks": {
+      "RuPay": [
+        "Platinum",
+        "Select"
+      ],
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-millennia",
+    "bank": "HDFC Bank",
+    "name": "Millennia Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 1000,
+    "joiningFee": 1000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Select merchants",
+          "rate": 5,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 16,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#3b82f6"
+    ],
+    "features": [
+      "5% on select merchants",
+      "Cashback as statement credit",
+      "Quarterly milestones"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-indigo-6e-rewards",
+    "bank": "HDFC Bank",
+    "name": "IndiGo 6E Rewards Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "IndiGo bookings",
+          "rate": 6,
+          "unit": "6E Rewards per INR 100"
+        },
+        {
+          "category": "Partner travel spends",
+          "rate": 2,
+          "unit": "6E Rewards per INR 100"
+        }
+      ],
+      "pointValue": 0.5,
+      "pointUnit": "6E Rewards",
+      "redemption": [
+        "Flight tickets",
+        "Seat upgrades",
+        "Priority services"
+      ]
+    },
+    "statementDate": 10,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#f97316"
+    ],
+    "features": [
+      "6E Rewards on IndiGo",
+      "Travel benefits",
+      "Priority check-in"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-irctc",
+    "bank": "HDFC Bank",
+    "name": "IRCTC HDFC Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "IRCTC bookings",
+          "rate": 5,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Railway and travel spends",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Train tickets",
+        "Railway catering",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 27,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#f59e0b"
+    ],
+    "features": [
+      "Railway booking rewards",
+      "IRCTC-specific benefits",
+      "Fuel surcharge waiver"
+    ],
+    "networks": [
+      "RuPay",
+      "Visa"
+    ],
+    "subNetworks": {
+      "RuPay": [
+        "Platinum"
+      ],
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-swiggy-blck",
+    "bank": "HDFC Bank",
+    "name": "Swiggy BLCK HDFC Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Swiggy",
+          "rate": 10,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Online spends",
+          "rate": 5,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0b0f14",
+      "#3f3f46"
+    ],
+    "features": [
+      "10% on Swiggy",
+      "5% on select online brands",
+      "Black edition visual theme"
+    ],
+    "networks": [
+      "Mastercard",
+      "Visa",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ],
+      "Visa": [
+        "Signature"
+      ],
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-swiggy-ornge",
+    "bank": "HDFC Bank",
+    "name": "Swiggy ORNGE HDFC Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Swiggy",
+          "rate": 10,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Online spends",
+          "rate": 5,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": [
+      "#f97316",
+      "#fdba74"
+    ],
+    "features": [
+      "10% on Swiggy",
+      "5% on select online brands",
+      "Orange edition visual theme"
+    ],
+    "networks": [
+      "Mastercard",
+      "Visa",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ],
+      "Visa": [
+        "Signature"
+      ],
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-swiggy",
+    "bank": "HDFC Bank",
+    "name": "Swiggy HDFC Bank Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Swiggy",
+          "rate": 10,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Online Spends",
+          "rate": 5,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": [
+      "#f15700",
+      "#ff864b"
+    ],
+    "features": [
+      "10% on Swiggy",
+      "5% on select online brands",
+      "Swiggy One membership"
+    ],
+    "networks": [
+      "Mastercard",
+      "Visa",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ],
+      "Visa": [
+        "Signature"
+      ],
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-moneyback-plus",
+    "bank": "HDFC Bank",
+    "name": "MoneyBack+ Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Online spends",
+          "rate": 2,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Wallet and utility spends",
+          "rate": 1,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#14b8a6"
+    ],
+    "features": [
+      "Cashback-style rewards",
+      "Online spend benefits",
+      "Low annual fee"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-moneyback",
+    "bank": "HDFC Bank",
+    "name": "MoneyBack Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Online transactions",
+          "rate": 2,
+          "unit": "points per INR 150"
+        },
+        {
+          "category": "Weekend dining",
+          "rate": 5,
+          "unit": "points per INR 150"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#60a5fa"
+    ],
+    "features": [
+      "Everyday spend rewards",
+      "Online purchase points",
+      "Simple fee structure"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-freedom",
+    "bank": "HDFC Bank",
+    "name": "Freedom Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Department stores",
+          "rate": 5,
+          "unit": "points per INR 150"
+        },
+        {
+          "category": "Dining and groceries",
+          "rate": 5,
+          "unit": "points per INR 150"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 8,
+    "gracePeriodDays": 20,
+    "color": [
+      "#991b1b",
+      "#1d4ed8"
+    ],
+    "features": [
+      "Low-fee rewards card",
+      "Weekend spending benefits",
+      "Fuel surcharge waiver"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "hdfc-indianoil",
+    "bank": "HDFC Bank",
+    "name": "IndianOil HDFC Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "IndianOil fuel",
+          "rate": 5,
+          "unit": "points per INR 150"
+        },
+        {
+          "category": "Utilities and groceries",
+          "rate": 2,
+          "unit": "points per INR 150"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Fuel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#f97316"
+    ],
+    "features": [
+      "Fuel rewards on IndianOil",
+      "Surcharge waiver",
+      "Everyday spend points"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "World"
+      ],
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  }
+]

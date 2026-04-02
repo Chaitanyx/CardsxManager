@@ -1,0 +1,354 @@
+[
+  {
+    "id": "sbi-aurum",
+    "bank": "SBI Card",
+    "name": "AURUM Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 9999,
+    "joiningFee": 9999,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [
+        { "category": "International spends", "rate": 2, "unit": "points per INR 100" }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["AURUM Reward Portal", "Air Miles", "E-vouchers"]
+    },
+    "statementDate": 1,
+    "gracePeriodDays": 20,
+    "color": ["#111111", "#d4af37"],
+    "features": ["Invite-only super premium card", "Unlimited international lounge access", "Taj Epicure & EazyDiner Prime membership"],
+    "networks": ["Visa"],
+    "subNetworks": { "Visa": ["Infinite"] }
+  },
+  {
+    "id": "sbi-elite",
+    "bank": "SBI Card",
+    "name": "SBI Card ELITE",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 4999,
+    "joiningFee": 4999,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        { "category": "Dining, Departmental & Groceries", "rate": 10, "unit": "points per INR 100" }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["Vouchers", "Statement Credit", "Travel"]
+    },
+    "statementDate": 6,
+    "gracePeriodDays": 20,
+    "color": ["#94a3b8", "#cbd5e1"],
+    "features": ["Free movie tickets worth ₹6,000/year", "Domestic & international lounge access", "Club Vistara Silver Tier membership"],
+    "networks": ["Visa", "Mastercard", "Amex"],
+    "subNetworks": { "Visa": ["Signature"], "Mastercard": ["World"], "Amex": ["Platinum"] }
+  },
+  {
+    "id": "sbi-prime",
+    "bank": "SBI Card",
+    "name": "SBI Card PRIME",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 2999,
+    "joiningFee": 2999,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        { "category": "Utility bill payments", "rate": 20, "unit": "points per INR 100" },
+        { "category": "Dining & Groceries", "rate": 10, "unit": "points per INR 100" }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["Vouchers", "Statement Credit"]
+    },
+    "statementDate": 14,
+    "gracePeriodDays": 20,
+    "color": ["#1e3a8a", "#2563eb"],
+    "features": ["Trident Privilege Red Tier membership", "Lounge access (Domestic & International)", "Milestone e-gift vouchers"],
+    "networks": ["Visa", "Mastercard", "Amex"],
+    "subNetworks": { "Visa": ["Signature"], "Mastercard": ["World"], "Amex": ["Platinum"] }
+  },
+  {
+    "id": "sbi-tata-platinum",
+    "bank": "SBI Card",
+    "name": "Tata Platinum SBI Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 2999,
+    "joiningFee": 2999,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "Tata Outlets", "rate": 5, "unit": "points per INR 100" },
+        { "category": "Grocery & Dining", "rate": 3, "unit": "points per INR 100" }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Empower Points",
+      "redemption": ["Tata stores", "Vouchers"]
+    },
+    "statementDate": 10,
+    "gracePeriodDays": 20,
+    "color": ["#1e293b", "#38bdf8"],
+    "features": ["Value back on Tata brand spends", "Complimentary lounge access", "Fuel surcharge waiver"],
+    "networks": ["Visa"],
+    "subNetworks": { "Visa": ["Signature"] }
+  },
+  {
+    "id": "sbi-irctc-premier",
+    "bank": "SBI Card",
+    "name": "IRCTC SBI Card Premier",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 1499,
+    "joiningFee": 1499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "IRCTC AC ticket bookings", "rate": 10, "unit": "% Value back" }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Reward Points",
+      "redemption": ["Free train tickets"]
+    },
+    "statementDate": 22,
+    "gracePeriodDays": 20,
+    "color": ["#4c1d95", "#6b7280"],
+    "features": ["8 complimentary railway lounge visits", "Air accident cover of ₹50L", "Milestone reward points"],
+    "networks": ["Visa"],
+    "subNetworks": { "Visa": ["Signature"] }
+  },
+  {
+    "id": "sbi-bpcl-octane",
+    "bank": "SBI Card",
+    "name": "BPCL SBI Card OCTANE",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 1499,
+    "joiningFee": 1499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "BPCL Fuel", "rate": 25, "unit": "points per INR 100" }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["Fuel at BPCL outlets"]
+    },
+    "statementDate": 16,
+    "gracePeriodDays": 20,
+    "color": ["#374151", "#f97316"],
+    "features": ["7.25% value back on fuel", "Domestic lounge access", "Fraud liability cover"],
+    "networks": ["Visa"],
+    "subNetworks": { "Visa": ["Signature"] }
+  },
+  {
+    "id": "sbi-pulse",
+    "bank": "SBI Card",
+    "name": "SBI Card PULSE",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 1499,
+    "joiningFee": 1499,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        { "category": "Pharmacies & Chemist", "rate": 10, "unit": "points per INR 100" }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["Statement Credit", "Vouchers"]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 20,
+    "color": ["#0ea5e9", "#f8fafc"],
+    "features": ["Noise Smartwatch on joining", "Fitpass Pro membership", "Complimentary health check-up"],
+    "networks": ["Visa"],
+    "subNetworks": { "Visa": ["Signature"] }
+  },
+  {
+    "id": "sbi-cashback",
+    "bank": "SBI Card",
+    "name": "Cashback SBI Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 999,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "Online spends", "rate": 5, "unit": "% Cashback" }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": ["Statement Credit"]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 15,
+    "color": ["#1a438c", "#2d5eb3"],
+    "features": ["Flat 5% online cashback", "No merchant restrictions", "Complimentary domestic lounge access"],
+    "networks": ["Visa"],
+    "subNetworks": { "Visa": ["Signature"] }
+  },
+  {
+    "id": "sbi-irctc-platinum",
+    "bank": "SBI Card",
+    "name": "IRCTC SBI Platinum Card",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "IRCTC bookings", "rate": 10, "unit": "% Value back" }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Reward Points",
+      "redemption": ["Free train tickets"]
+    },
+    "statementDate": 25,
+    "gracePeriodDays": 20,
+    "color": ["#1e40af", "#cbd5e1"],
+    "features": ["Zero payment gateway charges on IRCTC", "Fuel surcharge waiver", "RuPay network benefits"],
+    "networks": ["RuPay", "Visa"],
+    "subNetworks": { "RuPay": ["Platinum"], "Visa": ["Platinum"] }
+  },
+  {
+    "id": "sbi-tata-plus",
+    "bank": "SBI Card",
+    "name": "Tata Reward Plus SBI Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 499,
+    "joiningFee": 499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "Tata Outlets", "rate": 3, "unit": "points per INR 100" }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Empower Points",
+      "redemption": ["Tata stores"]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": ["#4c1d95", "#94a3b8"],
+    "features": ["Fuel surcharge waiver", "Milestone bonus points", "Entry-level Tata benefits"],
+    "networks": ["Visa"],
+    "subNetworks": { "Visa": ["Platinum"] }
+  },
+  {
+    "id": "sbi-apollo",
+    "bank": "SBI Card",
+    "name": "Apollo SBI Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 499,
+    "joiningFee": 499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "Apollo services", "rate": 3, "unit": "points per INR 100" }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Reward Points",
+      "redemption": ["Apollo vouchers"]
+    },
+    "statementDate": 18,
+    "gracePeriodDays": 20,
+    "color": ["#1e40af", "#ffffff"],
+    "features": ["Complimentary Apollo One membership", "Discounts on diagnostics", "Health-focused rewards"],
+    "networks": ["Visa"],
+    "subNetworks": { "Visa": ["Platinum"] }
+  },
+  {
+    "id": "sbi-bpcl",
+    "bank": "SBI Card",
+    "name": "BPCL SBI Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 499,
+    "joiningFee": 499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "Fuel", "rate": 13, "unit": "points per INR 100" }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["Fuel at BPCL"]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": ["#1e3a8a", "#facc15"],
+    "features": ["4.25% value back on fuel", "Instant joining bonus points", "Everyday grocery rewards"],
+    "networks": ["Visa"],
+    "subNetworks": { "Visa": ["Platinum"] }
+  },
+  {
+    "id": "sbi-simplyclick",
+    "bank": "SBI Card",
+    "name": "SimplyCLICK SBI Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 499,
+    "joiningFee": 499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "Exclusive Online Partners", "rate": 10, "unit": "points per INR 100" }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["Amazon/Cleartrip vouchers"]
+    },
+    "statementDate": 18,
+    "gracePeriodDays": 20,
+    "color": ["#0ea5e9", "#0284c7"],
+    "features": ["Amazon joining voucher", "Milestone e-vouchers", "Great for online shoppers"],
+    "networks": ["Visa", "RuPay"],
+    "subNetworks": { "Visa": ["Platinum"], "RuPay": ["Platinum"] }
+  },
+  {
+    "id": "sbi-simplysave",
+    "bank": "SBI Card",
+    "name": "SimplySAVE SBI Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 499,
+    "joiningFee": 499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        { "category": "Dining & Groceries", "rate": 10, "unit": "points per INR 150" }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["Statement Credit"]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": ["#1e3a8a", "#facc15"],
+    "features": ["Best for offline shopping", "Joining bonus points", "Annual fee waiver on ₹1L spend"],
+    "networks": ["Visa", "RuPay"],
+    "subNetworks": { "Visa": ["Platinum"], "RuPay": ["Platinum"] }
+  }
+]

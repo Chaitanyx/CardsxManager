@@ -1,0 +1,47 @@
+[
+  {
+    "id": "standardchartered-ultimate",
+    "bank": "Standard Chartered",
+    "name": "Ultimate Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 5000,
+    "joiningFee": 5000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Airlines",
+          "rate": 5,
+          "unit": "points per INR 150"
+        }
+      ],
+      "pointValue": 0.3,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Miles transfer"
+      ]
+    },
+    "statementDate": 9,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#0ea5e9"
+    ],
+    "features": [
+      "Lounge access",
+      "Travel insurance",
+      "Priority services"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  }
+]

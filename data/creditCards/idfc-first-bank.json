@@ -1,0 +1,47 @@
+[
+  {
+    "id": "idfc-wealth",
+    "bank": "IDFC FIRST Bank",
+    "name": "IDFC FIRST Wealth Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 0,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Travel & dining",
+          "rate": 3,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 10,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#6366f1"
+    ],
+    "features": [
+      "Complimentary lounge",
+      "Low forex markup",
+      "Lifestyle perks"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  }
+]

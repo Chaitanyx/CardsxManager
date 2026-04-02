@@ -1,0 +1,978 @@
+[
+  {
+    "id": "axis-burgundy-private",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Burgundy Private Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 50000,
+    "joiningFee": 50000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Luxury lifestyle spends",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.5,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Luxury vouchers",
+        "Travel",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 21,
+    "gracePeriodDays": 18,
+    "color": [
+      "#1f0f1b",
+      "#b91c1c"
+    ],
+    "features": [
+      "Private banking privileges",
+      "Luxury concierge",
+      "Top-tier lounge access"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "axis-reserve",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Reserve Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 30000,
+    "joiningFee": 30000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Travel and luxury",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.4,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#7c3aed"
+    ],
+    "features": [
+      "Travel concierge",
+      "Golf access",
+      "Premium dining privileges"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "axis-magnus",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Magnus Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 12500,
+    "joiningFee": 12500,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [
+        {
+          "category": "Travel and lifestyle",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "EDGE Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 19,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#0ea5e9"
+    ],
+    "features": [
+      "Premium lounge access",
+      "Concierge",
+      "Dining benefits"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "axis-atlas",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Atlas Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 5000,
+    "joiningFee": 5000,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [
+        {
+          "category": "Travel bookings",
+          "rate": 5,
+          "unit": "miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "EDGE Miles",
+      "redemption": [
+        "Flights",
+        "Hotels",
+        "Transfer partners"
+      ]
+    },
+    "statementDate": 14,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#22c55e"
+    ],
+    "features": [
+      "EDGE Miles earning",
+      "Travel transfer partners",
+      "Airport benefits"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature",
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "axis-horizon",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Horizon Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 1500,
+    "joiningFee": 1500,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [
+        {
+          "category": "Travel bookings",
+          "rate": 3,
+          "unit": "miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "EDGE Miles",
+      "redemption": [
+        "Flights",
+        "Hotels",
+        "Rewards transfer"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0b1220",
+      "#38bdf8"
+    ],
+    "features": [
+      "Travel miles",
+      "Lifestyle offers",
+      "Airport perks"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "axis-vistara-infinite",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Vistara Infinite Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 10000,
+    "joiningFee": 10000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Vistara spends",
+          "rate": 5,
+          "unit": "miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "CV Points",
+      "redemption": [
+        "Flight rewards",
+        "Upgrades"
+      ]
+    },
+    "statementDate": 13,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#7c3aed"
+    ],
+    "features": [
+      "Club Vistara points",
+      "Priority services",
+      "Airport perks"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "axis-vistara-signature",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Vistara Signature Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 3000,
+    "joiningFee": 3000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Vistara spends",
+          "rate": 3,
+          "unit": "miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "CV Points",
+      "redemption": [
+        "Flight rewards",
+        "Upgrades"
+      ]
+    },
+    "statementDate": 13,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#8b5cf6"
+    ],
+    "features": [
+      "CV points earning",
+      "Airport perks",
+      "Priority services"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-vistara",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Vistara Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 1500,
+    "joiningFee": 1500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Vistara spends",
+          "rate": 2,
+          "unit": "miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "CV Points",
+      "redemption": [
+        "Flight rewards",
+        "Upgrades"
+      ]
+    },
+    "statementDate": 13,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#c084fc"
+    ],
+    "features": [
+      "CV points earning",
+      "Airport perks",
+      "Priority services"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "spicejet-voyage-black",
+    "bank": "Axis Bank",
+    "name": "SpiceJet Axis Bank Voyage Black Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World Elite",
+    "annualFee": 3999,
+    "joiningFee": 3999,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "SpiceJet spends",
+          "rate": 5,
+          "unit": "miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "SpiceClub Points",
+      "redemption": [
+        "Flight rewards",
+        "Seat upgrades"
+      ]
+    },
+    "statementDate": 16,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#f97316"
+    ],
+    "features": [
+      "Travel miles",
+      "Priority boarding",
+      "SpiceClub benefits"
+    ],
+    "networks": [
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World Elite"
+      ]
+    }
+  },
+  {
+    "id": "spicejet-voyage",
+    "bank": "Axis Bank",
+    "name": "SpiceJet Axis Bank Voyage Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 1500,
+    "joiningFee": 1500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "SpiceJet spends",
+          "rate": 3,
+          "unit": "miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "SpiceClub Points",
+      "redemption": [
+        "Flight rewards",
+        "Seat upgrades"
+      ]
+    },
+    "statementDate": 16,
+    "gracePeriodDays": 20,
+    "color": [
+      "#1f2937",
+      "#fb7185"
+    ],
+    "features": [
+      "Travel miles",
+      "Priority services",
+      "Air travel perks"
+    ],
+    "networks": [
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "axis-select",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Select Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 3000,
+    "joiningFee": 3000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Dining and travel",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 10,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#06b6d4"
+    ],
+    "features": [
+      "Dining rewards",
+      "Lounge access",
+      "Lifestyle offers"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-privilege",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Privilege Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 1500,
+    "joiningFee": 1500,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Dining and shopping",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#a855f7"
+    ],
+    "features": [
+      "Privilege offers",
+      "Dining benefits",
+      "Lifestyle rewards"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-gpay-flex",
+    "bank": "Axis Bank",
+    "name": "Google Pay Axis Bank (Flex) Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "UPI and Google Pay",
+          "rate": 5,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 6,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#34d399"
+    ],
+    "features": [
+      "UPI cashback",
+      "Digital-first",
+      "Easy rewards"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-flipkart",
+    "bank": "Axis Bank",
+    "name": "Flipkart Axis Bank Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1.5,
+      "accelerated": [
+        {
+          "category": "Flipkart",
+          "rate": 5,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Preferred partners",
+          "rate": 4,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 8,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#f97316"
+    ],
+    "features": [
+      "5% on Flipkart",
+      "4% on select partners",
+      "Lounge access"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-airtel",
+    "bank": "Axis Bank",
+    "name": "Airtel Axis Bank Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Airtel spends",
+          "rate": 25,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Utilities",
+          "rate": 10,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 5,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#ef4444"
+    ],
+    "features": [
+      "Airtel cashback",
+      "Utilities cashback",
+      "Mobile recharge offers"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-indianoil",
+    "bank": "Axis Bank",
+    "name": "IndianOil Axis Bank Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Fuel spends",
+          "rate": 4,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "IndianOil outlets",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Fuel vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 7,
+    "gracePeriodDays": 20,
+    "color": [
+      "#1e293b",
+      "#0ea5e9"
+    ],
+    "features": [
+      "Fuel rewards",
+      "Surcharge waiver",
+      "Outlet benefits"
+    ],
+    "networks": [
+      "Mastercard",
+      "Visa"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ],
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-cashback",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Cashback Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "All retail spends",
+          "rate": 2,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 4,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#22c55e"
+    ],
+    "features": [
+      "Simple cashback",
+      "Online offers",
+      "Low annual fee"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-ace",
+    "bank": "Axis Bank",
+    "name": "Axis Bank ACE Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 499,
+    "joiningFee": 499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Google Pay",
+          "rate": 5,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Utilities",
+          "rate": 2,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 5,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#38bdf8"
+    ],
+    "features": [
+      "5% on Google Pay",
+      "2% on utilities",
+      "4 lounge visits"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-my-zone",
+    "bank": "Axis Bank",
+    "name": "Axis Bank MY Zone Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Entertainment and dining",
+          "rate": 5,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 9,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#ec4899"
+    ],
+    "features": [
+      "Movie offers",
+      "Dining discounts",
+      "Lifestyle perks"
+    ],
+    "networks": [
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "axis-rewards",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Rewards Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Retail spends",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 3,
+    "gracePeriodDays": 20,
+    "color": [
+      "#1f2937",
+      "#f59e0b"
+    ],
+    "features": [
+      "Classic rewards",
+      "Reward points",
+      "Low fee card"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "axis-neo",
+    "bank": "Axis Bank",
+    "name": "Axis Bank Neo Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 250,
+    "joiningFee": 250,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Online shopping",
+          "rate": 10,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Partner offers",
+          "rate": 5,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 2,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#14b8a6"
+    ],
+    "features": [
+      "Entry cashback",
+      "Online offers",
+      "Digital card support"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  }
+]

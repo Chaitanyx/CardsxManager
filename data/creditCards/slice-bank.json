@@ -1,0 +1,38 @@
+[
+  {
+    "id": "slice-upi-credit-card",
+    "bank": "slice",
+    "name": "slice UPI Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 0,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "UPI, online and everyday merchant spends",
+          "rate": 2,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": ["Statement Credit"]
+    },
+    "statementDate": 7,
+    "gracePeriodDays": 20,
+    "color": ["#111827", "#f59e0b"],
+    "features": [
+      "No annual or joining fee",
+      "Seamless UPI integration for credit payments",
+      "slice in 3 feature (split bills into 3 months at no extra cost)"
+    ],
+    "networks": ["RuPay", "Visa"],
+    "subNetworks": {
+      "RuPay": ["Platinum"],
+      "Visa": ["Platinum"]
+    }
+  }
+]

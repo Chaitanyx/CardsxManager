@@ -1,0 +1,306 @@
+[
+  {
+    "id": "amex-platinum",
+    "bank": "American Express",
+    "name": "Platinum Card",
+    "type": "rewards",
+    "preferredNetwork": "Amex",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 60000,
+    "joiningFee": 60000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "International spends",
+          "rate": 3,
+          "unit": "points per INR 40"
+        },
+        {
+          "category": "Reward Multiplier",
+          "rate": 5,
+          "unit": "points per INR 40"
+        }
+      ],
+      "pointValue": 0.5,
+      "pointUnit": "Membership Rewards Points",
+      "redemption": [
+        "Travel",
+        "Air Miles Transfer",
+        "Fine Hotels & Resorts"
+      ]
+    },
+    "statementDate": 1,
+    "gracePeriodDays": 20,
+    "color": [
+      "#e2e8f0",
+      "#94a3b8"
+    ],
+    "features": [
+      "Unlimited global lounge access",
+      "Marriott Bonvoy & Hilton Honors Elite status",
+      "Taj Epicure & EazyDiner Prime memberships"
+    ],
+    "networks": [
+      "Amex"
+    ],
+    "subNetworks": {
+      "Amex": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "amex-platinum-reserve",
+    "bank": "American Express",
+    "name": "Platinum Reserve Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Amex",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 10000,
+    "joiningFee": 5000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Monthly milestone (₹50k spend)",
+          "rate": 500,
+          "unit": "INR voucher"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Membership Rewards Points",
+      "redemption": [
+        "Travel",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 10,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#334155"
+    ],
+    "features": [
+      "Taj Epicure membership",
+      "Domestic lounge access",
+      "Golf and movie benefits"
+    ],
+    "networks": [
+      "Amex"
+    ],
+    "subNetworks": {
+      "Amex": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "amex-platinum-travel",
+    "bank": "American Express",
+    "name": "Platinum Travel Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Amex",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 5000,
+    "joiningFee": 5000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Annual milestone (₹1.9L)",
+          "rate": 7500,
+          "unit": "bonus points"
+        },
+        {
+          "category": "Annual milestone (₹4L)",
+          "rate": 10000,
+          "unit": "bonus points"
+        },
+        {
+          "category": "Annual milestone (₹7L)",
+          "rate": 22500,
+          "unit": "bonus points"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Membership Rewards Points",
+      "redemption": [
+        "Travel",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#94a3b8"
+    ],
+    "features": [
+      "1 MR point per INR 50",
+      "Milestone bonus points",
+      "Airport lounge access"
+    ],
+    "networks": [
+      "Amex"
+    ],
+    "subNetworks": {
+      "Amex": [
+        "Platinum"
+      ]
+    },
+    "sources": [
+      {
+        "title": "American Express Platinum Travel Credit Card",
+        "url": "https://www.americanexpress.com/in/credit-cards/platinum-travel-credit-card/",
+        "accessedOn": "2026-04-02"
+      }
+    ]
+  },
+  {
+    "id": "amex-gold",
+    "bank": "American Express",
+    "name": "Gold Card",
+    "type": "rewards",
+    "preferredNetwork": "Amex",
+    "preferredSubNetwork": "Gold",
+    "annualFee": 4500,
+    "joiningFee": 1000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "6 transactions of ₹1000+",
+          "rate": 1000,
+          "unit": "bonus points per month"
+        },
+        {
+          "category": "Reward Multiplier",
+          "rate": 5,
+          "unit": "points per INR 50"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Membership Rewards Points",
+      "redemption": [
+        "Travel",
+        "18/24 Karat Gold Collection"
+      ]
+    },
+    "statementDate": 5,
+    "gracePeriodDays": 18,
+    "color": [
+      "#ca8a04",
+      "#fef08a"
+    ],
+    "features": [
+      "No pre-set spending limit",
+      "Monthly bonus point milestones",
+      "Dining discounts"
+    ],
+    "networks": [
+      "Amex"
+    ],
+    "subNetworks": {
+      "Amex": [
+        "Gold"
+      ]
+    }
+  },
+  {
+    "id": "amex-mrcc",
+    "bank": "American Express",
+    "name": "Membership Rewards Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Amex",
+    "preferredSubNetwork": "Gold",
+    "annualFee": 1500,
+    "joiningFee": 1500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Monthly milestones",
+          "rate": 2,
+          "unit": "bonus points"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "MR Points",
+      "redemption": [
+        "Travel",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 18,
+    "color": [
+      "#1f2937",
+      "#fbbf24"
+    ],
+    "features": [
+      "MR points",
+      "Lifestyle offers",
+      "Global assistance"
+    ],
+    "networks": [
+      "Amex"
+    ],
+    "subNetworks": {
+      "Amex": [
+        "Gold",
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "amex-smartearn",
+    "bank": "American Express",
+    "name": "SmartEarn Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Amex",
+    "preferredSubNetwork": "Classic",
+    "annualFee": 495,
+    "joiningFee": 495,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Flipkart and Uber",
+          "rate": 10,
+          "unit": "points per INR 50"
+        },
+        {
+          "category": "Amazon, Swiggy, BookMyShow",
+          "rate": 5,
+          "unit": "points per INR 50"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Membership Rewards Points",
+      "redemption": [
+        "Statement Credit",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 18,
+    "color": [
+      "#1e3a8a",
+      "#60a5fa"
+    ],
+    "features": [
+      "10X MR points on select apps",
+      "Annual fee waiver on ₹40,000 spend",
+      "Entry-level fee"
+    ],
+    "networks": [
+      "Amex"
+    ],
+    "subNetworks": {
+      "Amex": [
+        "Classic"
+      ]
+    }
+  }
+]

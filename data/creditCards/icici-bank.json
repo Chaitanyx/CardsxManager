@@ -1,0 +1,761 @@
+[
+  {
+    "id": "icici-emeralde-private-metal",
+    "bank": "ICICI Bank",
+    "name": "Emeralde Private Metal Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 12500,
+    "joiningFee": 12500,
+    "rewardStructure": {
+      "baseRate": 3,
+      "accelerated": [
+        {
+          "category": "Luxury travel and stays",
+          "rate": 6,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Dining and lifestyle",
+          "rate": 4,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.3,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Premium vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 18,
+    "color": [
+      "#0b1020",
+      "#8b5cf6"
+    ],
+    "features": [
+      "Metal card",
+      "Unlimited lounge access",
+      "Premium concierge"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ],
+      "Mastercard": [
+        "World Elite"
+      ]
+    }
+  },
+  {
+    "id": "icici-times-black",
+    "bank": "ICICI Bank",
+    "name": "Times Black ICICI Bank Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 20000,
+    "joiningFee": 20000,
+    "rewardStructure": {
+      "baseRate": 3,
+      "accelerated": [
+        {
+          "category": "Times Black partner spends",
+          "rate": 10,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Travel and entertainment",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.35,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Lifestyle",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 17,
+    "gracePeriodDays": 18,
+    "color": [
+      "#111111",
+      "#a855f7"
+    ],
+    "features": [
+      "Premium entertainment privileges",
+      "Luxury travel benefits",
+      "Priority support"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "icici-emeralde",
+    "bank": "ICICI Bank",
+    "name": "Emeralde Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 12000,
+    "joiningFee": 12000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Travel and international spends",
+          "rate": 4,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Dining",
+          "rate": 3,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.3,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 18,
+    "gracePeriodDays": 18,
+    "color": [
+      "#0f172a",
+      "#22c55e"
+    ],
+    "features": [
+      "Unlimited domestic lounge access",
+      "Golf privileges",
+      "Concierge"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ],
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "icici-sapphiro",
+    "bank": "ICICI Bank",
+    "name": "Sapphiro Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 6500,
+    "joiningFee": 6500,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Dining",
+          "rate": 4,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Movies and entertainment",
+          "rate": 3,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit",
+        "Travel"
+      ]
+    },
+    "statementDate": 17,
+    "gracePeriodDays": 18,
+    "color": [
+      "#111827",
+      "#ef4444"
+    ],
+    "features": [
+      "Dual card benefits",
+      "Lounge access",
+      "Concierge"
+    ],
+    "networks": [
+      "Mastercard",
+      "Visa",
+      "Amex"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ],
+      "Visa": [
+        "Signature"
+      ],
+      "Amex": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "icici-rubyx",
+    "bank": "ICICI Bank",
+    "name": "Rubyx Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 3000,
+    "joiningFee": 3000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Dining and groceries",
+          "rate": 3,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Movies",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 18,
+    "color": [
+      "#1f2937",
+      "#c026d3"
+    ],
+    "features": [
+      "Movie benefits",
+      "Airport lounge access",
+      "Dining discounts"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard",
+      "Amex"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "World"
+      ],
+      "Amex": [
+        "Gold"
+      ]
+    }
+  },
+  {
+    "id": "icici-coral",
+    "bank": "ICICI Bank",
+    "name": "ICICI Bank Coral Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Utilities and insurance",
+          "rate": 1,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Dining and movies",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 18,
+    "color": [
+      "#0f172a",
+      "#f97316"
+    ],
+    "features": [
+      "BookMyShow offers",
+      "Fuel surcharge waiver",
+      "Domestic lounge access"
+    ],
+    "networks": [
+      "Visa",
+      "RuPay",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "RuPay": [
+        "Platinum"
+      ],
+      "Mastercard": [
+        "World"
+      ]
+    },
+    "sources": [
+      {
+        "title": "ICICI Bank Coral Credit Card",
+        "url": "https://www.icici.bank.in/personal-banking/cards/credit-card/coral-credit-card",
+        "accessedOn": "2026-04-02"
+      }
+    ]
+  },
+  {
+    "id": "icici-platinum-chip",
+    "bank": "ICICI Bank",
+    "name": "Platinum Chip Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 0,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Retail spends",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 14,
+    "gracePeriodDays": 18,
+    "color": [
+      "#111827",
+      "#475569"
+    ],
+    "features": [
+      "No annual fee",
+      "Fuel surcharge waiver",
+      "Contactless chip"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "Gold"
+      ],
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "icici-amazon-pay",
+    "bank": "ICICI Bank",
+    "name": "Amazon Pay ICICI Bank Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 0,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Amazon",
+          "rate": 5,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Partner merchants",
+          "rate": 2,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Amazon Pay balance"
+      ]
+    },
+    "statementDate": 18,
+    "gracePeriodDays": 18,
+    "color": [
+      "#111827",
+      "#f59e0b"
+    ],
+    "features": [
+      "No annual fee",
+      "Amazon Prime cashback",
+      "Rewards on utility spends"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "icici-makemytrip",
+    "bank": "ICICI Bank",
+    "name": "MakeMyTrip ICICI Bank Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 2500,
+    "joiningFee": 2500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "MakeMyTrip bookings",
+          "rate": 6,
+          "unit": "miles per INR 100"
+        },
+        {
+          "category": "Travel spends",
+          "rate": 3,
+          "unit": "miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "MMT Black Points",
+      "redemption": [
+        "Flights",
+        "Hotels",
+        "Holiday bookings"
+      ]
+    },
+    "statementDate": 16,
+    "gracePeriodDays": 18,
+    "color": [
+      "#0f172a",
+      "#0ea5e9"
+    ],
+    "features": [
+      "Travel points on MMT",
+      "Welcome travel voucher",
+      "Airport lounge access"
+    ],
+    "networks": [
+      "Mastercard",
+      "Visa"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ],
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "icici-adani-one-signature",
+    "bank": "ICICI Bank",
+    "name": "Adani One ICICI Bank Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 5000,
+    "joiningFee": 5000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Adani One ecosystem",
+          "rate": 7,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Airport and travel",
+          "rate": 4,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.3,
+      "pointUnit": "Adani Reward Points",
+      "redemption": [
+        "Flights",
+        "Airport services",
+        "Travel vouchers"
+      ]
+    },
+    "statementDate": 11,
+    "gracePeriodDays": 18,
+    "color": [
+      "#0b132b",
+      "#14b8a6"
+    ],
+    "features": [
+      "Airport-linked rewards",
+      "Adani One benefits",
+      "Priority travel services"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "icici-emirates-skywards",
+    "bank": "ICICI Bank",
+    "name": "Emirates Skywards ICICI Bank Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 5000,
+    "joiningFee": 5000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Emirates bookings",
+          "rate": 4,
+          "unit": "Skywards miles per INR 100"
+        },
+        {
+          "category": "International spends",
+          "rate": 2,
+          "unit": "Skywards miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Skywards Miles",
+      "redemption": [
+        "Flight rewards",
+        "Cabin upgrades",
+        "Airline benefits"
+      ]
+    },
+    "statementDate": 9,
+    "gracePeriodDays": 18,
+    "color": [
+      "#111827",
+      "#dc2626"
+    ],
+    "features": [
+      "Skywards miles earn",
+      "Travel insurance",
+      "Airport lounge access"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "icici-manchester-united",
+    "bank": "ICICI Bank",
+    "name": "Manchester United ICICI Bank Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 2499,
+    "joiningFee": 2499,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Sports merchandise and entertainment",
+          "rate": 4,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Merchandise",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 13,
+    "gracePeriodDays": 18,
+    "color": [
+      "#7f1d1d",
+      "#dc2626"
+    ],
+    "features": [
+      "Co-branded fan benefits",
+      "Entertainment offers",
+      "Reward points"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "icici-ferrari-signature",
+    "bank": "ICICI Bank",
+    "name": "Ferrari ICICI Bank Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 15000,
+    "joiningFee": 15000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Luxury lifestyle spends",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.3,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Luxury vouchers",
+        "Travel",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 21,
+    "gracePeriodDays": 18,
+    "color": [
+      "#450a0a",
+      "#ef4444"
+    ],
+    "features": [
+      "Premium co-branded card",
+      "Lifestyle privileges",
+      "Lounge access"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "icici-hpcl-super-saver",
+    "bank": "ICICI Bank",
+    "name": "ICICI HPCL Super Saver Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "HPCL fuel",
+          "rate": 5,
+          "unit": "% Cashback"
+        },
+        {
+          "category": "Utilities and grocery",
+          "rate": 2,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 18,
+    "color": [
+      "#1e293b",
+      "#fb923c"
+    ],
+    "features": [
+      "Fuel-focused rewards",
+      "Surcharge waiver",
+      "Cashback on utility spends"
+    ],
+    "networks": [
+      "Visa",
+      "Mastercard",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "Mastercard": [
+        "World"
+      ],
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  }
+]

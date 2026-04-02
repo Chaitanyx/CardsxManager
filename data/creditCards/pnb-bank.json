@@ -1,0 +1,272 @@
+[
+  {
+    "id": "pnb-luxura-visa-infinite",
+    "bank": "Punjab National Bank",
+    "name": "LUXURA Visa Infinite Metal Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 1999,
+    "joiningFee": 4999,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [
+        {
+          "category": "Travel and dining",
+          "rate": 12,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Statement Credit",
+        "PNB Rewardz Portal"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#94a3b8"
+    ],
+    "features": [
+      "Zero forex markup on international transactions",
+      "Unlimited domestic and international lounge access",
+      "BOGO movie tickets on BookMyShow"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "pnb-luxura-rupay-ekaa",
+    "bank": "Punjab National Bank",
+    "name": "LUXURA RuPay EKAA Metal Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "EKAA",
+    "annualFee": 7500,
+    "joiningFee": 9000,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [
+        {
+          "category": "Travel and dining",
+          "rate": 12,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Statement Credit",
+        "PNB Rewardz Portal"
+      ]
+    },
+    "statementDate": 10,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#d4af37"
+    ],
+    "features": [
+      "HoteLux Elite Plus Membership",
+      "Premium ITC Hotel Hospitality Benefits",
+      "Up to 8 domestic and 4 international lounge visits annually"
+    ],
+    "networks": [
+      "RuPay"
+    ],
+    "subNetworks": {
+      "RuPay": [
+        "EKAA"
+      ]
+    }
+  },
+  {
+    "id": "pnb-visa-signature",
+    "bank": "Punjab National Bank",
+    "name": "Visa Signature Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 2000,
+    "joiningFee": 1500,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "International spends",
+          "rate": 4,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 20,
+    "color": [
+      "#1e3a8a",
+      "#facc15"
+    ],
+    "features": [
+      "Complimentary domestic & international lounge access",
+      "Comprehensive insurance cover up to ₹50 Lakhs",
+      "24/7 Concierge Services"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "pnb-rupay-select",
+    "bank": "Punjab National Bank",
+    "name": "RuPay Select Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Select",
+    "annualFee": 750,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1.33,
+      "accelerated": [
+        {
+          "category": "Retail merchandise",
+          "rate": 2.66,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Utility Bills"
+      ]
+    },
+    "statementDate": 5,
+    "gracePeriodDays": 20,
+    "color": [
+      "#312e81",
+      "#991b1b"
+    ],
+    "features": [
+      "Spend-based domestic lounge access (min ₹5k in previous quarter)",
+      "Complimentary health check-up and gym sessions",
+      "Cashback on utility bills and eateries"
+    ],
+    "networks": [
+      "RuPay"
+    ],
+    "subNetworks": {
+      "RuPay": [
+        "Select"
+      ]
+    }
+  },
+  {
+    "id": "pnb-visa-platinum",
+    "bank": "Punjab National Bank",
+    "name": "Visa Platinum Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 500,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 1.33,
+      "accelerated": [
+        {
+          "category": "Select merchants",
+          "rate": 2.66,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 18,
+    "gracePeriodDays": 20,
+    "color": [
+      "#475569",
+      "#cbd5e1"
+    ],
+    "features": [
+      "Fee waiver on surpassing card limit in preceding year",
+      "Fuel surcharge waiver",
+      "Zero lost card liability"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "pnb-rupay-platinum",
+    "bank": "Punjab National Bank",
+    "name": "RuPay Platinum Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 500,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "First time usage",
+          "rate": 300,
+          "unit": "bonus points"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 22,
+    "gracePeriodDays": 20,
+    "color": [
+      "#1e293b",
+      "#f97316"
+    ],
+    "features": [
+      "Insurance coverage as per NPCI RuPay scheme",
+      "Annual fee waiver on minimum one use per quarter",
+      "Fuel surcharge waiver"
+    ],
+    "networks": [
+      "RuPay"
+    ],
+    "subNetworks": {
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  }
+]

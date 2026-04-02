@@ -1,0 +1,251 @@
+[
+  {
+    "id": "indusind-club-vistara-explorer",
+    "bank": "IndusInd Bank",
+    "name": "Club Vistara Explorer Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 10000,
+    "joiningFee": 40000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Vistara website/app",
+          "rate": 8,
+          "unit": "CV points per INR 200"
+        },
+        {
+          "category": "Hotel, Airline, and Travel",
+          "rate": 6,
+          "unit": "CV points per INR 200"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "CV Points",
+      "redemption": [
+        "Flight upgrades",
+        "Flight bookings"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#d4af37"
+    ],
+    "features": [
+      "Zero forex markup fee",
+      "Club Vistara Gold membership",
+      "Up to 5 Business Class tickets annually on milestones"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "indusind-pinnacle",
+    "bank": "IndusInd Bank",
+    "name": "Pinnacle World Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 0,
+    "joiningFee": 15000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Online e-commerce spends",
+          "rate": 2.5,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Online travel and airlines",
+          "rate": 1.5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.75,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Statement Credit",
+        "Air Miles Transfer",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#e5e7eb"
+    ],
+    "features": [
+      "Buy 1 Get 1 on BookMyShow thrice a month",
+      "Complimentary golf games",
+      "Travel Plus lounge program"
+    ],
+    "networks": [
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ]
+    }
+  },
+  {
+    "id": "indusind-eazydiner",
+    "bank": "IndusInd Bank",
+    "name": "EazyDiner Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 2999,
+    "joiningFee": 2999,
+    "rewardStructure": {
+      "baseRate": 4,
+      "accelerated": [
+        {
+          "category": "Dining, Shopping, and Entertainment",
+          "rate": 10,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Dining bill discounts",
+        "EazyEvents",
+        "Hotel stays"
+      ]
+    },
+    "statementDate": 18,
+    "gracePeriodDays": 20,
+    "color": [
+      "#dc2626",
+      "#f8fafc"
+    ],
+    "features": [
+      "Extra 25% off up to ₹1,000 on dining via PayEazy",
+      "12 months EazyDiner Prime membership",
+      "Complimentary premium alcoholic beverage at select restaurants"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "indusind-legend",
+    "bank": "IndusInd Bank",
+    "name": "Legend Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 0,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Weekend spends",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.75,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Statement Credit",
+        "Air Miles Transfer",
+        "Rewards Catalog"
+      ]
+    },
+    "statementDate": 22,
+    "gracePeriodDays": 20,
+    "color": [
+      "#4c1d95",
+      "#fbbf24"
+    ],
+    "features": [
+      "Low forex markup fee of 1.8%",
+      "Buy 1 Get 1 free movie ticket monthly",
+      "Lifetime free card"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "indusind-tiger",
+    "bank": "IndusInd Bank",
+    "name": "Tiger Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 0,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Annual spends between ₹1L - ₹2.5L",
+          "rate": 2,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Annual spends between ₹2.5L - ₹5L",
+          "rate": 4,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Annual spends above ₹5L",
+          "rate": 6,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.4,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Statement Credit",
+        "Air Miles Transfer",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 25,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#f97316"
+    ],
+    "features": [
+      "Low forex markup of 1.5%",
+      "Complimentary domestic & international lounge access",
+      "Complimentary golf games and movie tickets"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  }
+]

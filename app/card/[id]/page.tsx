@@ -1,0 +1,521 @@
+"use client";
+
+import React, { useMemo, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import creditCardsData from "../../../data/creditCards";
+import { useCards } from "../../../hooks/useCards";
+import { useTransactions } from "../../../hooks/useTransactions";
+import { categorizeTransactions, calculateDueDate } from "../../../lib/billingCycle";
+import { CardIllustration } from "../../../components/cards/CardIllustration";
+import AddSpendModal from "../../../components/cards/AddSpendModal";
+import { RewardHistory } from "../../../components/detail/RewardHistory";
+import { TransactionList } from "../../../components/detail/TransactionList";
+import { CardNetwork, CardType, RewardRateMode, Transaction } from "../../../types";
+import { getSharedLimitSummary } from "../../../lib/limitSharing";
+import { spendCategories } from "../../../lib/categoryMeta";
+import { getRewardTabLabel } from "../../../lib/rewardDisplay";
+
+const networkVariants: Record<CardNetwork, string[]> = {
+  Visa: ["Classic", "Gold", "Platinum", "Signature", "Infinite"],
+  Mastercard: ["Standard", "Gold", "Platinum", "World", "World Elite"],
+  RuPay: ["Classic", "Platinum", "Select", "EKAA"],
+  Amex: ["Green", "Gold", "Platinum", "Centurion"],
+  "Diners Club": ["Classic", "Privilege", "Black", "Premium"]
+};
+
+export default function CardDetailPage() {
+  const params = useParams();
+  const router = useRouter();
+  const cardId = params?.id as string;
+  const { cards, updateCard, removeCard } = useCards();
+  const { transactions, addTransaction, removeTransactions, updateTransaction, removeTransaction } = useTransactions();
+  const [activeTab, setActiveTab] = useState<"unbilled" | "billed" | "rewards">("unbilled");
+  const [showSpendModal, setShowSpendModal] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [isClearing, setIsClearing] = useState(false);
+  const [showPaid, setShowPaid] = useState(false);
+  const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
+  const [editMerchant, setEditMerchant] = useState("");
+  const [editAmount, setEditAmount] = useState("");
+  const [editDate, setEditDate] = useState(new Date().toISOString().slice(0, 10));
+  const [editTime, setEditTime] = useState(new Date().toTimeString().slice(0, 5));
+  const [editCategory, setEditCategory] = useState(spendCategories[0]);
+  const [editRewardEligible, setEditRewardEligible] = useState(true);
+  const [editRewardRate, setEditRewardRate] = useState("");
+  const [editRewardRateMode, setEditRewardRateMode] = useState<RewardRateMode>("percent");
+  const [editRewardUnit, setEditRewardUnit] = useState("points");
+
+  const card = cards.find((item) => item.id === cardId);
+  const cardData = useMemo(
+    () => (creditCardsData as any[]).find((item) => item.id === card?.bankCardId),
+    [card?.bankCardId]
+  );
+
+  const cardTransactions = transactions.filter((tx) => tx.cardId === cardId);
+  const { unbilled, billed } = card
+    ? categorizeTransactions(cardTransactions, card)
+    : { unbilled: [], billed: [] };
+
+  const unbilledTotal = unbilled.reduce((acc, tx) => acc + tx.amount, 0);
+  const billedTotal = billed.reduce((acc, tx) => acc + tx.amount, 0);
+  const sharedLimitSummary = card ? getSharedLimitSummary(cards, transactions, card) : null;
+  const dueDate = card ? calculateDueDate(card.statementDate, card.gracePeriodDays) : null;
+
+  if (!card) {
+    return (
+      <section className="glass-panel p-10 text-center">
+        <h1 className="text-2xl font-semibold">Card not found</h1>
+        <button
+          onClick={() => router.push("/")}
+          className="mt-6 rounded-full bg-neutral-900 text-white px-5 py-2 text-sm font-semibold"
+        >
+          Back to Dashboard
+        </button>
+      </section>
+    );
+  }
+
+  const handleClearDues = () => {
+    if (billed.length === 0 || isClearing) return;
+    setIsClearing(true);
+    const ids = billed.map((tx) => tx.id);
+    setTimeout(() => {
+      removeTransactions(ids);
+      setIsClearing(false);
+      setShowPaid(true);
+      setTimeout(() => setShowPaid(false), 1200);
+    }, 350);
+  };
+
+  const handleUpdateSettings = (updates: Partial<typeof card>) => {
+    updateCard(card.id, updates);
+  };
+
+  const calculateRewardEarned = (amount: number, rate: number, rateMode: RewardRateMode) => {
+    if (!rate || !amount) return 0;
+    if (rateMode === "percent") return (amount * rate) / 100;
+    if (rateMode === "multiplier") return amount * rate;
+    return (amount / 100) * rate;
+  };
+
+  const openEditTransaction = (tx: Transaction) => {
+    const txDate = new Date(tx.date);
+    setEditingTransaction(tx);
+    setEditMerchant(tx.merchant);
+    setEditAmount(String(tx.amount));
+    setEditDate(txDate.toISOString().slice(0, 10));
+    setEditTime(txDate.toTimeString().slice(0, 5));
+    setEditCategory(tx.category);
+    setEditRewardEligible(tx.isRewardEligible);
+    setEditRewardRate(tx.rewardRate !== undefined ? String(tx.rewardRate) : "");
+    setEditRewardRateMode(tx.rewardRateMode ?? (card.type === "cashback" ? "percent" : "perCurrency"));
+    setEditRewardUnit(tx.rewardUnit ?? (card.type === "cashback" ? "cashback" : card.type === "miles" ? "miles" : "points"));
+  };
+
+  const handleSaveTransactionEdit = () => {
+    if (!editingTransaction || !editMerchant || !editAmount) return;
+
+    const parsedAmount = Number(editAmount);
+    const parsedRate = editRewardRate ? Number(editRewardRate) : 0;
+    const rewardEarned = editRewardEligible
+      ? calculateRewardEarned(parsedAmount, parsedRate, editRewardRateMode)
+      : 0;
+
+    updateTransaction(editingTransaction.id, {
+      merchant: editMerchant,
+      amount: parsedAmount,
+      date: `${editDate}T${editTime}:00.000Z`,
+      category: editCategory,
+      isRewardEligible: editRewardEligible,
+      rewardType: card.type,
+      rewardRate: editRewardEligible ? parsedRate : undefined,
+      rewardRateMode: editRewardEligible ? editRewardRateMode : undefined,
+      rewardUnit: editRewardEligible ? editRewardUnit : undefined,
+      rewardEarned: editRewardEligible ? rewardEarned : 0
+    });
+
+    setEditingTransaction(null);
+  };
+
+  const handleDeleteTransaction = () => {
+    if (!editingTransaction) return;
+    removeTransaction(editingTransaction.id);
+    setEditingTransaction(null);
+  };
+
+  return (
+    <section className="grid gap-8 lg:grid-cols-[320px_1fr]">
+      <div className="space-y-5">
+        <CardIllustration
+          card={card}
+          unbilledTotal={unbilledTotal}
+          billedTotal={billedTotal}
+          sharedLimitSummary={sharedLimitSummary ?? undefined}
+          onAddSpend={() => setShowSpendModal(true)}
+          onClearDues={billed.length > 0 ? handleClearDues : undefined}
+          isClearing={isClearing}
+          showPaid={showPaid}
+        />
+        <div className="glass-panel p-5 text-sm text-neutral-600 space-y-2">
+          <div className="flex items-center justify-between">
+            <span>Credit Limit</span>
+            <span className="font-semibold text-neutral-900">₹{card.creditLimit.toLocaleString("en-IN")}</span>
+          </div>
+          {sharedLimitSummary?.sharedLimitEnabled && (
+            <div className="rounded-2xl border border-white/60 bg-white/70 px-3 py-2 text-xs text-neutral-600">
+              Shared with {sharedLimitSummary.memberCards.length} cards in this limit pool
+            </div>
+          )}
+          <div className="flex items-center justify-between">
+            <span>Statement Day</span>
+            <span className="font-semibold text-neutral-900">{card.statementDate}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span>Due Date</span>
+            <span className="font-semibold text-neutral-900">
+              {dueDate ? dueDate.toLocaleDateString("en-IN", { day: "numeric", month: "short" }) : "-"}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span>Unbilled Spend</span>
+            <span className="font-semibold text-neutral-900">₹{unbilledTotal.toLocaleString("en-IN")}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span>Statement Spend</span>
+            <span className="font-semibold text-neutral-900">₹{billedTotal.toLocaleString("en-IN")}</span>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setShowSettings((prev) => !prev)}
+          className="rounded-full border border-neutral-200 bg-white px-5 py-2 text-sm font-semibold"
+        >
+          {showSettings ? "Close Settings" : "Card Settings"}
+        </button>
+
+        {showSettings && (
+          <div className="glass-panel p-5 space-y-4">
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold">Network</label>
+              <select
+                value={card.network}
+                onChange={(event) => handleUpdateSettings({ network: event.target.value as CardNetwork })}
+                className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+              >
+                {cardData?.networks?.map((network: CardNetwork) => (
+                  <option key={network} value={network}>
+                    {network}
+                  </option>
+                )) ?? Object.keys(networkVariants).map((network) => (
+                  <option key={network} value={network}>
+                    {network}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold">Sub-network</label>
+              <select
+                value={card.subNetwork}
+                onChange={(event) => handleUpdateSettings({ subNetwork: event.target.value })}
+                className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+              >
+                {(cardData?.subNetworks?.[card.network] ?? networkVariants[card.network] ?? [card.subNetwork]).map(
+                  (variant: string) => (
+                    <option key={variant} value={variant}>
+                      {variant}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold">Card Last 4 Digits</label>
+              <input
+                type="text"
+                value={card.last4}
+                maxLength={4}
+                inputMode="numeric"
+                onChange={(event) =>
+                  handleUpdateSettings({
+                    last4: event.target.value.replace(/\D/g, "").slice(0, 4)
+                  })
+                }
+                className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold">Statement Day</label>
+              <input
+                type="number"
+                value={card.statementDate}
+                min={1}
+                max={31}
+                onChange={(event) => handleUpdateSettings({ statementDate: Number(event.target.value) })}
+                className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold">Grace Period (days)</label>
+              <input
+                type="number"
+                value={card.gracePeriodDays}
+                min={0}
+                max={45}
+                onChange={(event) => handleUpdateSettings({ gracePeriodDays: Number(event.target.value) })}
+                className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold">Credit Limit</label>
+              <input
+                type="number"
+                value={card.creditLimit}
+                min={0}
+                onChange={(event) => handleUpdateSettings({ creditLimit: Number(event.target.value) })}
+                className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold">Reward Type</label>
+              <select
+                value={card.type}
+                onChange={(event) => handleUpdateSettings({ type: event.target.value as CardType })}
+                className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
+              >
+                <option value="cashback">Cashback</option>
+                <option value="rewards">Rewards</option>
+                <option value="miles">Miles</option>
+              </select>
+            </div>
+            <button
+              onClick={() => {
+                removeCard(card.id);
+                router.push("/");
+              }}
+              className="rounded-full border border-red-200 bg-red-50 px-5 py-2 text-sm font-semibold text-red-600"
+            >
+              Delete Card
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-5">
+        <div className="flex flex-wrap gap-3">
+          <button
+            className={`rounded-full px-5 py-2 text-sm font-semibold ${
+              activeTab === "unbilled" ? "bg-neutral-900 text-white" : "bg-white border border-neutral-200"
+            }`}
+            onClick={() => setActiveTab("unbilled")}
+          >
+            Unbilled
+          </button>
+          <button
+            className={`rounded-full px-5 py-2 text-sm font-semibold ${
+              activeTab === "billed" ? "bg-neutral-900 text-white" : "bg-white border border-neutral-200"
+            }`}
+            onClick={() => setActiveTab("billed")}
+          >
+            Statement
+          </button>
+          <button
+            className={`rounded-full px-5 py-2 text-sm font-semibold ${
+              activeTab === "rewards" ? "bg-neutral-900 text-white" : "bg-white border border-neutral-200"
+            }`}
+            onClick={() => setActiveTab("rewards")}
+          >
+            {getRewardTabLabel(card.type)}
+          </button>
+          {activeTab === "billed" && billed.length > 0 && (
+            <button
+              onClick={handleClearDues}
+              className="rounded-full border border-emerald-200 bg-emerald-50 px-5 py-2 text-sm font-semibold text-emerald-700"
+            >
+              {isClearing ? "Clearing..." : "Clear Dues"}
+            </button>
+          )}
+        </div>
+
+        {activeTab === "unbilled" && (
+          <TransactionList
+            title="Unbilled Spends"
+            transactions={unbilled}
+            onTransactionClick={openEditTransaction}
+            activeTransactionId={editingTransaction?.id}
+          />
+        )}
+        {activeTab === "billed" && (
+          <TransactionList
+            title="Statement Spends"
+            transactions={billed}
+            isFading={isClearing}
+            onTransactionClick={openEditTransaction}
+            activeTransactionId={editingTransaction?.id}
+          />
+        )}
+        {activeTab === "rewards" && <RewardHistory transactions={[...unbilled, ...billed]} cardType={card.type} />}
+      </div>
+
+      {editingTransaction && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+          <div className="glass-panel-strong w-full max-w-2xl p-7">
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="text-2xl font-semibold">Edit Transaction</h2>
+              <button
+                onClick={() => setEditingTransaction(null)}
+                className="text-sm font-semibold text-neutral-500 hover:text-neutral-800"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <label className="text-sm font-semibold">Merchant</label>
+                <input
+                  value={editMerchant}
+                  onChange={(event) => setEditMerchant(event.target.value)}
+                  className="rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="grid gap-2">
+                  <label className="text-sm font-semibold">Amount</label>
+                  <input
+                    type="number"
+                    min={0}
+                    value={editAmount}
+                    onChange={(event) => setEditAmount(event.target.value)}
+                    className="rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <label className="text-sm font-semibold">Category</label>
+                  <select
+                    value={editCategory}
+                    onChange={(event) => setEditCategory(event.target.value)}
+                    className="rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm"
+                  >
+                    {spendCategories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="grid gap-2">
+                  <label className="text-sm font-semibold">Date</label>
+                  <input
+                    type="date"
+                    value={editDate}
+                    onChange={(event) => setEditDate(event.target.value)}
+                    className="rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <label className="text-sm font-semibold">Time</label>
+                  <input
+                    type="time"
+                    value={editTime}
+                    onChange={(event) => setEditTime(event.target.value)}
+                    className="rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/60 bg-white/70 p-4">
+                <div className="mb-3 flex items-center justify-between">
+                  <div>
+                    <h3 className="font-semibold">{getRewardTabLabel(card.type)}</h3>
+                    <p className="text-xs text-neutral-500">Adjust eligibility and earned value for this spend.</p>
+                  </div>
+                  <button
+                    onClick={() => setEditRewardEligible((prev) => !prev)}
+                    className={`relative h-7 w-14 rounded-full transition ${
+                      editRewardEligible ? "bg-emerald-500" : "bg-neutral-300"
+                    }`}
+                  >
+                    <span
+                      className={`absolute top-1 h-5 w-5 rounded-full bg-white transition ${
+                        editRewardEligible ? "left-8" : "left-1"
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                {editRewardEligible && (
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                    <input
+                      type="number"
+                      value={editRewardRate}
+                      onChange={(event) => setEditRewardRate(event.target.value)}
+                      placeholder="Rate"
+                      className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
+                    />
+                    <select
+                      value={editRewardRateMode}
+                      onChange={(event) => setEditRewardRateMode(event.target.value as RewardRateMode)}
+                      className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
+                    >
+                      <option value="percent">Percent</option>
+                      <option value="perCurrency">Per INR 100</option>
+                      <option value="multiplier">Multiplier</option>
+                    </select>
+                    <select
+                      value={editRewardUnit}
+                      onChange={(event) => setEditRewardUnit(event.target.value)}
+                      className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
+                    >
+                      <option value="cashback">Cashback</option>
+                      <option value="points">Reward Points</option>
+                      <option value="miles">Miles</option>
+                    </select>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+              <button
+                onClick={handleDeleteTransaction}
+                className="rounded-full border border-red-200 bg-red-50 px-5 py-2 text-sm font-semibold text-red-700"
+              >
+                Delete Transaction
+              </button>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setEditingTransaction(null)}
+                  className="rounded-full px-5 py-2 text-sm font-semibold text-neutral-500"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleSaveTransactionEdit}
+                  className="rounded-full bg-neutral-900 px-5 py-2 text-sm font-semibold text-white"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showSpendModal && (
+        <AddSpendModal
+          card={card}
+          onClose={() => setShowSpendModal(false)}
+          onAdd={(tx) => {
+            addTransaction(tx);
+            setShowSpendModal(false);
+          }}
+        />
+      )}
+    </section>
+  );
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "federal-scapia",
+    "bank": "Federal Bank",
+    "name": "Scapia Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 0,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Travel bookings",
+          "rate": 2,
+          "unit": "miles per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Travel Miles",
+      "redemption": [
+        "Flight rewards",
+        "Hotel bookings"
+      ]
+    },
+    "statementDate": 2,
+    "gracePeriodDays": 18,
+    "color": [
+      "#0f172a",
+      "#14b8a6"
+    ],
+    "features": [
+      "Zero forex markup",
+      "Travel rewards",
+      "Airport lounge access"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  }
+]

@@ -1,0 +1,247 @@
+[
+  {
+    "id": "hsbc-premier-metal",
+    "bank": "HSBC",
+    "name": "HSBC Premier Metal Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 12000,
+    "joiningFee": 12000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Accelerated Rewards",
+          "rate": 3,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Reward Points",
+      "redemption": ["Air Miles", "Hotel Points", "Premium Vouchers"]
+    },
+    "statementDate": 1,
+    "gracePeriodDays": 20,
+    "color": ["#000000", "#c0c0c0"],
+    "features": [
+      "Crafted in Metal",
+      "Unlimited global lounge access",
+      "No-cost priority check-in at airports"
+    ],
+    "networks": ["Visa"],
+    "subNetworks": {
+      "Visa": ["Infinite"]
+    }
+  },
+  {
+    "id": "hsbc-taj",
+    "bank": "HSBC",
+    "name": "HSBC Taj Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 10000,
+    "joiningFee": 10000,
+    "rewardStructure": {
+      "baseRate": 3,
+      "accelerated": [
+        {
+          "category": "Taj, SeleQtions and Vivanta hotels",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Taj Reward Points",
+      "redemption": ["Taj Stays", "Dining at Taj", "Taj Vouchers"]
+    },
+    "statementDate": 5,
+    "gracePeriodDays": 20,
+    "color": ["#4b2c20", "#d4af37"],
+    "features": [
+      "Epicure Plus membership",
+      "Complimentary Taj stays",
+      "High-tier dining privileges"
+    ],
+    "networks": ["Visa"],
+    "subNetworks": {
+      "Visa": ["Signature"]
+    }
+  },
+  {
+    "id": "hsbc-travelone",
+    "bank": "HSBC",
+    "name": "HSBC TravelOne Credit Card",
+    "type": "miles",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 4999,
+    "joiningFee": 4999,
+    "rewardStructure": {
+      "baseRate": 1.5,
+      "accelerated": [
+        {
+          "category": "Travel and International spends",
+          "rate": 3,
+          "unit": "Reward Points per INR 100"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Reward Points",
+      "redemption": ["9 Airlines partners", "3 Hotel partners", "Instant redemption"]
+    },
+    "statementDate": 14,
+    "gracePeriodDays": 20,
+    "color": ["#002b45", "#ffffff"],
+    "features": [
+      "Complimentary lounge access",
+      "Low forex markup of 1.99%",
+      "Comprehensive travel insurance"
+    ],
+    "networks": ["Visa"],
+    "subNetworks": {
+      "Visa": ["Signature"]
+    }
+  },
+  {
+    "id": "hsbc-live-plus",
+    "bank": "HSBC",
+    "name": "HSBC Live+ Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 999,
+    "joiningFee": 999,
+    "rewardStructure": {
+      "baseRate": 1.5,
+      "accelerated": [
+        {
+          "category": "Dining, food delivery and streaming",
+          "rate": 10,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": ["Statement Credit"]
+    },
+    "statementDate": 20,
+    "gracePeriodDays": 20,
+    "color": ["#111827", "#7c3aed"],
+    "features": [
+      "10% cashback on Swiggy and Zomato",
+      "Dining discounts via Live+ program",
+      "Global lifestyle benefits"
+    ],
+    "networks": ["Visa"],
+    "subNetworks": {
+      "Visa": ["Signature"]
+    }
+  },
+  {
+    "id": "hsbc-rupay-cashback",
+    "bank": "HSBC",
+    "name": "HSBC RuPay Cashback Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 999,
+    "joiningFee": 999,
+    "rewardStructure": {
+      "baseRate": 1.5,
+      "accelerated": [
+        {
+          "category": "Dining, Groceries and Utility payments",
+          "rate": 10,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": ["Statement Credit"]
+    },
+    "statementDate": 18,
+    "gracePeriodDays": 20,
+    "color": ["#db2777", "#ffffff"],
+    "features": [
+      "UPI integration enabled",
+      "10% cashback on everyday essentials",
+      "Fuel surcharge waiver"
+    ],
+    "networks": ["RuPay"],
+    "subNetworks": {
+      "RuPay": ["Platinum"]
+    }
+  },
+  {
+    "id": "hsbc-visa-platinum",
+    "bank": "HSBC",
+    "name": "HSBC Visa Platinum Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 0,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "First 400,000 annual spend",
+          "rate": 5,
+          "unit": "points per INR 150"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["Vouchers", "Catalog items"]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 20,
+    "color": ["#ffffff", "#d1d5db"],
+    "features": [
+      "Lifetime Free card",
+      "Introductory Amazon vouchers",
+      "Simple reward structure for beginners"
+    ],
+    "networks": ["Visa"],
+    "subNetworks": {
+      "Visa": ["Platinum"]
+    }
+  },
+  {
+    "id": "hsbc-rupay-platinum",
+    "bank": "HSBC",
+    "name": "HSBC RuPay Platinum Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 0,
+    "joiningFee": 0,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "UPI spends",
+          "rate": 2,
+          "unit": "points per INR 150"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": ["Vouchers", "Statement Credit"]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 20,
+    "color": ["#ffffff", "#ef4444"],
+    "features": [
+      "UPI on Credit enabled",
+      "Lifetime Free card",
+      "Zero joining fees"
+    ],
+    "networks": ["RuPay"],
+    "subNetworks": {
+      "RuPay": ["Platinum"]
+    }
+  }
+]

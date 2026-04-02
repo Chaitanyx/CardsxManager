@@ -1,0 +1,47 @@
+[
+  {
+    "id": "yes-marquee",
+    "bank": "YES Bank",
+    "name": "Marquee Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World Elite",
+    "annualFee": 9999,
+    "joiningFee": 9999,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "International spends",
+          "rate": 4,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.3,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 23,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#22c55e"
+    ],
+    "features": [
+      "Lounge access",
+      "Golf benefits",
+      "Concierge"
+    ],
+    "networks": [
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World Elite"
+      ]
+    }
+  }
+]

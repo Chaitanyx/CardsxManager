@@ -1,0 +1,47 @@
+[
+  {
+    "id": "kotak-league",
+    "bank": "Kotak Mahindra Bank",
+    "name": "League Platinum Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 199,
+    "joiningFee": 199,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Online spends",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 14,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#22c55e"
+    ],
+    "features": [
+      "Quarterly rewards",
+      "Fuel surcharge waiver",
+      "Dining offers"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Platinum"
+      ]
+    }
+  }
+]

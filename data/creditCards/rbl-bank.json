@@ -1,0 +1,46 @@
+[
+  {
+    "id": "rbl-shoprite",
+    "bank": "RBL Bank",
+    "name": "Shoprite Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Grocery stores",
+          "rate": 5,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 7,
+    "gracePeriodDays": 18,
+    "color": [
+      "#0f172a",
+      "#ef4444"
+    ],
+    "features": [
+      "Grocery cashback",
+      "Fuel surcharge waiver",
+      "EMI conversion"
+    ],
+    "networks": [
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "Platinum"
+      ]
+    }
+  }
+]

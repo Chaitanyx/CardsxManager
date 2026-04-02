@@ -1,0 +1,244 @@
+[
+  {
+    "id": "bob-eterna",
+    "bank": "Bank of Baroda",
+    "name": "Eterna Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 2500,
+    "joiningFee": 2500,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Dining and travel",
+          "rate": 4,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 4,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#f59e0b"
+    ],
+    "features": [
+      "Lounge access",
+      "Dining discounts",
+      "Fuel surcharge waiver"
+    ],
+    "networks": [
+      "Visa",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "RuPay": [
+        "Platinum",
+        "Select"
+      ]
+    }
+  },
+  {
+    "id": "bob-premier",
+    "bank": "Bank of Baroda",
+    "name": "BOBCARD Premier",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 1000,
+    "joiningFee": 1000,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Travel, dining & international spends",
+          "rate": 10,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Statement Credit",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 10,
+    "gracePeriodDays": 20,
+    "color": [
+      "#334155",
+      "#475569"
+    ],
+    "features": [
+      "1 complimentary domestic lounge visit per quarter",
+      "Zero liability on lost card",
+      "5X rewards on travel and dining"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "bob-select",
+    "bank": "Bank of Baroda",
+    "name": "BOBCARD Select",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 750,
+    "joiningFee": 750,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Online spends and dining",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Statement Credit",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0ea5e9",
+      "#14b8a6"
+    ],
+    "features": [
+      "5X rewards on online & dining spends",
+      "Fee waiver on ₹70,000 annual spends",
+      "Up to 3 free add-on cards"
+    ],
+    "networks": [
+      "Visa",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Platinum"
+      ],
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "bob-easy",
+    "bank": "Bank of Baroda",
+    "name": "BOBCARD Easy",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 500,
+    "joiningFee": 500,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Departmental stores and movies",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Statement Credit",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#f97316",
+      "#ef4444"
+    ],
+    "features": [
+      "5X rewards on movies & groceries",
+      "Fee waiver on ₹35,000 annual spends",
+      "Easy approval for beginners"
+    ],
+    "networks": [
+      "Visa",
+      "RuPay",
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Platinum"
+      ],
+      "RuPay": [
+        "Platinum"
+      ],
+      "Mastercard": [
+        "Titanium"
+      ]
+    }
+  },
+  {
+    "id": "bob-cashback",
+    "bank": "Bank of Baroda",
+    "name": "BOBCARD Cashback",
+    "type": "cashback",
+    "preferredNetwork": "Mastercard",
+    "preferredSubNetwork": "World",
+    "annualFee": 499,
+    "joiningFee": 499,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Domestic online spends",
+          "rate": 5,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 22,
+    "gracePeriodDays": 20,
+    "color": [
+      "#ec4899",
+      "#d946ef"
+    ],
+    "features": [
+      "5% cashback on all online spends",
+      "1% cashback on offline spends",
+      "Auto-credited cashback to statement"
+    ],
+    "networks": [
+      "Mastercard"
+    ],
+    "subNetworks": {
+      "Mastercard": [
+        "World"
+      ]
+    }
+  }
+  
+]

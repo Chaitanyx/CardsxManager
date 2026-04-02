@@ -1,0 +1,240 @@
+[
+  {
+    "id": "au-zenith-plus",
+    "bank": "AU Small Finance Bank",
+    "name": "Zenith+ Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 4999,
+    "joiningFee": 4999,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Dining",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 11,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#ec4899"
+    ],
+    "features": [
+      "Airport meet and greet",
+      "Dining offers",
+      "Travel vouchers"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "au-zenith",
+    "bank": "AU Small Finance Bank",
+    "name": "Zenith Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Infinite",
+    "annualFee": 7999,
+    "joiningFee": 7999,
+    "rewardStructure": {
+      "baseRate": 3,
+      "accelerated": [
+        {
+          "category": "Dining, international, grocery",
+          "rate": 5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#d4af37"
+    ],
+    "features": [
+      "Up to 5x Reward Points",
+      "Lower Mark-Up Fees of 1.99%",
+      "24x7 Global Concierge"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Infinite"
+      ]
+    }
+  },
+  {
+    "id": "au-vetta",
+    "bank": "AU Small Finance Bank",
+    "name": "Vetta Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 2999,
+    "joiningFee": 2999,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "Grocery and Departmental",
+          "rate": 4,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Travel",
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 12,
+    "gracePeriodDays": 20,
+    "color": [
+      "#1e293b",
+      "#64748b"
+    ],
+    "features": [
+      "Quarterly milestone benefits",
+      "Complimentary Lounge Access",
+      "1% fuel surcharge waiver"
+    ],
+    "networks": [
+      "Visa",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ],
+      "RuPay": [
+        "Select"
+      ]
+    }
+  },
+  {
+    "id": "au-altura-plus",
+    "bank": "AU Small Finance Bank",
+    "name": "Altura Plus Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 499,
+    "joiningFee": 499,
+    "rewardStructure": {
+      "baseRate": 1.5,
+      "accelerated": [
+        {
+          "category": "Online Spends",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Cashback",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 18,
+    "gracePeriodDays": 20,
+    "color": [
+      "#111827",
+      "#38bdf8"
+    ],
+    "features": [
+      "1.5% cashback on POS retail",
+      "2x Reward Points on online spends",
+      "Railway lounge access"
+    ],
+    "networks": [
+      "Visa",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Platinum"
+      ],
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "au-altura",
+    "bank": "AU Small Finance Bank",
+    "name": "Altura Credit Card",
+    "type": "cashback",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 199,
+    "joiningFee": 199,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Grocery",
+          "rate": 2,
+          "unit": "% Cashback"
+        }
+      ],
+      "pointValue": 1,
+      "pointUnit": "Cashback",
+      "redemption": [
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 5,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#10b981"
+    ],
+    "features": [
+      "2% Cashback on grocery",
+      "Cashback of INR 50 on 10k spends",
+      "Railway lounge access"
+    ],
+    "networks": [
+      "Visa",
+      "RuPay"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Platinum"
+      ],
+      "RuPay": [
+        "Platinum"
+      ]
+    }
+  }
+]

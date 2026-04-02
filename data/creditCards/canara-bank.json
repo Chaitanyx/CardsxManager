@@ -1,0 +1,49 @@
+[
+  {
+    "id": "canara-rupay-platinum",
+    "bank": "Canara Bank",
+    "name": "Canara Bank RuPay Platinum Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 1000,
+    "joiningFee": 1000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Fuel",
+          "rate": 2,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.2,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Vouchers",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 25,
+    "gracePeriodDays": 20,
+    "color": [
+      "#0f172a",
+      "#38bdf8"
+    ],
+    "features": [
+      "RuPay offers",
+      "Fuel surcharge waiver",
+      "Dining discounts"
+    ],
+    "networks": [
+      "RuPay"
+    ],
+    "subNetworks": {
+      "RuPay": [
+        "Platinum",
+        "Select",
+        "EKAA"
+      ]
+    }
+  }
+]
