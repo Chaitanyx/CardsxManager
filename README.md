@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CardXManager
+
+CardXManager is a local-first credit card manager built with Next.js, TypeScript, and Tailwind CSS. It helps you track card spends, billing cycles, rewards, shared limits, and analytics in one place with a clean liquid-glass UI.
+
+## Project Illustration
+
+The app is designed around a visual card-first experience:
+
+- Large illustrated card faces on the dashboard
+- Bank-specific branding and card variant previews
+- Add Card and Add Spend flows with graphical selection panels
+- Rewards, statement, and analytics views with category icons and charts
+
+## Main Steps
+
+1. Open the dashboard.
+2. Click Add Card to launch the full-screen card setup flow.
+3. Choose a bank, then pick the card from the illustrated preview grid.
+4. Select the network, sub-network, statement date, due date, limit, and reward type.
+5. Add spends from the card detail page with merchant, category, amount, date, time, and reward settings.
+6. Review statement, rewards, and analytics summaries.
+7. Clear statement dues when needed and keep unbilled spends separate.
 
 ## Getting Started
 
-First, run the development server:
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Useful Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev
+npm run build
+npm run lint
+```
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- Add and manage multiple credit cards
+- Bank-wise card database with illustrated previews
+- Cashback, reward points, and miles tracking
+- Shared limit support for related cards
+- Statement and unbilled spend separation
+- Transaction editing and deletion
+- Analytics with category and card breakdowns
+- CSV import and export for backup and restore
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Data Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Credit card data is split by bank inside `data/creditCards/`, with a central aggregator in `data/creditCards/index.ts`.
 
-## Deploy on Vercel
+## Folder Highlights
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/` - routes, dashboard, analytics, and card detail screens
+- `components/` - card UI, spend modal, detail views, layout, and shared controls
+- `data/` - bank-wise credit card database
+- `hooks/` - local state helpers for cards and transactions
+- `lib/` - billing logic, reward formatting, CSV helpers, and storage utilities
+- `types/` - shared TypeScript types
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+- Data is stored locally in the browser.
+- The UI uses a white and grey glass aesthetic with card illustrations.
+- Some card and bank details are sample-based and can be expanded with verified sources later.
