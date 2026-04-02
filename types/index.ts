@@ -42,6 +42,8 @@ export interface UserCard {
   gracePeriodDays: number;
   dueDate: number;
   creditLimit: number;
+  annualFee?: number;
+  isLtf?: boolean;
   sharedLimitGroupId?: string;
   color: [string, string];
   createdAt: string;

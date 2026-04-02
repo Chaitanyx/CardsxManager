@@ -511,15 +511,15 @@
     "annualFee": 1500,
     "joiningFee": 1500,
     "rewardStructure": {
-      "baseRate": 2,
+      "baseRate": 1,
       "accelerated": [
         {
           "category": "Dining and shopping",
-          "rate": 5,
+          "rate": 10,
           "unit": "points per INR 100"
         }
       ],
-      "pointValue": 0.25,
+      "pointValue": 0.20,
       "pointUnit": "Reward Points",
       "redemption": [
         "Travel",
@@ -797,7 +797,7 @@
     "annualFee": 499,
     "joiningFee": 499,
     "rewardStructure": {
-      "baseRate": 1,
+      "baseRate": 1.5,
       "accelerated": [
         {
           "category": "Google Pay",
@@ -805,12 +805,12 @@
           "unit": "% Cashback"
         },
         {
-          "category": "Utilities",
-          "rate": 2,
+          "category": "Zomato and Swiggy",
+          "rate": 4,
           "unit": "% Cashback"
         }
       ],
-      "pointValue": 1,
+      "pointValue": 1.5,
       "pointUnit": "Cashback",
       "redemption": [
         "Statement Credit"
@@ -824,7 +824,7 @@
     ],
     "features": [
       "5% on Google Pay",
-      "2% on utilities",
+      "4% on Zomato and Swiggy",
       "4 lounge visits"
     ],
     "networks": [

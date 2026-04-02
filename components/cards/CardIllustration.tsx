@@ -7,8 +7,12 @@ import { SharedLimitSummary } from "../../lib/limitSharing";
 
 export function CardIllustration({
   card,
+  annualFee = 0,
+  isLtf = false,
   unbilledTotal,
   billedTotal,
+  totalRewardsReceived = 0,
+  showDetailedStats = false,
   sharedLimitSummary,
   onAddSpend,
   onClearDues,
@@ -16,8 +20,12 @@ export function CardIllustration({
   showPaid = false
 }: {
   card: UserCard;
+  annualFee?: number;
+  isLtf?: boolean;
   unbilledTotal: number;
   billedTotal: number;
+  totalRewardsReceived?: number;
+  showDetailedStats?: boolean;
   sharedLimitSummary?: SharedLimitSummary;
   onAddSpend: () => void;
   onClearDues?: () => void;
@@ -31,6 +39,8 @@ export function CardIllustration({
   const variantLabel = card.subNetwork?.toUpperCase() ?? "CLASSIC";
   const safeLast4 = (card.last4 ?? card.id.slice(-4)).replace(/\D/g, "").slice(-4).padStart(4, "0");
   const maskedNumber = `•••• •••• •••• ${safeLast4}`;
+  const baseAnnualFee = isLtf ? 0 : Math.max(annualFee, 0);
+  const annualFeeWithGst = baseAnnualFee * 1.18;
 
   return (
     <div className="glass-panel p-5 flex flex-col gap-4 hover:-translate-y-1 transition-transform duration-300">
@@ -96,6 +106,21 @@ export function CardIllustration({
           <div>Statement</div>
           <div className="text-sm font-semibold text-neutral-800">₹{billedTotal.toLocaleString("en-IN")}</div>
         </div>
+        {showDetailedStats && (
+          <>
+            <div className="glass-panel-strong px-3 py-2">
+              <div>Annual Fee</div>
+              <div className="text-sm font-semibold text-neutral-800">
+                {isLtf ? "Free" : `₹${annualFeeWithGst.toLocaleString("en-IN")}`}
+              </div>
+              {!isLtf && <div className="text-[10px] text-neutral-500">incl. 18% GST</div>}
+            </div>
+            <div className="glass-panel-strong px-3 py-2">
+              <div>Total Rewards</div>
+              <div className="text-sm font-semibold text-neutral-800">₹{totalRewardsReceived.toLocaleString("en-IN")}</div>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="mt-2 flex flex-wrap gap-2">

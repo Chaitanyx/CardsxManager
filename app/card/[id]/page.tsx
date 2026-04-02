@@ -14,6 +14,7 @@ import { CardNetwork, CardType, RewardRateMode, Transaction } from "../../../typ
 import { getSharedLimitSummary } from "../../../lib/limitSharing";
 import { spendCategories } from "../../../lib/categoryMeta";
 import { getRewardTabLabel } from "../../../lib/rewardDisplay";
+import { type RewardSortOption, type SpendSortOption } from "../../../lib/transactionSorting";
 
 const networkVariants: Record<CardNetwork, string[]> = {
   Visa: ["Classic", "Gold", "Platinum", "Signature", "Infinite"],
@@ -35,6 +36,9 @@ export default function CardDetailPage() {
   const [isClearing, setIsClearing] = useState(false);
   const [showPaid, setShowPaid] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
+  const [unbilledSort, setUnbilledSort] = useState<SpendSortOption>("newest");
+  const [billedSort, setBilledSort] = useState<SpendSortOption>("newest");
+  const [rewardSort, setRewardSort] = useState<RewardSortOption>("newest");
   const [editMerchant, setEditMerchant] = useState("");
   const [editAmount, setEditAmount] = useState("");
   const [editDate, setEditDate] = useState(new Date().toISOString().slice(0, 10));
@@ -58,6 +62,7 @@ export default function CardDetailPage() {
 
   const unbilledTotal = unbilled.reduce((acc, tx) => acc + tx.amount, 0);
   const billedTotal = billed.reduce((acc, tx) => acc + tx.amount, 0);
+  const totalRewardsReceived = cardTransactions.reduce((acc, tx) => acc + (tx.rewardEarned ?? 0), 0);
   const sharedLimitSummary = card ? getSharedLimitSummary(cards, transactions, card) : null;
   const dueDate = card ? calculateDueDate(card.statementDate, card.gracePeriodDays) : null;
 
@@ -148,8 +153,12 @@ export default function CardDetailPage() {
       <div className="space-y-5">
         <CardIllustration
           card={card}
+          annualFee={card.annualFee ?? cardData?.annualFee ?? 0}
+          isLtf={card.isLtf ?? (card.annualFee ?? cardData?.annualFee ?? 0) === 0}
           unbilledTotal={unbilledTotal}
           billedTotal={billedTotal}
+          totalRewardsReceived={totalRewardsReceived}
+          showDetailedStats
           sharedLimitSummary={sharedLimitSummary ?? undefined}
           onAddSpend={() => setShowSpendModal(true)}
           onClearDues={billed.length > 0 ? handleClearDues : undefined}
@@ -276,6 +285,52 @@ export default function CardDetailPage() {
                 className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
               />
             </div>
+            <div className="rounded-2xl border border-white/60 bg-white/70 p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-semibold">Life Time Free (LTF)</h3>
+                  <p className="text-xs text-neutral-500">When enabled, annual fee is treated as zero.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleUpdateSettings({
+                      isLtf: !(card.isLtf ?? false),
+                      annualFee: !(card.isLtf ?? false) ? 0 : card.annualFee ?? cardData?.annualFee ?? 0
+                    })
+                  }
+                  className={`relative h-7 w-14 rounded-full transition ${
+                    card.isLtf ?? false ? "bg-emerald-500" : "bg-neutral-300"
+                  }`}
+                >
+                  <span
+                    className={`absolute top-1 h-5 w-5 rounded-full bg-white transition ${
+                      card.isLtf ?? false ? "left-8" : "left-1"
+                    }`}
+                  />
+                </button>
+              </div>
+
+              <div className="grid gap-2">
+                <label className="text-sm font-semibold">Annual Fee (before GST)</label>
+                <input
+                  type="number"
+                  value={card.isLtf ? 0 : card.annualFee ?? cardData?.annualFee ?? 0}
+                  min={0}
+                  disabled={card.isLtf ?? false}
+                  onChange={(event) =>
+                    handleUpdateSettings({
+                      annualFee: Math.max(Number(event.target.value) || 0, 0),
+                      isLtf: false
+                    })
+                  }
+                  className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm disabled:bg-neutral-100 disabled:text-neutral-500"
+                />
+                <p className="text-xs text-neutral-500">
+                  Effective annual fee = ₹{(((card.isLtf ? 0 : card.annualFee ?? cardData?.annualFee ?? 0) * 1.18)).toLocaleString("en-IN")} (includes 18% GST)
+                </p>
+              </div>
+            </div>
             <div className="grid gap-2">
               <label className="text-sm font-semibold">Reward Type</label>
               <select
@@ -341,6 +396,8 @@ export default function CardDetailPage() {
           <TransactionList
             title="Unbilled Spends"
             transactions={unbilled}
+            sortBy={unbilledSort}
+            onSortChange={setUnbilledSort}
             onTransactionClick={openEditTransaction}
             activeTransactionId={editingTransaction?.id}
           />
@@ -349,12 +406,21 @@ export default function CardDetailPage() {
           <TransactionList
             title="Statement Spends"
             transactions={billed}
+            sortBy={billedSort}
+            onSortChange={setBilledSort}
             isFading={isClearing}
             onTransactionClick={openEditTransaction}
             activeTransactionId={editingTransaction?.id}
           />
         )}
-        {activeTab === "rewards" && <RewardHistory transactions={[...unbilled, ...billed]} cardType={card.type} />}
+        {activeTab === "rewards" && (
+          <RewardHistory
+            transactions={[...unbilled, ...billed]}
+            cardType={card.type}
+            sortBy={rewardSort}
+            onSortChange={setRewardSort}
+          />
+        )}
       </div>
 
       {editingTransaction && (

@@ -6,6 +6,12 @@ export const STORAGE_KEYS = {
 };
 
 function normalizeCard(card: UserCard): UserCard {
+  const normalizedAnnualFee =
+    typeof card.annualFee === "number" && Number.isFinite(card.annualFee)
+      ? Math.max(card.annualFee, 0)
+      : 0;
+  const normalizedIsLtf = card.isLtf ?? normalizedAnnualFee === 0;
+
   const normalizedLast4 = (card.last4 ?? card.id.slice(-4) ?? "0000")
     .replace(/\D/g, "")
     .slice(-4)
@@ -16,6 +22,8 @@ function normalizeCard(card: UserCard): UserCard {
     last4: normalizedLast4,
     gracePeriodDays: card.gracePeriodDays ?? 20,
     dueDate: card.dueDate ?? 0,
+    annualFee: normalizedIsLtf ? 0 : normalizedAnnualFee,
+    isLtf: normalizedIsLtf,
     sharedLimitGroupId: card.sharedLimitGroupId ?? undefined,
   };
 }

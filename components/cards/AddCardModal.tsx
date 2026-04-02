@@ -208,6 +208,8 @@ export default function AddCardModal({
       gracePeriodDays,
       dueDate,
       creditLimit,
+      annualFee: selectedCard.annualFee,
+      isLtf: selectedCard.annualFee === 0,
       sharedLimitGroupId,
       color: selectedCard.color as [string, string],
       createdAt: new Date().toISOString()
