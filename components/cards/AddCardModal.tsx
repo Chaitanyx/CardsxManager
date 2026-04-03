@@ -282,8 +282,13 @@ export default function AddCardModal({
                         <div className="text-sm font-medium opacity-90">{card.bank}</div>
                         <h3 className="mt-2 text-xl font-semibold leading-tight line-clamp-2">{card.name}</h3>
                       </div>
-                      <div className="rounded-full bg-white/18 px-3 py-1 text-[10px] font-semibold tracking-[0.24em] uppercase backdrop-blur">
-                        {(card.preferredNetwork ?? selectedCard?.preferredNetwork ?? "card").toUpperCase()}
+                      <div className="text-right text-white/75 drop-shadow-[0_1px_1px_rgba(0,0,0,0.12)]">
+                        <div className="text-[9px] font-semibold uppercase tracking-[0.28em]">
+                          {(card.preferredNetwork ?? selectedCard?.preferredNetwork ?? "card").toUpperCase()}
+                        </div>
+                        <div className="mt-1 text-[8px] font-medium uppercase tracking-[0.28em] opacity-80">
+                          {(card.preferredSubNetwork || "network").toUpperCase()}
+                        </div>
                       </div>
                     </div>
 
@@ -294,9 +299,7 @@ export default function AddCardModal({
 
                     <div className="relative z-10 flex items-end justify-between gap-4">
                       <div className="chip h-10 w-14 rounded-lg" />
-                      <div className="rounded-full bg-white/16 px-3 py-1 text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur">
-                        {(card.preferredSubNetwork || "network").toUpperCase()}
-                      </div>
+                      <div />
                     </div>
                   </div>
                 </button>
@@ -312,8 +315,13 @@ export default function AddCardModal({
                     <div className="absolute inset-0 opacity-45" style={{ background: "radial-gradient(circle at 88% 18%, rgba(255,255,255,0.48), transparent 44%)" }} />
                     <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(circle at 12% 96%, rgba(0,0,0,0.32), transparent 48%)" }} />
                     <div className="absolute left-0 right-0 top-0 h-14 opacity-50" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0))" }} />
-                    <div className="absolute top-4 right-4 rounded-full bg-white/20 px-3 py-1 text-[10px] font-semibold tracking-[0.22em]">
-                      {(selectedNetwork ?? selectedCard.preferredNetwork).toUpperCase()}
+                    <div className="absolute right-4 top-4 text-right text-white/75 drop-shadow-[0_1px_1px_rgba(0,0,0,0.12)]">
+                      <div className="text-[9px] font-semibold uppercase tracking-[0.28em]">
+                        {(selectedNetwork ?? selectedCard.preferredNetwork).toUpperCase()}
+                      </div>
+                      <div className="mt-1 text-[8px] font-medium uppercase tracking-[0.28em] opacity-80">
+                        {(selectedSubNetwork || selectedCard.preferredSubNetwork).toUpperCase()}
+                      </div>
                     </div>
                     <div className="relative z-10">
                       <h3 className="text-xl font-semibold leading-tight max-w-[86%]">{selectedCard.name}</h3>

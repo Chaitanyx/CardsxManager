@@ -2,11 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { UserCard } from "../../types";
+import { CardType, UserCard } from "../../types";
 import { SharedLimitSummary } from "../../lib/limitSharing";
 
 export function CardIllustration({
   card,
+  cardType,
   annualFee = 0,
   isLtf = false,
   unbilledTotal,
@@ -20,6 +21,7 @@ export function CardIllustration({
   showPaid = false
 }: {
   card: UserCard;
+  cardType: CardType;
   annualFee?: number;
   isLtf?: boolean;
   unbilledTotal: number;
@@ -41,19 +43,31 @@ export function CardIllustration({
   const maskedNumber = `•••• •••• •••• ${safeLast4}`;
   const baseAnnualFee = isLtf ? 0 : Math.max(annualFee, 0);
   const annualFeeWithGst = baseAnnualFee * 1.18;
+  const totalRewardsLabel = cardType === "cashback" ? "Total Cashback" : cardType === "miles" ? "Total Miles" : "Total Points";
+  const totalRewardsValue =
+    cardType === "cashback"
+      ? `₹${totalRewardsReceived.toLocaleString("en-IN")}`
+      : cardType === "miles"
+      ? `${totalRewardsReceived.toLocaleString("en-IN")} miles`
+      : `${totalRewardsReceived.toLocaleString("en-IN")} points`;
 
   return (
     <div className="glass-panel p-5 flex flex-col gap-4 hover:-translate-y-1 transition-transform duration-300">
       <Link href={`/card/${card.id}`} className="block">
         <div
-          className="rounded-2xl p-5 text-white relative overflow-hidden soft-ring min-h-[210px]"
+          className="rounded-2xl p-6 text-white relative overflow-hidden soft-ring min-h-[258px]"
           style={{ background: `linear-gradient(135deg, ${card.color[0]}, ${card.color[1]})` }}
         >
           <div className="absolute inset-0 opacity-45" style={{ background: "radial-gradient(circle at 86% 12%, rgba(255,255,255,0.48), transparent 42%)" }} />
           <div className="absolute inset-0 opacity-25" style={{ background: "radial-gradient(circle at 10% 100%, rgba(0,0,0,0.3), transparent 46%)" }} />
           <div className="absolute left-0 right-0 top-0 h-16 opacity-55" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0))" }} />
           <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "repeating-linear-gradient(120deg, rgba(255,255,255,0.8) 0 1px, transparent 1px 6px)" }} />
-          <div className="absolute top-4 right-4 rounded-full bg-white/20 px-3 py-1 text-[10px] font-semibold tracking-[0.22em]">{networkLabel}</div>
+          <div className="absolute bottom-4 right-4 h-24 w-24 rounded-full bg-white/12 blur-2xl" />
+          <div className="absolute left-6 top-20 h-16 w-16 rounded-full bg-black/10 blur-2xl" />
+          <div className="absolute right-4 top-4 text-right text-white/75 drop-shadow-[0_1px_1px_rgba(0,0,0,0.12)]">
+            <div className="text-[8px] font-semibold uppercase tracking-[0.32em]">{networkLabel}</div>
+            <div className="mt-1 text-[7px] font-medium uppercase tracking-[0.32em] opacity-80">{variantLabel}</div>
+          </div>
           {billedTotal > 0 && (
             <div className="absolute top-14 right-4 rounded-full bg-white/25 px-3 py-1 text-[10px] uppercase tracking-[0.2em]">
               Statement Due
@@ -72,13 +86,16 @@ export function CardIllustration({
               </div>
             </div>
           )}
-          <div className="relative z-10">
-            <div className="text-lg font-semibold tracking-tight">{card.bank}</div>
-            <div className="text-2xl font-semibold mt-2 max-w-[88%] leading-tight">{card.name}</div>
-            <div className="mt-5 text-xs tracking-[0.28em] opacity-80">{maskedNumber}</div>
-            <div className="mt-5 flex items-center justify-between">
-              <div className="chip h-10 w-14 rounded-lg" />
-              <div className="rounded-full bg-white/16 px-3 py-1 text-xs font-semibold tracking-[0.18em]">{variantLabel}</div>
+          <div className="relative z-10 flex h-full min-h-[206px] flex-col justify-between">
+            <div>
+              <div className="text-lg font-semibold tracking-tight">{card.bank}</div>
+              <div className="mt-4 max-w-[88%] text-2xl font-semibold leading-[1.15]">{card.name}</div>
+            </div>
+            <div>
+              <div className="text-xs tracking-[0.28em] opacity-80">{maskedNumber}</div>
+              <div className="mt-6 flex items-end justify-between">
+                <div className="chip h-11 w-16 rounded-xl" />
+              </div>
             </div>
           </div>
         </div>
@@ -104,7 +121,9 @@ export function CardIllustration({
         </div>
         <div className="glass-panel-strong px-3 py-2">
           <div>Statement</div>
-          <div className="text-sm font-semibold text-neutral-800">₹{billedTotal.toLocaleString("en-IN")}</div>
+          <div className={`text-sm font-semibold ${billedTotal > 0 ? "text-red-600" : "text-neutral-800"}`}>
+            ₹{billedTotal.toLocaleString("en-IN")}
+          </div>
         </div>
         {showDetailedStats && (
           <>
@@ -116,8 +135,10 @@ export function CardIllustration({
               {!isLtf && <div className="text-[10px] text-neutral-500">incl. 18% GST</div>}
             </div>
             <div className="glass-panel-strong px-3 py-2">
-              <div>Total Rewards</div>
-              <div className="text-sm font-semibold text-neutral-800">₹{totalRewardsReceived.toLocaleString("en-IN")}</div>
+              <div>{totalRewardsLabel}</div>
+              <div className={`text-sm font-semibold ${totalRewardsReceived > 0 ? "text-emerald-600" : "text-neutral-800"}`}>
+                {totalRewardsValue}
+              </div>
             </div>
           </>
         )}

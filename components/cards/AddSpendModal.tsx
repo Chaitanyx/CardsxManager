@@ -49,6 +49,9 @@ export default function AddSpendModal({
     card.type === "cashback" ? "percent" : "perCurrency"
   );
   const [rewardUnit, setRewardUnit] = useState(card.type === "cashback" ? "cashback" : card.type === "miles" ? "miles" : "points");
+  const [rewardPointValue, setRewardPointValue] = useState(
+    card.type === "rewards" ? String(bankCard?.rewardStructure?.pointValue ?? 1) : ""
+  );
   const activeCategory = getCategoryMeta(category);
 
   const rewardOptions = useMemo<RewardOption[]>(() => {
@@ -71,8 +74,18 @@ export default function AddSpendModal({
     }
 
     if (card.type === "rewards") {
-      return [1, 2, 5, 10].map((rate) => ({
-        label: `${rate}x points`,
+      const presetRates = new Set<number>([
+        1,
+        2,
+        bankCard.rewardStructure?.baseRate ?? 1,
+        ...(bankCard.rewardStructure?.accelerated?.map((item) => item.rate) ?? [])
+      ]);
+
+      return Array.from(presetRates)
+        .filter((rate) => rate > 0)
+        .sort((a, b) => a - b)
+        .map((rate) => ({
+        label: `${rate} point${rate > 1 ? "s" : ""} / ₹100`,
         value: String(rate),
         mode: "perCurrency" as const,
         unit: "points"
@@ -92,6 +105,7 @@ export default function AddSpendModal({
     const parsedAmount = Number(amount);
     const rate = rewardRate ? Number(rewardRate) : 0;
     const earned = isRewardEligible ? calculateRewardEarned(parsedAmount, rate, rewardRateMode) : 0;
+    const parsedPointValue = rewardPointValue ? Number(rewardPointValue) : 0;
 
     const tx: Transaction = {
       id: Math.random().toString(36).slice(2),
@@ -106,6 +120,7 @@ export default function AddSpendModal({
       rewardRateMode: isRewardEligible ? rewardRateMode : undefined,
       rewardUnit: isRewardEligible ? rewardUnit : undefined,
       rewardEarned: isRewardEligible ? earned : 0,
+      rewardPointValue: isRewardEligible && rewardUnit === "points" ? parsedPointValue : undefined,
       status: "unbilled",
       createdAt: new Date().toISOString()
     };
@@ -230,7 +245,7 @@ export default function AddSpendModal({
                     }}
                     className="rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm shadow-sm outline-none transition focus:border-neutral-400"
                   >
-                    <option value="">Select preset</option>
+                    <option value="">Select rate</option>
                     {rewardOptions.map((option) => (
                       <option key={option.label} value={option.value}>
                         {option.label}
@@ -265,7 +280,25 @@ export default function AddSpendModal({
                   </select>
                 </div>
               </div>
-            ) : (
+            ) : null}
+
+            {isRewardEligible && rewardUnit === "points" && (
+              <div className="mt-3 grid gap-2 md:max-w-xs">
+                <label className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">Point value (₹ per point)</label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={rewardPointValue}
+                  onChange={(event) => setRewardPointValue(event.target.value)}
+                  placeholder="0.25"
+                  className="rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm shadow-sm outline-none transition focus:border-neutral-400"
+                />
+                <p className="text-xs text-neutral-500">Example: 1 reward point = ₹0.25</p>
+              </div>
+            )}
+
+            {!isRewardEligible && (
               <div className="rounded-2xl border border-dashed border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-500">
                 Rewards disabled for this transaction.
               </div>

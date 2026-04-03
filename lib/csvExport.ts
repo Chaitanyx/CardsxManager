@@ -29,6 +29,7 @@ const header = [
   "rewardRateMode",
   "rewardUnit",
   "rewardEarned",
+  "rewardPointValue",
   "status"
 ];
 
@@ -111,6 +112,7 @@ export function exportAllToCsv(cards: UserCard[], transactions: Transaction[]) {
         tx.rewardRateMode ?? "",
         tx.rewardUnit ?? "",
         tx.rewardEarned ?? "",
+        tx.rewardPointValue ?? "",
         tx.status
       ].map(escapeCsv).join(",")
     );
@@ -160,6 +162,7 @@ export function importAllFromCsv(csvText: string) {
   rows.forEach((row) => {
     const recordType = row[0];
     const hasSharedLimitColumn = row.length >= 29;
+    const hasRewardPointValueColumn = row.length >= 31;
     const cardCreatedAtIndex = hasSharedLimitColumn ? 17 : 16;
     const txCreatedAtIndex = hasSharedLimitColumn ? 17 : 16;
     const txIdx = {
@@ -174,7 +177,8 @@ export function importAllFromCsv(csvText: string) {
       rewardRateMode: txCreatedAtIndex + 8,
       rewardUnit: txCreatedAtIndex + 9,
       rewardEarned: txCreatedAtIndex + 10,
-      status: txCreatedAtIndex + 11
+      rewardPointValue: txCreatedAtIndex + 11,
+      status: txCreatedAtIndex + (hasRewardPointValueColumn ? 12 : 11)
     };
 
     if (recordType === "card") {
@@ -212,6 +216,7 @@ export function importAllFromCsv(csvText: string) {
         rewardRateMode: row[txIdx.rewardRateMode] as Transaction["rewardRateMode"],
         rewardUnit: row[txIdx.rewardUnit] || undefined,
         rewardEarned: row[txIdx.rewardEarned] ? Number(row[txIdx.rewardEarned]) : undefined,
+        rewardPointValue: row[txIdx.rewardPointValue] ? Number(row[txIdx.rewardPointValue]) : undefined,
         status: (row[txIdx.status] as Transaction["status"]) || "unbilled",
         createdAt: row[txIdx.createdAt]
       });

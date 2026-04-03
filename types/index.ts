@@ -66,6 +66,7 @@ export interface Transaction {
   rewardRateMode?: RewardRateMode;
   rewardUnit?: string;
   rewardEarned?: number;
+  rewardPointValue?: number;
   status: "unbilled" | "billed" | "paid";
   createdAt: string;
 }

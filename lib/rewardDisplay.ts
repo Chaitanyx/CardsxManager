@@ -1,5 +1,14 @@
 import { CardType, Transaction } from "../types";
 
+const numberFormatter = new Intl.NumberFormat("en-IN", {
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2
+});
+
+function formatNumber(value: number) {
+  return numberFormatter.format(value);
+}
+
 export function getRewardTabLabel(cardType: CardType) {
   if (cardType === "cashback") return "Cashback";
   if (cardType === "miles") return "Miles";
@@ -20,14 +29,24 @@ export function getRewardTotalLabel(cardType: CardType) {
 
 export function formatRewardEarned(value: number, rewardType: CardType) {
   if (rewardType === "cashback") {
-    return `+₹${value.toFixed(2)} cashback`;
+    return `+₹${formatNumber(value)} cashback`;
   }
 
   if (rewardType === "miles") {
-    return `+${value.toFixed(2)} miles`;
+    return `+${formatNumber(value)} miles`;
   }
 
-  return `+${value.toFixed(2)} points`;
+  return `+${formatNumber(value)} points`;
+}
+
+export function getRewardRupeeEquivalent(tx: Transaction) {
+  if (tx.rewardType !== "rewards") return null;
+  const pointValue = tx.rewardPointValue ?? 0;
+  const rewardEarned = tx.rewardEarned ?? 0;
+  if (pointValue <= 0 || rewardEarned <= 0) return null;
+
+  const rupeeValue = rewardEarned * pointValue;
+  return `+₹${formatNumber(rupeeValue)}`;
 }
 
 export function formatTransactionReward(tx: Transaction) {

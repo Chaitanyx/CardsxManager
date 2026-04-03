@@ -87,6 +87,7 @@ export default function Home() {
               <CardIllustration
                 key={card.id}
                 card={card}
+                cardType={card.type}
                 unbilledTotal={unbilledTotal}
                 billedTotal={billedTotal}
                 sharedLimitSummary={sharedLimitSummary}

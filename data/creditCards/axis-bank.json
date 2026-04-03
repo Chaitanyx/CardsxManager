@@ -28,8 +28,8 @@
     "statementDate": 21,
     "gracePeriodDays": 18,
     "color": [
-      "#1f0f1b",
-      "#b91c1c"
+      "#3b0819",
+      "#1a1a1a"
     ],
     "features": [
       "Private banking privileges",
@@ -74,8 +74,8 @@
     "statementDate": 20,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#7c3aed"
+      "#111111",
+      "#333333"
     ],
     "features": [
       "Travel concierge",
@@ -120,8 +120,8 @@
     "statementDate": 19,
     "gracePeriodDays": 20,
     "color": [
-      "#0f172a",
-      "#0ea5e9"
+      "#5e142d",
+      "#822245"
     ],
     "features": [
       "Premium lounge access",
@@ -166,8 +166,8 @@
     "statementDate": 14,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#22c55e"
+      "#b0b3b8",
+      "#e4e6eb"
     ],
     "features": [
       "EDGE Miles earning",
@@ -213,8 +213,8 @@
     "statementDate": 15,
     "gracePeriodDays": 20,
     "color": [
-      "#0b1220",
-      "#38bdf8"
+      "#1d4ed8",
+      "#1e3a8a"
     ],
     "features": [
       "Travel miles",
@@ -258,8 +258,8 @@
     "statementDate": 13,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#7c3aed"
+      "#5b255d",
+      "#d4af37"
     ],
     "features": [
       "Club Vistara points",
@@ -303,8 +303,8 @@
     "statementDate": 13,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#8b5cf6"
+      "#5b255d",
+      "#c0c0c0"
     ],
     "features": [
       "CV points earning",
@@ -348,8 +348,8 @@
     "statementDate": 13,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#c084fc"
+      "#5b255d",
+      "#ffffff"
     ],
     "features": [
       "CV points earning",
@@ -393,8 +393,8 @@
     "statementDate": 16,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#f97316"
+      "#171717",
+      "#ea580c"
     ],
     "features": [
       "Travel miles",
@@ -438,8 +438,8 @@
     "statementDate": 16,
     "gracePeriodDays": 20,
     "color": [
-      "#1f2937",
-      "#fb7185"
+      "#dc2626",
+      "#f97316"
     ],
     "features": [
       "Travel miles",
@@ -484,8 +484,8 @@
     "statementDate": 10,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#06b6d4"
+      "#1e3a8a",
+      "#d4af37"
     ],
     "features": [
       "Dining rewards",
@@ -531,7 +531,7 @@
     "gracePeriodDays": 20,
     "color": [
       "#0f172a",
-      "#a855f7"
+      "#ea580c"
     ],
     "features": [
       "Privilege offers",
@@ -574,8 +574,8 @@
     "statementDate": 6,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#34d399"
+      "#4285f4",
+      "#34a853"
     ],
     "features": [
       "UPI cashback",
@@ -623,8 +623,8 @@
     "statementDate": 8,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#f97316"
+      "#0b1b3d",
+      "#f4c01e"
     ],
     "features": [
       "5% on Flipkart",
@@ -672,8 +672,8 @@
     "statementDate": 5,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#ef4444"
+      "#111111",
+      "#ff0000"
     ],
     "features": [
       "Airtel cashback",
@@ -722,8 +722,8 @@
     "statementDate": 7,
     "gracePeriodDays": 20,
     "color": [
-      "#1e293b",
-      "#0ea5e9"
+      "#0b1b3d",
+      "#ff6600"
     ],
     "features": [
       "Fuel rewards",
@@ -770,8 +770,8 @@
     "statementDate": 4,
     "gracePeriodDays": 20,
     "color": [
-      "#0f172a",
-      "#22c55e"
+      "#2d3748",
+      "#1a202c"
     ],
     "features": [
       "Simple cashback",
@@ -819,8 +819,8 @@
     "statementDate": 5,
     "gracePeriodDays": 20,
     "color": [
-      "#0f172a",
-      "#38bdf8"
+      "#111827",
+      "#f97316"
     ],
     "features": [
       "5% on Google Pay",
@@ -863,8 +863,8 @@
     "statementDate": 9,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#ec4899"
+      "#1a1a1a",
+      "#ff5500"
     ],
     "features": [
       "Movie offers",
@@ -909,8 +909,8 @@
     "statementDate": 3,
     "gracePeriodDays": 20,
     "color": [
-      "#1f2937",
-      "#f59e0b"
+      "#1e40af",
+      "#60a5fa"
     ],
     "features": [
       "Classic rewards",
@@ -958,8 +958,8 @@
     "statementDate": 2,
     "gracePeriodDays": 20,
     "color": [
-      "#111827",
-      "#14b8a6"
+      "#2c2c2c",
+      "#00ffcc"
     ],
     "features": [
       "Entry cashback",

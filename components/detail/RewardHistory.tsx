@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { CardType, Transaction } from "../../types";
 import { format } from "date-fns";
-import { formatRewardEarned, getRewardHistoryTitle, getRewardTotalLabel } from "../../lib/rewardDisplay";
+import { formatRewardEarned, getRewardHistoryTitle, getRewardRupeeEquivalent, getRewardTotalLabel } from "../../lib/rewardDisplay";
 import { rewardSortOptions, sortRewardTransactions, type RewardSortOption } from "../../lib/transactionSorting";
 
 export function RewardHistory({
@@ -57,18 +57,23 @@ export function RewardHistory({
       </div>
       <div className="space-y-3">
         {rewards.length === 0 && <p className="text-sm text-neutral-500">No earnings yet.</p>}
-        {rewards.map((tx) => (
-          <div key={tx.id} className="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
-            <div>
-              <div className="font-semibold">{tx.merchant}</div>
-              <div className="text-xs text-neutral-500">{format(new Date(tx.date), "dd MMM yyyy")}</div>
+        {rewards.map((tx) => {
+          const rupeeEquivalent = getRewardRupeeEquivalent(tx);
+
+          return (
+            <div key={tx.id} className="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
+              <div>
+                <div className="font-semibold">{tx.merchant}</div>
+                <div className="text-xs text-neutral-500">{format(new Date(tx.date), "dd MMM yyyy")}</div>
+              </div>
+              <div className="text-right">
+                <div className="font-semibold text-emerald-600">{formatRewardEarned(tx.rewardEarned ?? 0, tx.rewardType)}</div>
+                {rupeeEquivalent && <div className="text-[11px] text-emerald-500">{rupeeEquivalent}</div>}
+                <div className="text-xs text-neutral-500">₹{tx.amount.toLocaleString("en-IN")}</div>
+              </div>
             </div>
-            <div className="text-right">
-              <div className="font-semibold text-emerald-600">{formatRewardEarned(tx.rewardEarned ?? 0, tx.rewardType)}</div>
-              <div className="text-xs text-neutral-500">₹{tx.amount.toLocaleString("en-IN")}</div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

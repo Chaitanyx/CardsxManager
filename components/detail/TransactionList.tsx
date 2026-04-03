@@ -5,7 +5,7 @@ import { Transaction } from "../../types";
 import { format } from "date-fns";
 import { EmptyState } from "../ui/EmptyState";
 import { getCategoryMeta } from "../../lib/categoryMeta";
-import { formatTransactionReward } from "../../lib/rewardDisplay";
+import { formatTransactionReward, getRewardRupeeEquivalent } from "../../lib/rewardDisplay";
 import { sortSpendTransactions, spendSortOptions, type SpendSortOption } from "../../lib/transactionSorting";
 
 export function TransactionList({
@@ -60,6 +60,7 @@ export function TransactionList({
         {sortedTransactions.map((tx) => {
           const meta = getCategoryMeta(tx.category);
           const CategoryIcon = meta.icon;
+          const rupeeEquivalent = getRewardRupeeEquivalent(tx);
 
           return (
             <button
@@ -88,7 +89,10 @@ export function TransactionList({
               <div className="text-right">
                 <div className="font-semibold">₹{tx.amount.toLocaleString("en-IN")}</div>
                 {tx.isRewardEligible && tx.rewardEarned !== undefined && (
-                  <div className="text-xs text-emerald-600">{formatTransactionReward(tx)}</div>
+                  <>
+                    <div className="text-xs font-semibold text-emerald-600">{formatTransactionReward(tx)}</div>
+                    {rupeeEquivalent && <div className="text-[11px] text-emerald-500">{rupeeEquivalent}</div>}
+                  </>
                 )}
               </div>
             </button>

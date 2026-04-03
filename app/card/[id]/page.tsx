@@ -49,6 +49,7 @@ export default function CardDetailPage() {
   const [editRewardRate, setEditRewardRate] = useState("");
   const [editRewardRateMode, setEditRewardRateMode] = useState<RewardRateMode>("percent");
   const [editRewardUnit, setEditRewardUnit] = useState("points");
+  const [editRewardPointValue, setEditRewardPointValue] = useState("");
 
   useEffect(() => {
     setIsMounted(true);
@@ -81,6 +82,52 @@ export default function CardDetailPage() {
   const showFeeWaiverTracker = !isCardLtf && configuredAnnualFee > 0 && feeWaiverTarget > 0;
   const sharedLimitSummary = card ? getSharedLimitSummary(cards, transactions, card) : null;
   const dueDate = card ? calculateDueDate(card.statementDate, card.gracePeriodDays) : null;
+  const rewardRateOptions = useMemo(() => {
+    if (!cardData || !card) return [] as Array<{ label: string; value: string; mode: RewardRateMode; unit: string }>;
+
+    if (card.type === "cashback") {
+      const presets = cardData.rewardStructure?.accelerated?.map((item) => ({
+        label: `${item.category} - ${item.rate}%`,
+        value: String(item.rate),
+        mode: "percent" as RewardRateMode,
+        unit: "cashback"
+      })) ?? [];
+
+      presets.unshift({
+        label: `Base - ${cardData.rewardStructure?.baseRate ?? 1}%`,
+        value: String(cardData.rewardStructure?.baseRate ?? 1),
+        mode: "percent" as RewardRateMode,
+        unit: "cashback"
+      });
+      return presets;
+    }
+
+    if (card.type === "rewards") {
+      const presetRates = new Set<number>([
+        1,
+        2,
+        cardData.rewardStructure?.baseRate ?? 1,
+        ...(cardData.rewardStructure?.accelerated?.map((item) => item.rate) ?? [])
+      ]);
+
+      return Array.from(presetRates)
+        .filter((rate) => rate > 0)
+        .sort((a, b) => a - b)
+        .map((rate) => ({
+          label: `${rate} point${rate > 1 ? "s" : ""} / ₹100`,
+          value: String(rate),
+          mode: "perCurrency" as RewardRateMode,
+          unit: "points"
+        }));
+    }
+
+    return [1, 2, 3, 5].map((rate) => ({
+      label: `${rate}x miles`,
+      value: String(rate),
+      mode: "perCurrency" as RewardRateMode,
+      unit: "miles"
+    }));
+  }, [card, cardData]);
 
   if (!isMounted) {
     return (
@@ -155,6 +202,11 @@ export default function CardDetailPage() {
     setEditRewardRate(tx.rewardRate !== undefined ? String(tx.rewardRate) : "");
     setEditRewardRateMode(tx.rewardRateMode ?? (card.type === "cashback" ? "percent" : "perCurrency"));
     setEditRewardUnit(tx.rewardUnit ?? (card.type === "cashback" ? "cashback" : card.type === "miles" ? "miles" : "points"));
+    setEditRewardPointValue(
+      tx.rewardPointValue !== undefined
+        ? String(tx.rewardPointValue)
+        : String(cardData?.rewardStructure?.pointValue ?? 1)
+    );
   };
 
   const handleSaveTransactionEdit = () => {
@@ -162,6 +214,7 @@ export default function CardDetailPage() {
 
     const parsedAmount = Number(editAmount);
     const parsedRate = editRewardRate ? Number(editRewardRate) : 0;
+    const parsedPointValue = editRewardPointValue ? Number(editRewardPointValue) : 0;
     const rewardEarned = editRewardEligible
       ? calculateRewardEarned(parsedAmount, parsedRate, editRewardRateMode)
       : 0;
@@ -176,7 +229,8 @@ export default function CardDetailPage() {
       rewardRate: editRewardEligible ? parsedRate : undefined,
       rewardRateMode: editRewardEligible ? editRewardRateMode : undefined,
       rewardUnit: editRewardEligible ? editRewardUnit : undefined,
-      rewardEarned: editRewardEligible ? rewardEarned : 0
+      rewardEarned: editRewardEligible ? rewardEarned : 0,
+      rewardPointValue: editRewardEligible && editRewardUnit === "points" ? parsedPointValue : undefined
     });
 
     setEditingTransaction(null);
@@ -193,6 +247,7 @@ export default function CardDetailPage() {
       <div className="space-y-5">
         <CardIllustration
           card={card}
+          cardType={card.type}
           annualFee={configuredAnnualFee}
           isLtf={isCardLtf}
           unbilledTotal={unbilledTotal}
@@ -656,13 +711,25 @@ export default function CardDetailPage() {
 
                 {editRewardEligible && (
                   <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-                    <input
-                      type="number"
+                    <select
                       value={editRewardRate}
-                      onChange={(event) => setEditRewardRate(event.target.value)}
-                      placeholder="Rate"
+                      onChange={(event) => {
+                        const selected = rewardRateOptions.find((option) => option.value === event.target.value);
+                        if (selected) {
+                          setEditRewardRateMode(selected.mode);
+                          setEditRewardUnit(selected.unit);
+                        }
+                        setEditRewardRate(event.target.value);
+                      }}
                       className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
-                    />
+                    >
+                      <option value="">Select rate</option>
+                      {rewardRateOptions.map((option) => (
+                        <option key={option.label} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
                     <select
                       value={editRewardRateMode}
                       onChange={(event) => setEditRewardRateMode(event.target.value as RewardRateMode)}
@@ -681,6 +748,21 @@ export default function CardDetailPage() {
                       <option value="points">Reward Points</option>
                       <option value="miles">Miles</option>
                     </select>
+                  </div>
+                )}
+
+                {editRewardEligible && editRewardUnit === "points" && (
+                  <div className="mt-3 grid gap-2 md:max-w-xs">
+                    <label className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">Point value (₹ per point)</label>
+                    <input
+                      type="number"
+                      min={0}
+                      step="0.01"
+                      value={editRewardPointValue}
+                      onChange={(event) => setEditRewardPointValue(event.target.value)}
+                      className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
+                    />
+                    <p className="text-xs text-neutral-500">Example: 1 reward point = ₹0.25</p>
                   </div>
                 )}
               </div>

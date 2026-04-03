@@ -1,4 +1,5 @@
 import { UserCard, Transaction } from '../types';
+import creditCardsData from '../data/creditCards';
 
 export const STORAGE_KEYS = {
   CARDS: 'cardx_cards',
@@ -6,6 +7,9 @@ export const STORAGE_KEYS = {
 };
 
 function normalizeCard(card: UserCard): UserCard {
+  const bankCard = (creditCardsData as Array<{ id: string; color: [string, string] }>).find(
+    (item) => item.id === card.bankCardId
+  );
   const normalizedAnnualFee =
     typeof card.annualFee === "number" && Number.isFinite(card.annualFee)
       ? Math.max(card.annualFee, 0)
@@ -42,6 +46,7 @@ function normalizeCard(card: UserCard): UserCard {
     pastCumulativeSpend: normalizedPastCumulativeSpend,
     renewalMonth: normalizedRenewalMonth,
     sharedLimitGroupId: card.sharedLimitGroupId ?? undefined,
+    color: bankCard?.color ?? card.color,
   };
 }
 
