@@ -2,11 +2,40 @@
 
 import React, { useMemo } from "react";
 import { Transaction } from "../../types";
-import { format } from "date-fns";
+import { format, isSameDay, startOfDay, subDays } from "date-fns";
 import { EmptyState } from "../ui/EmptyState";
 import { getCategoryMeta } from "../../lib/categoryMeta";
 import { formatTransactionReward, getRewardRupeeEquivalent } from "../../lib/rewardDisplay";
 import { sortSpendTransactions, spendSortOptions, type SpendSortOption } from "../../lib/transactionSorting";
+
+type TransactionDateBucket = "today" | "past-week" | "past";
+
+const dateBucketLabels: Record<TransactionDateBucket, string> = {
+  today: "Today",
+  "past-week": "Past week",
+  past: "Past spends"
+};
+
+const bucketRenderOrder: TransactionDateBucket[] = ["today", "past-week", "past"];
+
+function getTransactionDateBucket(transactionDate: string): TransactionDateBucket {
+  const now = new Date();
+  const txDate = new Date(transactionDate);
+
+  if (isSameDay(txDate, now)) {
+    return "today";
+  }
+
+  const oneWeekAgoStart = startOfDay(subDays(now, 7));
+  const todayStart = startOfDay(now);
+  const txTime = txDate.getTime();
+
+  if (txTime >= oneWeekAgoStart.getTime() && txTime < todayStart.getTime()) {
+    return "past-week";
+  }
+
+  return "past";
+}
 
 export function TransactionList({
   title,
@@ -26,6 +55,19 @@ export function TransactionList({
   activeTransactionId?: string;
 }) {
   const sortedTransactions = useMemo(() => sortSpendTransactions(transactions, sortBy), [transactions, sortBy]);
+  const groupedTransactions = useMemo(() => {
+    const groups: Record<TransactionDateBucket, Transaction[]> = {
+      today: [],
+      "past-week": [],
+      past: []
+    };
+
+    sortedTransactions.forEach((tx) => {
+      groups[getTransactionDateBucket(tx.date)].push(tx);
+    });
+
+    return groups;
+  }, [sortedTransactions]);
 
   return (
     <div
@@ -57,45 +99,60 @@ export function TransactionList({
         {sortedTransactions.length === 0 && (
           <EmptyState title="No transactions yet" subtitle="Add a spend to see your statement split." size="compact" />
         )}
-        {sortedTransactions.map((tx) => {
-          const meta = getCategoryMeta(tx.category);
-          const CategoryIcon = meta.icon;
-          const rupeeEquivalent = getRewardRupeeEquivalent(tx);
+        {bucketRenderOrder.map((bucket) => {
+          const bucketTransactions = groupedTransactions[bucket];
+
+          if (bucketTransactions.length === 0) {
+            return null;
+          }
 
           return (
-            <button
-              key={tx.id}
-              type="button"
-              onClick={() => onTransactionClick?.(tx)}
-              className={`flex w-full items-center justify-between rounded-2xl bg-white/70 px-4 py-3 text-left transition ${
-                onTransactionClick ? "hover:bg-white" : ""
-              } ${activeTransactionId === tx.id ? "ring-2 ring-blue-200" : ""}`}
-            >
-              <div className="flex items-center gap-3">
-                <span
-                  className={`inline-flex h-9 w-9 items-center justify-center rounded-full ${
-                    meta.iconClassName
-                  }`}
-                >
-                  <CategoryIcon className="h-4 w-4" />
-                </span>
-                <div>
-                  <div className="font-semibold">{tx.merchant}</div>
-                  <div className="text-xs text-neutral-500">
-                    {format(new Date(tx.date), "dd MMM yyyy, hh:mm a")} • {tx.category}
-                  </div>
-                </div>
+            <div key={bucket} className="space-y-3">
+              <div className="px-1 pt-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-neutral-500">
+                {dateBucketLabels[bucket]}
               </div>
-              <div className="text-right">
-                <div className="font-semibold">₹{tx.amount.toLocaleString("en-IN")}</div>
-                {tx.isRewardEligible && tx.rewardEarned !== undefined && (
-                  <>
-                    <div className="text-xs font-semibold text-emerald-600">{formatTransactionReward(tx)}</div>
-                    {rupeeEquivalent && <div className="text-[11px] text-emerald-500">{rupeeEquivalent}</div>}
-                  </>
-                )}
-              </div>
-            </button>
+              {bucketTransactions.map((tx) => {
+                const meta = getCategoryMeta(tx.category);
+                const CategoryIcon = meta.icon;
+                const rupeeEquivalent = getRewardRupeeEquivalent(tx);
+
+                return (
+                  <button
+                    key={tx.id}
+                    type="button"
+                    onClick={() => onTransactionClick?.(tx)}
+                    className={`flex w-full items-center justify-between rounded-2xl bg-white/70 px-4 py-3 text-left transition ${
+                      onTransactionClick ? "hover:bg-white" : ""
+                    } ${activeTransactionId === tx.id ? "ring-2 ring-blue-200" : ""}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`inline-flex h-9 w-9 items-center justify-center rounded-full ${
+                          meta.iconClassName
+                        }`}
+                      >
+                        <CategoryIcon className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <div className="font-semibold">{tx.merchant}</div>
+                        <div className="text-xs text-neutral-500">
+                          {format(new Date(tx.date), "dd MMM yyyy, hh:mm a")} • {tx.category}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-semibold">₹{tx.amount.toLocaleString("en-IN")}</div>
+                      {tx.isRewardEligible && tx.rewardEarned !== undefined && (
+                        <>
+                          <div className="text-xs font-semibold text-emerald-600">{formatTransactionReward(tx)}</div>
+                          {rupeeEquivalent && <div className="text-[11px] text-emerald-500">{rupeeEquivalent}</div>}
+                        </>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           );
         })}
       </div>
