@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { CardType, UserCard } from "../../types";
 import { SharedLimitSummary } from "../../lib/limitSharing";
+import { CreditCard, Nfc, WifiHigh } from "lucide-react";
 
 export function CardIllustration({
   card,
@@ -44,6 +45,7 @@ export function CardIllustration({
   const baseAnnualFee = isLtf ? 0 : Math.max(annualFee, 0);
   const annualFeeWithGst = baseAnnualFee * 1.18;
   const totalRewardsLabel = cardType === "cashback" ? "Total Cashback" : cardType === "miles" ? "Total Miles" : "Total Points";
+  const cardTypeLabel = cardType === "cashback" ? "CASHBACK CARD" : cardType === "miles" ? "MILES CARD" : "REWARDS CARD";
   const totalRewardsValue =
     cardType === "cashback"
       ? `₹${totalRewardsReceived.toLocaleString("en-IN")}`
@@ -93,8 +95,31 @@ export function CardIllustration({
             </div>
             <div>
               <div className="text-xs tracking-[0.28em] opacity-80">{maskedNumber}</div>
-              <div className="mt-6 flex items-end justify-between">
-                <div className="chip h-11 w-16 rounded-xl" />
+              <div className="mt-6 flex items-end justify-between gap-4">
+                <div className="flex items-end gap-3">
+                  <div className="relative h-12 w-16 overflow-hidden rounded-xl border border-white/30 bg-white/12 backdrop-blur-[1px] shadow-[0_10px_18px_rgba(15,23,42,0.12)]">
+                    <div className="absolute inset-0 opacity-60" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.32), rgba(255,255,255,0.06))" }} />
+                    <div className="absolute left-2 top-2 grid grid-cols-2 gap-1.5">
+                      <span className="h-2.5 w-3.5 rounded-sm border border-white/35 bg-white/18" />
+                      <span className="h-2.5 w-3.5 rounded-sm border border-white/35 bg-white/18" />
+                      <span className="h-2.5 w-3.5 rounded-sm border border-white/35 bg-white/18" />
+                      <span className="h-2.5 w-3.5 rounded-sm border border-white/35 bg-white/18" />
+                    </div>
+                    <div className="absolute inset-x-0 bottom-0 h-4 bg-white/10" />
+                  </div>
+                  <div className="flex flex-col gap-1 pb-1">
+                    <CreditCard className="h-4 w-4 opacity-80" />
+                    <div className="flex items-center gap-1.5 opacity-85">
+                      <WifiHigh className="h-4 w-4" />
+                      <Nfc className="h-4 w-4" />
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">
+                    {cardTypeLabel}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
