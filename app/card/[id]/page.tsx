@@ -9,6 +9,8 @@ import { categorizeTransactions, calculateDueDate } from "../../../lib/billingCy
 import { CardIllustration } from "../../../components/cards/CardIllustration";
 import AddSpendModal from "../../../components/cards/AddSpendModal";
 import { RewardHistory } from "../../../components/detail/RewardHistory";
+import { CardBenefits } from "../../../components/detail/CardBenefits";
+import { RewardsCap } from "../../../components/detail/RewardsCap";
 import { TransactionList } from "../../../components/detail/TransactionList";
 import { BankCardData, CardNetwork, CardType, RewardRateMode, Transaction } from "../../../types";
 import { getSharedLimitSummary } from "../../../lib/limitSharing";
@@ -588,14 +590,17 @@ export default function CardDetailPage() {
         </div>
 
         {activeTab === "unbilled" && (
-          <TransactionList
-            title="Unbilled Spends"
-            transactions={unbilled}
-            sortBy={unbilledSort}
-            onSortChange={setUnbilledSort}
-            onTransactionClick={openEditTransaction}
-            activeTransactionId={editingTransaction?.id}
-          />
+          <div className="space-y-5">
+            <TransactionList
+              title="Unbilled Spends"
+              transactions={unbilled}
+              sortBy={unbilledSort}
+              onSortChange={setUnbilledSort}
+              onTransactionClick={openEditTransaction}
+              activeTransactionId={editingTransaction?.id}
+            />
+            <CardBenefits card={card} cardData={cardData} />
+          </div>
         )}
         {activeTab === "billed" && (
           <TransactionList
@@ -609,12 +614,15 @@ export default function CardDetailPage() {
           />
         )}
         {activeTab === "rewards" && (
-          <RewardHistory
-            transactions={[...unbilled, ...billed]}
-            cardType={card.type}
-            sortBy={rewardSort}
-            onSortChange={setRewardSort}
-          />
+          <>
+            <RewardHistory
+              transactions={[...unbilled, ...billed]}
+              cardType={card.type}
+              sortBy={rewardSort}
+              onSortChange={setRewardSort}
+            />
+            <RewardsCap cardData={cardData} />
+          </>
         )}
       </div>
 
