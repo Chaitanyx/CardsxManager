@@ -75,7 +75,7 @@ export default function Home() {
           subtitle='Tap "Add Card" to start tracking your spends.'
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {cards.map((card) => {
             const cardTransactions = transactions.filter((tx) => tx.cardId === card.id);
             const { unbilled, billed } = categorizeTransactions(cardTransactions, card);

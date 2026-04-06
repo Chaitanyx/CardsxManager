@@ -4,7 +4,29 @@ import React from "react";
 import Link from "next/link";
 import { CardType, UserCard } from "../../types";
 import { SharedLimitSummary } from "../../lib/limitSharing";
-import { CreditCard, Nfc, WifiHigh } from "lucide-react";
+import { 
+  CreditCard, Nfc, WifiHigh, Plane, Wallet, Sparkles, 
+  ShoppingBag, UtensilsCrossed, Fuel, Train, Smartphone, Gem, Crown 
+} from "lucide-react";
+
+function getBackgroundIcon(cardName: string, cardType: CardType) {
+  const name = cardName.toLowerCase();
+  const classes = "w-48 h-48 -rotate-12";
+  
+  if (name.includes("swiggy") || name.includes("zomato") || name.includes("dining")) return <UtensilsCrossed className={classes} />;
+  if (name.includes("fuel") || name.includes("indianoil") || name.includes("bpcl") || name.includes("hpcl") || name.includes("petrol") || name.includes("octane")) return <Fuel className={classes} />;
+  if (name.includes("amazon") || name.includes("flipkart") || name.includes("shopping") || name.includes("tata neu") || name.includes("myntra") || name.includes("ace")) return <ShoppingBag className={classes} />;
+  if (name.includes("train") || name.includes("irctc")) return <Train className={classes} />;
+  if (name.includes("airtel") || name.includes("telecom") || name.includes("jio")) return <Smartphone className={classes} />;
+  if (name.includes("vistara") || name.includes("indigo") || name.includes("yatra") || name.includes("travel") || name.includes("makemytrip") || name.includes("mmt") || name.includes("atlas") || name.includes("voyage") || name.includes("scapia") || name.includes("miles")) return <Plane className={classes} />;
+  if (name.includes("infinia") || name.includes("reserve") || name.includes("magnus") || name.includes("burgundy") || name.includes("zenith") || name.includes("metal") || name.includes("black") || name.includes("aurum") || name.includes("emerge") || name.includes("eon")) return <Crown className={classes} />;
+  if (name.includes("privilege") || name.includes("select") || name.includes("regalia") || name.includes("wealth") || name.includes("signature") || name.includes("rubyx") || name.includes("eterna")) return <Gem className={classes} />;
+
+  // Type fallbacks
+  if (cardType === "miles") return <Plane className={classes} />;
+  if (cardType === "cashback") return <Wallet className={classes} />;
+  return <Sparkles className={classes} />;
+}
 
 export function CardIllustration({
   card,
@@ -64,6 +86,11 @@ export function CardIllustration({
           <div className="absolute inset-0 opacity-25" style={{ background: "radial-gradient(circle at 10% 100%, rgba(0,0,0,0.3), transparent 46%)" }} />
           <div className="absolute left-0 right-0 top-0 h-16 opacity-55" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0))" }} />
           <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "repeating-linear-gradient(120deg, rgba(255,255,255,0.8) 0 1px, transparent 1px 6px)" }} />
+          
+          <div className="absolute -bottom-6 -right-6 opacity-[0.15] mix-blend-overlay pointer-events-none select-none">
+            {getBackgroundIcon(card.name, cardType)}
+          </div>
+
           <div className="absolute bottom-4 right-4 h-24 w-24 rounded-full bg-white/12 blur-2xl" />
           <div className="absolute left-6 top-20 h-16 w-16 rounded-full bg-black/10 blur-2xl" />
           <div className="absolute right-4 top-4 text-right text-white/75 drop-shadow-[0_1px_1px_rgba(0,0,0,0.12)]">
@@ -139,31 +166,52 @@ export function CardIllustration({
         <div className="h-full rounded-full bg-sky-500" style={{ width: `${Math.min(utilization, 100)}%` }} />
       </div>
 
-      <div className="grid grid-cols-2 gap-3 text-xs text-neutral-500">
-        <div className="glass-panel-strong px-3 py-2">
-          <div>Unbilled</div>
-          <div className="text-sm font-semibold text-neutral-800">₹{unbilledTotal.toLocaleString("en-IN")}</div>
+      <div className="grid grid-cols-2 gap-3 mt-4">
+        <div className="glass-panel-strong p-4 flex flex-col gap-1.5 rounded-2xl bg-gradient-to-br from-white/80 to-white/40 border border-white/60 shadow-sm relative overflow-hidden group">
+          <div className="absolute inset-0 bg-blue-500/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+          <span className="text-xs font-medium text-neutral-500 relative z-10 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+            Unbilled
+          </span>
+          <span className="text-lg font-bold text-neutral-800 relative z-10">₹{unbilledTotal.toLocaleString("en-IN")}</span>
         </div>
-        <div className="glass-panel-strong px-3 py-2">
-          <div>Statement</div>
-          <div className={`text-sm font-semibold ${billedTotal > 0 ? "text-red-600" : "text-neutral-800"}`}>
+        
+        <div className="glass-panel-strong p-4 flex flex-col gap-1.5 rounded-2xl bg-gradient-to-br from-white/80 to-white/40 border border-white/60 shadow-sm relative overflow-hidden group">
+          <div className="absolute inset-0 bg-rose-500/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+          <span className="text-xs font-medium text-neutral-500 relative z-10 flex items-center gap-1.5">
+            <span className={`w-1.5 h-1.5 rounded-full ${billedTotal > 0 ? "bg-rose-500" : "bg-neutral-300"}`}></span>
+            Statement
+          </span>
+          <span className={`text-lg font-bold relative z-10 ${billedTotal > 0 ? "text-rose-600" : "text-neutral-800"}`}>
             ₹{billedTotal.toLocaleString("en-IN")}
-          </div>
+          </span>
         </div>
+
         {showDetailedStats && (
           <>
-            <div className="glass-panel-strong px-3 py-2">
-              <div>Annual Fee</div>
-              <div className="text-sm font-semibold text-neutral-800">
-                {isLtf ? "Free" : `₹${annualFeeWithGst.toLocaleString("en-IN")}`}
+            <div className="glass-panel-strong p-4 flex flex-col gap-1.5 rounded-2xl bg-gradient-to-br from-white/80 to-white/40 border border-white/60 shadow-sm relative overflow-hidden group">
+              <div className="absolute inset-0 bg-amber-500/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <span className="text-xs font-medium text-neutral-500 relative z-10 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                Annual Fee
+              </span>
+              <div className="relative z-10 flex items-baseline gap-1">
+                <span className="text-lg font-bold text-neutral-800">
+                  {isLtf ? "Free" : `₹${annualFeeWithGst.toLocaleString("en-IN")}`}
+                </span>
+                {!isLtf && <span className="text-[10px] text-neutral-400 font-medium">w/ GST</span>}
               </div>
-              {!isLtf && <div className="text-[10px] text-neutral-500">incl. 18% GST</div>}
             </div>
-            <div className="glass-panel-strong px-3 py-2">
-              <div>{totalRewardsLabel}</div>
-              <div className={`text-sm font-semibold ${totalRewardsReceived > 0 ? "text-emerald-600" : "text-neutral-800"}`}>
+
+            <div className="glass-panel-strong p-4 flex flex-col gap-1.5 rounded-2xl bg-gradient-to-br from-white/80 to-white/40 border border-white/60 shadow-sm relative overflow-hidden group">
+              <div className="absolute inset-0 bg-emerald-500/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <span className="text-xs font-medium text-neutral-500 relative z-10 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                {totalRewardsLabel}
+              </span>
+              <span className={`text-lg font-bold relative z-10 ${totalRewardsReceived > 0 ? "text-emerald-600" : "text-neutral-800"}`}>
                 {totalRewardsValue}
-              </div>
+              </span>
             </div>
           </>
         )}

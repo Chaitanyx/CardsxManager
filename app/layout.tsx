@@ -19,12 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${outfit.variable} font-sans min-h-screen text-neutral-900`}>
+      <body className={`${dmSans.variable} ${outfit.variable} font-sans min-h-screen text-neutral-900 bg-slate-50 flex`}>
         <Navbar />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 transition-all duration-300 ml-16 sm:ml-20">
           {children}
         </main>
-        <Footer />
       </body>
     </html>
   );
