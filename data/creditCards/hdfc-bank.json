@@ -288,11 +288,13 @@
     "joiningFee": 1000,
     "rewardStructure": {
       "baseRate": 1,
+      "baseCap": 1000,
       "accelerated": [
         {
           "category": "Select merchants",
           "rate": 5,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "cap": 1000
         }
       ],
       "pointValue": 1,
@@ -323,7 +325,14 @@
       "Mastercard": [
         "World"
       ]
-    }
+    },
+    "sources": [
+      {
+        "title": "CardInsider - HDFC Bank Millennia Credit Card",
+        "url": "https://cardinsider.com/hdfc-bank/hdfc-bank-millennia-credit-card/",
+        "accessedOn": "2026-04-07"
+      }
+    ]
   },
   {
     "id": "hdfc-indigo-6e-rewards",
@@ -442,16 +451,19 @@
     "joiningFee": 500,
     "rewardStructure": {
       "baseRate": 1,
+      "baseCap": 500,
       "accelerated": [
         {
           "category": "Swiggy",
           "rate": 10,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "cap": 1500
         },
         {
           "category": "Online spends",
           "rate": 5,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "cap": 1500
         }
       ],
       "pointValue": 1,
@@ -499,16 +511,19 @@
     "joiningFee": 500,
     "rewardStructure": {
       "baseRate": 1,
+      "baseCap": 500,
       "accelerated": [
         {
           "category": "Swiggy",
           "rate": 10,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "cap": 1500
         },
         {
           "category": "Online spends",
           "rate": 5,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "cap": 1500
         }
       ],
       "pointValue": 1,
@@ -556,16 +571,19 @@
     "joiningFee": 500,
     "rewardStructure": {
       "baseRate": 1,
+      "baseCap": 500,
       "accelerated": [
         {
           "category": "Swiggy",
           "rate": 10,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "cap": 1500
         },
         {
           "category": "Online Spends",
           "rate": 5,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "cap": 1500
         }
       ],
       "pointValue": 1,

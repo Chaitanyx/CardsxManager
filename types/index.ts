@@ -4,7 +4,9 @@ export type RewardRateMode = "percent" | "multiplier" | "perCurrency";
 
 export interface RewardStructure {
   baseRate: number;
-  accelerated?: { category: string; rate: number; unit: string }[];
+  baseCap?: number;
+  baseCapNote?: string;
+  accelerated?: { category: string; rate: number; unit: string; cap?: number; capNote?: string }[];
   pointValue: number;
   pointUnit: string;
   redemption?: string[];

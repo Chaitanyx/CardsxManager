@@ -798,16 +798,21 @@
     "joiningFee": 499,
     "rewardStructure": {
       "baseRate": 1.5,
+      "baseCapNote": "No cap (unlimited)",
       "accelerated": [
         {
-          "category": "Google Pay",
+          "category": "Google Pay Utilites",
           "rate": 5,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "cap": 500,
+          "capNote": "Combined cap ₹500/month with 4% category"
         },
         {
-          "category": "Zomato and Swiggy",
+          "category": "Zomato, Swiggy, Ola",
           "rate": 4,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "cap": 500,
+          "capNote": "Combined cap ₹500/month with 5% category"
         }
       ],
       "pointValue": 1.5,

@@ -187,8 +187,9 @@
     "joiningFee": 0,
     "rewardStructure": {
       "baseRate": 1,
+      "baseCap": 2000,
       "accelerated": [
-        { "category": "Online spends", "rate": 5, "unit": "% Cashback" }
+        { "category": "Online spends", "rate": 5, "unit": "% Cashback", "cap": 2000 }
       ],
       "pointValue": 1,
       "pointUnit": "Cashback",
@@ -199,7 +200,19 @@
     "color": ["#1a438c", "#2d5eb3"],
     "features": ["Flat 5% online cashback", "No merchant restrictions", "Complimentary domestic lounge access"],
     "networks": ["Visa"],
-    "subNetworks": { "Visa": ["Signature"] }
+    "subNetworks": { "Visa": ["Signature"] },
+    "sources": [
+      {
+        "title": "CardInsider - SBI Cashback Credit Card Devaluation (Mar 2026)",
+        "url": "https://cardinsider.com/blog/sbi-cashback-credit-card-devaluation/",
+        "accessedOn": "2026-04-07"
+      },
+      {
+        "title": "SBI Card Notification - Cashback Revised",
+        "url": "https://www.sbicard.com/sbi-card-en/assets/docs/pdf/cashback-revised.pdf",
+        "accessedOn": "2026-04-07"
+      }
+    ]
   },
   {
     "id": "sbi-irctc-platinum",

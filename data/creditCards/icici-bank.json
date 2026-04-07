@@ -406,16 +406,19 @@
     "joiningFee": 0,
     "rewardStructure": {
       "baseRate": 1,
+      "baseCapNote": "No cap (unlimited)",
       "accelerated": [
         {
           "category": "Amazon",
           "rate": 5,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "capNote": "No cap (unlimited)"
         },
         {
           "category": "Partner merchants",
           "rate": 2,
-          "unit": "% Cashback"
+          "unit": "% Cashback",
+          "capNote": "No cap (unlimited)"
         }
       ],
       "pointValue": 1,
