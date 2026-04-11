@@ -43,5 +43,145 @@
         "Platinum"
       ]
     }
+  },
+  {
+    "id": "kotak-zen-signature",
+    "bank": "Kotak Mahindra Bank",
+    "name": "Zen Signature Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Signature",
+    "annualFee": 1500,
+    "joiningFee": 1500,
+    "rewardStructure": {
+      "baseRate": 3.33,
+      "accelerated": [
+        {
+          "category": "Shopping",
+          "rate": 6.66,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Zen Points",
+      "redemption": [
+        "Travel",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#475569",
+      "#0f172a"
+    ],
+    "features": [
+      "Lounge Access",
+      "Fuel surcharge waiver",
+      "Milestone Bonus"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Signature"
+      ]
+    }
+  },
+  {
+    "id": "kotak-mojo-platinum",
+    "bank": "Kotak Mahindra Bank",
+    "name": "Mojo Platinum Credit Card",
+    "type": "rewards",
+    "preferredNetwork": "Visa",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 1000,
+    "joiningFee": 1000,
+    "rewardStructure": {
+      "baseRate": 1,
+      "accelerated": [
+        {
+          "category": "Online spends",
+          "rate": 2.5,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Mojo Points",
+      "redemption": [
+        "Statement Credit",
+        "Vouchers"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#1e1b4b",
+      "#4338ca"
+    ],
+    "features": [
+      "Lounge Access",
+      "Fuel surcharge waiver",
+      "Railway surcharge waiver"
+    ],
+    "networks": [
+      "Visa"
+    ],
+    "subNetworks": {
+      "Visa": [
+        "Platinum"
+      ]
+    }
+  },
+  {
+    "id": "kotak-indianoil",
+    "bank": "Kotak Mahindra Bank",
+    "name": "IndianOil Credit Card",
+    "type": "fuel",
+    "preferredNetwork": "RuPay",
+    "preferredSubNetwork": "Platinum",
+    "annualFee": 449,
+    "joiningFee": 449,
+    "rewardStructure": {
+      "baseRate": 2,
+      "accelerated": [
+        {
+          "category": "IndianOil Fuel Spends",
+          "rate": 16,
+          "unit": "points per INR 100"
+        },
+        {
+          "category": "Dining and Grocery",
+          "rate": 8,
+          "unit": "points per INR 100"
+        }
+      ],
+      "pointValue": 0.25,
+      "pointUnit": "Reward Points",
+      "redemption": [
+        "Fuel",
+        "Statement Credit"
+      ]
+    },
+    "statementDate": 15,
+    "gracePeriodDays": 20,
+    "color": [
+      "#ea580c",
+      "#7f1d1d"
+    ],
+    "features": [
+      "Fuel points",
+      "Fuel surcharge waiver",
+      "Welcome Bonus"
+    ],
+    "networks": [
+      "RuPay"
+    ],
+    "subNetworks": {
+      "RuPay": [
+        "Platinum"
+      ]
+    }
   }
 ]

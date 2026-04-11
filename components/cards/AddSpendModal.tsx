@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import creditCardsData from "../../data/creditCards";
-import { BankCardData, Transaction, UserCard } from "../../types";
+import { BankCardData, RewardUnit, Transaction, UserCard } from "../../types";
 import { getCategoryMeta, spendCategories } from "../../lib/categoryMeta";
 import { getRewardTabLabel } from "../../lib/rewardDisplay";
 
@@ -48,7 +48,9 @@ export default function AddSpendModal({
   const [rewardRateMode, setRewardRateMode] = useState<"percent" | "multiplier" | "perCurrency">(
     card.type === "cashback" ? "percent" : "perCurrency"
   );
-  const [rewardUnit, setRewardUnit] = useState(card.type === "cashback" ? "cashback" : card.type === "miles" ? "miles" : "points");
+  const [rewardUnit, setRewardUnit] = useState<RewardUnit>(
+    card.type === "cashback" ? "cashback" : card.type === "miles" ? "miles" : "points"
+  );
   const [rewardPointValue, setRewardPointValue] = useState(
     card.type === "rewards" ? String(bankCard?.rewardStructure?.pointValue ?? 1) : ""
   );
@@ -84,12 +86,31 @@ export default function AddSpendModal({
       return Array.from(presetRates)
         .filter((rate) => rate > 0)
         .sort((a, b) => a - b)
-        .map((rate) => ({
-        label: `${rate} point${rate > 1 ? "s" : ""} / ₹100`,
-        value: String(rate),
-        mode: "perCurrency" as const,
-        unit: "points"
-      }));
+        .flatMap((rate) => {
+          const options: RewardOption[] = [
+            {
+              label: `${rate} point${rate > 1 ? "s" : ""} / ₹100`,
+              value: String(rate),
+              mode: "perCurrency" as const,
+              unit: "points"
+            }
+          ];
+          if (rate === 1) {
+            options.push({
+              label: `1 point / ₹150`,
+              value: String(100 / 150),
+              mode: "perCurrency" as const,
+              unit: "points"
+            });
+            options.push({
+              label: `1 point / ₹200`,
+              value: String(100 / 200),
+              mode: "perCurrency" as const,
+              unit: "points"
+            });
+          }
+          return options;
+        });
     }
 
     return [1, 2, 3, 5].map((rate) => ({
@@ -271,7 +292,7 @@ export default function AddSpendModal({
                   <label className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">Unit</label>
                   <select
                     value={rewardUnit}
-                    onChange={(event) => setRewardUnit(event.target.value)}
+                    onChange={(event) => setRewardUnit(event.target.value as RewardUnit)}
                     className="rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm shadow-sm outline-none transition focus:border-neutral-400"
                   >
                     <option value="cashback">Cashback</option>

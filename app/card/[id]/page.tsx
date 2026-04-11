@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import creditCardsData from "../../../data/creditCards";
 import { useCards } from "../../../hooks/useCards";
@@ -12,7 +12,7 @@ import { RewardHistory } from "../../../components/detail/RewardHistory";
 import { CardBenefits } from "../../../components/detail/CardBenefits";
 import { RewardsCap } from "../../../components/detail/RewardsCap";
 import { TransactionList } from "../../../components/detail/TransactionList";
-import { BankCardData, CardNetwork, CardType, RewardRateMode, Transaction } from "../../../types";
+import { BankCardData, CardNetwork, CardType, RewardRateMode, RewardUnit, Transaction, UserCard } from "../../../types";
 import { getSharedLimitSummary } from "../../../lib/limitSharing";
 import { spendCategories } from "../../../lib/categoryMeta";
 import { getRewardTabLabel } from "../../../lib/rewardDisplay";
@@ -30,9 +30,15 @@ export default function CardDetailPage() {
   const params = useParams();
   const router = useRouter();
   const cardId = params?.id as string;
-  const { cards, updateCard, removeCard } = useCards();
-  const { transactions, addTransaction, removeTransactions, updateTransaction, removeTransaction } = useTransactions();
-  const [isMounted, setIsMounted] = useState(false);
+  const { cards, loading: cardsLoading, updateCard, deleteCard } = useCards();
+  const {
+    transactions,
+    loading: transactionsLoading,
+    addTransaction,
+    deleteTransactions,
+    updateTransaction,
+    deleteTransaction
+  } = useTransactions();
   const [activeTab, setActiveTab] = useState<"unbilled" | "billed" | "rewards">("unbilled");
   const [showSpendModal, setShowSpendModal] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -50,50 +56,54 @@ export default function CardDetailPage() {
   const [editRewardEligible, setEditRewardEligible] = useState(true);
   const [editRewardRate, setEditRewardRate] = useState("");
   const [editRewardRateMode, setEditRewardRateMode] = useState<RewardRateMode>("percent");
-  const [editRewardUnit, setEditRewardUnit] = useState("points");
+  const [editRewardUnit, setEditRewardUnit] = useState<RewardUnit>("points");
   const [editRewardPointValue, setEditRewardPointValue] = useState("");
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const card = cards.find((item) => item.id === cardId);
   const cardData = useMemo(
-    () => (creditCardsData as BankCardData[]).find((item) => item.id === card?.bankCardId),
-    [card?.bankCardId]
+    () => (creditCardsData as BankCardData[]).find((item) => item.id === card?.bank_card_id),
+    [card?.bank_card_id]
   );
 
-  const cardTransactions = transactions.filter((tx) => tx.cardId === cardId);
+  const cardTransactions = transactions.filter((tx) => (tx.cardId ?? tx.card_id) === cardId);
   const { unbilled, billed } = card
     ? categorizeTransactions(cardTransactions, card)
     : { unbilled: [], billed: [] };
 
   const unbilledTotal = unbilled.reduce((acc, tx) => acc + tx.amount, 0);
   const billedTotal = billed.reduce((acc, tx) => acc + tx.amount, 0);
-  const totalRewardsReceived = cardTransactions.reduce((acc, tx) => acc + (tx.rewardEarned ?? 0), 0);
+  const totalRewardsReceived = cardTransactions.reduce((acc, tx) => acc + (tx.rewardEarned ?? tx.reward_earned ?? 0), 0);
   const totalCardSpend = cardTransactions.reduce((acc, tx) => acc + tx.amount, 0);
-  const configuredAnnualFee = card?.annualFee ?? cardData?.annualFee ?? 0;
-  const isCardLtf = card?.isLtf ?? configuredAnnualFee === 0;
-  const feeWaiverTarget = card?.annualFeeWaiverTarget ?? (configuredAnnualFee > 0 ? configuredAnnualFee * 100 : 0);
-  const includePastCumulativeSpend = card?.includePastCumulativeSpend ?? false;
-  const pastCumulativeSpend = card?.pastCumulativeSpend ?? 0;
+  const configuredAnnualFee = card?.annual_fee ?? cardData?.annualFee ?? 0;
+  const isCardLtf = card?.is_ltf ?? configuredAnnualFee === 0;
+  const feeWaiverTarget = card?.annual_fee_waiver_target ?? (configuredAnnualFee > 0 ? configuredAnnualFee * 100 : 0);
+  const includePastCumulativeSpend = card?.include_past_cumulative_spend ?? false;
+  const pastCumulativeSpend = card?.past_cumulative_spend ?? 0;
   const effectiveWaiverSpend = totalCardSpend + (includePastCumulativeSpend ? pastCumulativeSpend : 0);
   const restoredAnnualFee = configuredAnnualFee > 0 ? configuredAnnualFee : cardData?.annualFee ?? 0;
   const restoredWaiverTarget = feeWaiverTarget > 0 ? feeWaiverTarget : restoredAnnualFee > 0 ? restoredAnnualFee * 100 : 0;
   const feeWaiverRemaining = Math.max(feeWaiverTarget - effectiveWaiverSpend, 0);
   const showFeeWaiverTracker = !isCardLtf && configuredAnnualFee > 0 && feeWaiverTarget > 0;
   const sharedLimitSummary = card ? getSharedLimitSummary(cards, transactions, card) : null;
-  const dueDate = card ? calculateDueDate(card.statementDate, card.gracePeriodDays) : null;
+  const statementDay = Number(card?.statement_date ?? card?.statementDate ?? 1);
+  const graceDays = Number(card?.grace_period_days ?? card?.gracePeriodDays ?? 0);
+  const currentCardType: CardType = (card?.card_type ?? card?.type ?? "cashback") as CardType;
+  const currentSubNetwork = card?.sub_network ?? card?.subNetwork ?? "";
+  const dueDate = card ? calculateDueDate(statementDay, graceDays) : null;
+  const cardCreditLimit = Number((card as { credit_limit?: number; creditLimit?: number } | undefined)?.credit_limit
+    ?? (card as { credit_limit?: number; creditLimit?: number } | undefined)?.creditLimit
+    ?? 0);
   const rewardRateOptions = useMemo(() => {
     if (!cardData || !card) return [] as Array<{ label: string; value: string; mode: RewardRateMode; unit: string }>;
 
-    if (card.type === "cashback") {
-      const presets = cardData.rewardStructure?.accelerated?.map((item) => ({
-        label: `${item.category} - ${item.rate}%`,
-        value: String(item.rate),
-        mode: "percent" as RewardRateMode,
-        unit: "cashback"
-      })) ?? [];
+    if (currentCardType === "cashback") {
+      const presets =
+        cardData.rewardStructure?.accelerated?.map((item: any) => ({
+          label: `${item.category} - ${item.rate}%`,
+          value: String(item.rate),
+          mode: "percent" as RewardRateMode,
+          unit: "cashback"
+        })) ?? [];
 
       presets.unshift({
         label: `Base - ${cardData.rewardStructure?.baseRate ?? 1}%`,
@@ -104,12 +114,12 @@ export default function CardDetailPage() {
       return presets;
     }
 
-    if (card.type === "rewards") {
+    if (currentCardType === "rewards") {
       const presetRates = new Set<number>([
         1,
         2,
         cardData.rewardStructure?.baseRate ?? 1,
-        ...(cardData.rewardStructure?.accelerated?.map((item) => item.rate) ?? [])
+        ...(cardData.rewardStructure?.accelerated?.map((item: any) => item.rate) ?? [])
       ]);
 
       return Array.from(presetRates)
@@ -129,12 +139,12 @@ export default function CardDetailPage() {
       mode: "perCurrency" as RewardRateMode,
       unit: "miles"
     }));
-  }, [card, cardData]);
+  }, [card, cardData, currentCardType]);
 
-  if (!isMounted) {
+  if ((cardsLoading || transactionsLoading) && cards.length === 0) {
     return (
       <section className="glass-panel p-10 text-neutral-500 text-center">
-        Loading card details...
+        Syncing card data...
       </section>
     );
   }
@@ -165,7 +175,7 @@ export default function CardDetailPage() {
     new Set<string>([
       ...((cardData?.subNetworks?.[card.network] as string[] | undefined) ?? []),
       ...(networkVariants[card.network] ?? []),
-      card.subNetwork
+      currentSubNetwork
     ])
   );
 
@@ -174,15 +184,17 @@ export default function CardDetailPage() {
     setIsClearing(true);
     const ids = billed.map((tx) => tx.id);
     setTimeout(() => {
-      removeTransactions(ids);
+      deleteTransactions(ids);
       setIsClearing(false);
       setShowPaid(true);
       setTimeout(() => setShowPaid(false), 1200);
     }, 350);
   };
 
-  const handleUpdateSettings = (updates: Partial<typeof card>) => {
-    updateCard(card.id, updates);
+  const handleUpdateSettings = (updates: Partial<UserCard>) => {
+    if (card) {
+      updateCard({ ...card, ...updates });
+    }
   };
 
   const calculateRewardEarned = (amount: number, rate: number, rateMode: RewardRateMode) => {
@@ -200,19 +212,23 @@ export default function CardDetailPage() {
     setEditDate(txDate.toISOString().slice(0, 10));
     setEditTime(txDate.toTimeString().slice(0, 5));
     setEditCategory(tx.category);
-    setEditRewardEligible(tx.isRewardEligible);
-    setEditRewardRate(tx.rewardRate !== undefined ? String(tx.rewardRate) : "");
-    setEditRewardRateMode(tx.rewardRateMode ?? (card.type === "cashback" ? "percent" : "perCurrency"));
-    setEditRewardUnit(tx.rewardUnit ?? (card.type === "cashback" ? "cashback" : card.type === "miles" ? "miles" : "points"));
+    setEditRewardEligible(tx.is_reward_eligible ?? tx.isRewardEligible ?? true);
+    setEditRewardRate(tx.reward_rate !== undefined ? String(tx.reward_rate) : tx.rewardRate !== undefined ? String(tx.rewardRate) : "");
+    setEditRewardRateMode(tx.reward_rate_mode ?? tx.rewardRateMode ?? (currentCardType === "cashback" ? "percent" : "perCurrency"));
+    setEditRewardUnit(
+      (tx.reward_unit ?? tx.rewardUnit ?? (currentCardType === "cashback" ? "cashback" : currentCardType === "miles" ? "miles" : "points")) as RewardUnit
+    );
     setEditRewardPointValue(
-      tx.rewardPointValue !== undefined
+      tx.reward_point_value !== undefined
+        ? String(tx.reward_point_value)
+        : tx.rewardPointValue !== undefined
         ? String(tx.rewardPointValue)
         : String(cardData?.rewardStructure?.pointValue ?? 1)
     );
   };
 
   const handleSaveTransactionEdit = () => {
-    if (!editingTransaction || !editMerchant || !editAmount) return;
+    if (!editingTransaction || !editMerchant || !editAmount || !card) return;
 
     const parsedAmount = Number(editAmount);
     const parsedRate = editRewardRate ? Number(editRewardRate) : 0;
@@ -221,18 +237,19 @@ export default function CardDetailPage() {
       ? calculateRewardEarned(parsedAmount, parsedRate, editRewardRateMode)
       : 0;
 
-    updateTransaction(editingTransaction.id, {
+    updateTransaction({
+      ...editingTransaction,
       merchant: editMerchant,
       amount: parsedAmount,
       date: `${editDate}T${editTime}:00.000Z`,
       category: editCategory,
-      isRewardEligible: editRewardEligible,
-      rewardType: card.type,
-      rewardRate: editRewardEligible ? parsedRate : undefined,
-      rewardRateMode: editRewardEligible ? editRewardRateMode : undefined,
-      rewardUnit: editRewardEligible ? editRewardUnit : undefined,
-      rewardEarned: editRewardEligible ? rewardEarned : 0,
-      rewardPointValue: editRewardEligible && editRewardUnit === "points" ? parsedPointValue : undefined
+      is_reward_eligible: editRewardEligible,
+      reward_type: currentCardType,
+      reward_rate: editRewardEligible ? parsedRate : undefined,
+      reward_rate_mode: editRewardEligible ? editRewardRateMode : undefined,
+      reward_unit: editRewardEligible ? editRewardUnit : undefined,
+      reward_earned: editRewardEligible ? rewardEarned : 0,
+      reward_point_value: editRewardEligible && editRewardUnit === "points" ? parsedPointValue : undefined
     });
 
     setEditingTransaction(null);
@@ -240,7 +257,7 @@ export default function CardDetailPage() {
 
   const handleDeleteTransaction = () => {
     if (!editingTransaction) return;
-    removeTransaction(editingTransaction.id);
+    deleteTransaction(editingTransaction.id);
     setEditingTransaction(null);
   };
 
@@ -249,7 +266,7 @@ export default function CardDetailPage() {
       <div className="space-y-5">
         <CardIllustration
           card={card}
-          cardType={card.type}
+          cardType={currentCardType}
           annualFee={configuredAnnualFee}
           isLtf={isCardLtf}
           unbilledTotal={unbilledTotal}
@@ -265,7 +282,7 @@ export default function CardDetailPage() {
         <div className="glass-panel p-5 text-sm text-neutral-600 space-y-2">
           <div className="flex items-center justify-between">
             <span>Credit Limit</span>
-            <span className="font-semibold text-neutral-900">₹{card.creditLimit.toLocaleString("en-IN")}</span>
+            <span className="font-semibold text-neutral-900">₹{cardCreditLimit.toLocaleString("en-IN")}</span>
           </div>
           {sharedLimitSummary?.sharedLimitEnabled && (
             <div className="rounded-2xl border border-white/60 bg-white/70 px-3 py-2 text-xs text-neutral-600">
@@ -274,7 +291,7 @@ export default function CardDetailPage() {
           )}
           <div className="flex items-center justify-between">
             <span>Statement Day</span>
-            <span className="font-semibold text-neutral-900">{card.statementDate}</span>
+            <span className="font-semibold text-neutral-900">{card.statement_date}</span>
           </div>
           <div className="flex items-center justify-between">
             <span>Due Date</span>
@@ -322,14 +339,14 @@ export default function CardDetailPage() {
                     new Set<string>([
                       ...((cardData?.subNetworks?.[nextNetwork] as string[] | undefined) ?? []),
                       ...(networkVariants[nextNetwork] ?? []),
-                      card.subNetwork
+                      currentSubNetwork
                     ])
                   );
-                  const nextSubNetwork = nextSubNetworkOptions.includes(card.subNetwork)
-                    ? card.subNetwork
-                    : nextSubNetworkOptions[0] ?? card.subNetwork;
+                  const nextSubNetwork = nextSubNetworkOptions.includes(currentSubNetwork)
+                    ? currentSubNetwork
+                    : nextSubNetworkOptions[0] ?? currentSubNetwork;
 
-                  handleUpdateSettings({ network: nextNetwork, subNetwork: nextSubNetwork });
+                  handleUpdateSettings({ network: nextNetwork, sub_network: nextSubNetwork });
                 }}
                 className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
               >
@@ -343,8 +360,8 @@ export default function CardDetailPage() {
             <div className="grid gap-2">
               <label className="text-sm font-semibold">Sub-network</label>
               <select
-                value={card.subNetwork}
-                onChange={(event) => handleUpdateSettings({ subNetwork: event.target.value })}
+                value={card.sub_network}
+                onChange={(event) => handleUpdateSettings({ sub_network: event.target.value })}
                 className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
               >
                 {subNetworkOptions.map((variant: string) => (
@@ -358,12 +375,12 @@ export default function CardDetailPage() {
               <label className="text-sm font-semibold">Card Last 4 Digits</label>
               <input
                 type="text"
-                value={card.last4}
+                value={card.last_4_digits}
                 maxLength={4}
                 inputMode="numeric"
                 onChange={(event) =>
                   handleUpdateSettings({
-                    last4: event.target.value.replace(/\D/g, "").slice(0, 4)
+                    last_4_digits: event.target.value.replace(/\D/g, "").slice(0, 4)
                   })
                 }
                 className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
@@ -373,10 +390,10 @@ export default function CardDetailPage() {
               <label className="text-sm font-semibold">Statement Day</label>
               <input
                 type="number"
-                value={card.statementDate}
+                value={card.statement_date}
                 min={1}
                 max={31}
-                onChange={(event) => handleUpdateSettings({ statementDate: Number(event.target.value) })}
+                onChange={(event) => handleUpdateSettings({ statement_date: Number(event.target.value) })}
                 className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
               />
             </div>
@@ -384,10 +401,10 @@ export default function CardDetailPage() {
               <label className="text-sm font-semibold">Grace Period (days)</label>
               <input
                 type="number"
-                value={card.gracePeriodDays}
+                value={card.grace_period_days}
                 min={0}
                 max={45}
-                onChange={(event) => handleUpdateSettings({ gracePeriodDays: Number(event.target.value) })}
+                onChange={(event) => handleUpdateSettings({ grace_period_days: Number(event.target.value) })}
                 className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
               />
             </div>
@@ -395,9 +412,9 @@ export default function CardDetailPage() {
               <label className="text-sm font-semibold">Credit Limit</label>
               <input
                 type="number"
-                value={card.creditLimit}
+                value={card.credit_limit}
                 min={0}
-                onChange={(event) => handleUpdateSettings({ creditLimit: Number(event.target.value) })}
+                onChange={(event) => handleUpdateSettings({ credit_limit: Number(event.target.value) })}
                 className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
               />
             </div>
@@ -411,11 +428,11 @@ export default function CardDetailPage() {
                   type="button"
                   onClick={() =>
                     handleUpdateSettings({
-                      isLtf: !isCardLtf,
-                      annualFee: isCardLtf ? restoredAnnualFee : configuredAnnualFee,
-                      annualFeeWaiverTarget: isCardLtf ? restoredWaiverTarget : 0,
-                      includePastCumulativeSpend: isCardLtf ? includePastCumulativeSpend : false,
-                      pastCumulativeSpend: isCardLtf ? pastCumulativeSpend : 0
+                      is_ltf: !isCardLtf,
+                      annual_fee: isCardLtf ? restoredAnnualFee : configuredAnnualFee,
+                      annual_fee_waiver_target: isCardLtf ? restoredWaiverTarget : 0,
+                      include_past_cumulative_spend: isCardLtf ? includePastCumulativeSpend : false,
+                      past_cumulative_spend: isCardLtf ? pastCumulativeSpend : 0
                     })
                   }
                   className={`relative h-7 w-14 rounded-full transition ${
@@ -439,8 +456,8 @@ export default function CardDetailPage() {
                   disabled={isCardLtf}
                   onChange={(event) =>
                     handleUpdateSettings({
-                      annualFee: Math.max(Number(event.target.value) || 0, 0),
-                      isLtf: false
+                      annual_fee: Math.max(Number(event.target.value) || 0, 0),
+                      is_ltf: false
                     })
                   }
                   className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm disabled:bg-neutral-100 disabled:text-neutral-500"
@@ -459,7 +476,7 @@ export default function CardDetailPage() {
                     min={0}
                     onChange={(event) =>
                       handleUpdateSettings({
-                        annualFeeWaiverTarget: Math.max(Number(event.target.value) || 0, 0)
+                        annual_fee_waiver_target: Math.max(Number(event.target.value) || 0, 0)
                       })
                     }
                     className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
@@ -474,8 +491,8 @@ export default function CardDetailPage() {
                         type="button"
                         onClick={() =>
                           handleUpdateSettings({
-                            includePastCumulativeSpend: !includePastCumulativeSpend,
-                            pastCumulativeSpend: !includePastCumulativeSpend ? pastCumulativeSpend : 0
+                            include_past_cumulative_spend: !includePastCumulativeSpend,
+                            past_cumulative_spend: !includePastCumulativeSpend ? pastCumulativeSpend : 0
                           })
                         }
                         className={`relative h-7 w-14 rounded-full transition ${
@@ -498,7 +515,7 @@ export default function CardDetailPage() {
                           value={pastCumulativeSpend}
                           onChange={(event) =>
                             handleUpdateSettings({
-                              pastCumulativeSpend: Math.max(Number(event.target.value) || 0, 0)
+                              past_cumulative_spend: Math.max(Number(event.target.value) || 0, 0)
                             })
                           }
                           className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm"
@@ -542,10 +559,12 @@ export default function CardDetailPage() {
             </div>
             <button
               onClick={() => {
-                removeCard(card.id);
-                router.push("/");
+                if (window.confirm("Are you sure you want to delete this card? This action cannot be undone.")) {
+                  deleteCard(card.id);
+                  router.push("/");
+                }
               }}
-              className="rounded-full border border-red-200 bg-red-50 px-5 py-2 text-sm font-semibold text-red-600"
+              className="w-full rounded-full bg-red-500 text-white px-5 py-2 text-sm font-semibold"
             >
               Delete Card
             </button>
@@ -577,7 +596,7 @@ export default function CardDetailPage() {
             }`}
             onClick={() => setActiveTab("rewards")}
           >
-            {getRewardTabLabel(card.type)}
+            {getRewardTabLabel(currentCardType)}
           </button>
           {activeTab === "billed" && billed.length > 0 && (
             <button
@@ -616,8 +635,8 @@ export default function CardDetailPage() {
         {activeTab === "rewards" && (
           <>
             <RewardHistory
-              transactions={[...unbilled, ...billed]}
-              cardType={card.type}
+              transactions={cardTransactions}
+              cardType={currentCardType}
               sortBy={rewardSort}
               onSortChange={setRewardSort}
             />
@@ -697,91 +716,90 @@ export default function CardDetailPage() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-white/60 bg-white/70 p-4">
-                <div className="mb-3 flex items-center justify-between">
-                  <div>
-                    <h3 className="font-semibold">{getRewardTabLabel(card.type)}</h3>
-                    <p className="text-xs text-neutral-500">Adjust eligibility and earned value for this spend.</p>
-                  </div>
-                  <button
-                    onClick={() => setEditRewardEligible((prev) => !prev)}
-                    className={`relative h-7 w-14 rounded-full transition ${
-                      editRewardEligible ? "bg-emerald-500" : "bg-neutral-300"
-                    }`}
-                  >
-                    <span
-                      className={`absolute top-1 h-5 w-5 rounded-full bg-white transition ${
-                        editRewardEligible ? "left-8" : "left-1"
-                      }`}
-                    />
-                  </button>
+              <div className="mb-4 flex items-center justify-between gap-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-neutral-900">{getRewardTabLabel(currentCardType)}</h3>
+                  <p className="text-sm text-neutral-500">Adjust eligibility and earned value for this spend.</p>
                 </div>
-
-                {editRewardEligible && (
-                  <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-                    <select
-                      value={editRewardRate}
-                      onChange={(event) => {
-                        const selected = rewardRateOptions.find((option) => option.value === event.target.value);
-                        if (selected) {
-                          setEditRewardRateMode(selected.mode);
-                          setEditRewardUnit(selected.unit);
-                        }
-                        setEditRewardRate(event.target.value);
-                      }}
-                      className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
-                    >
-                      <option value="">Select rate</option>
-                      {rewardRateOptions.map((option) => (
-                        <option key={option.label} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={editRewardRateMode}
-                      onChange={(event) => setEditRewardRateMode(event.target.value as RewardRateMode)}
-                      className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
-                    >
-                      <option value="percent">Percent</option>
-                      <option value="perCurrency">Per INR 100</option>
-                      <option value="multiplier">Multiplier</option>
-                    </select>
-                    <select
-                      value={editRewardUnit}
-                      onChange={(event) => setEditRewardUnit(event.target.value)}
-                      className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
-                    >
-                      <option value="cashback">Cashback</option>
-                      <option value="points">Reward Points</option>
-                      <option value="miles">Miles</option>
-                    </select>
-                  </div>
-                )}
-
-                {editRewardEligible && editRewardUnit === "points" && (
-                  <div className="mt-3 grid gap-2 md:max-w-xs">
-                    <label className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">Point value (₹ per point)</label>
-                    <input
-                      type="number"
-                      min={0}
-                      step="0.01"
-                      value={editRewardPointValue}
-                      onChange={(event) => setEditRewardPointValue(event.target.value)}
-                      className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
-                    />
-                    <p className="text-xs text-neutral-500">Example: 1 reward point = ₹0.25</p>
-                  </div>
-                )}
+                <button
+                  type="button"
+                  onClick={() => setEditRewardEligible((prev) => !prev)}
+                  className={`relative h-7 w-14 rounded-full transition ${
+                    editRewardEligible ? "bg-emerald-500" : "bg-neutral-300"
+                  }`}
+                >
+                  <span
+                    className={`absolute top-1 h-5 w-5 rounded-full bg-white transition ${
+                      editRewardEligible ? "left-8" : "left-1"
+                    }`}
+                  />
+                </button>
               </div>
+
+              {editRewardEligible && (
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                  <select
+                    value={editRewardRate}
+                    onChange={(event) => {
+                      const selected = rewardRateOptions.find((option) => option.value === event.target.value);
+                      if (selected) {
+                        setEditRewardRateMode(selected.mode);
+                        setEditRewardUnit(selected.unit as RewardUnit);
+                      }
+                      setEditRewardRate(event.target.value);
+                    }}
+                    className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
+                  >
+                    <option value="">Select rate</option>
+                    {rewardRateOptions.map((option) => (
+                      <option key={option.label} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={editRewardRateMode}
+                    onChange={(event) => setEditRewardRateMode(event.target.value as RewardRateMode)}
+                    className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
+                  >
+                    <option value="percent">Percent</option>
+                    <option value="perCurrency">Per INR 100</option>
+                    <option value="multiplier">Multiplier</option>
+                  </select>
+                  <select
+                    value={editRewardUnit}
+                    onChange={(event) => setEditRewardUnit(event.target.value as RewardUnit)}
+                    className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
+                  >
+                    <option value="cashback">Cashback</option>
+                    <option value="points">Reward Points</option>
+                    <option value="miles">Miles</option>
+                  </select>
+                </div>
+              )}
+
+              {editRewardEligible && editRewardUnit === "points" && (
+                <div className="mt-3 grid gap-2 md:max-w-xs">
+                  <label className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">Point value (₹ per point)</label>
+                  <input
+                    type="number"
+                    min={0}
+                    step="0.01"
+                    value={editRewardPointValue}
+                    onChange={(event) => setEditRewardPointValue(event.target.value)}
+                    className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm"
+                  />
+                  <p className="text-xs text-neutral-500">Example: 1 reward point = ₹0.25</p>
+                </div>
+              )}
             </div>
 
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
               <button
                 onClick={handleDeleteTransaction}
-                className="rounded-full border border-red-200 bg-red-50 px-5 py-2 text-sm font-semibold text-red-700"
+                className="rounded-full bg-red-500 text-white px-5 py-2 text-sm font-semibold"
               >
-                Delete Transaction
+                Delete
               </button>
               <div className="flex gap-3">
                 <button
@@ -792,7 +810,7 @@ export default function CardDetailPage() {
                 </button>
                 <button
                   onClick={handleSaveTransactionEdit}
-                  className="rounded-full bg-neutral-900 px-5 py-2 text-sm font-semibold text-white"
+                  className="rounded-full bg-neutral-900 text-white px-5 py-2 text-sm font-semibold"
                 >
                   Save Changes
                 </button>

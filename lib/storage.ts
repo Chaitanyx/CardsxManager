@@ -1,4 +1,4 @@
-import { UserCard, Transaction } from '../types';
+import { Card, Transaction } from '../types';
 import creditCardsData from '../data/creditCards';
 
 export const STORAGE_KEYS = {
@@ -6,7 +6,11 @@ export const STORAGE_KEYS = {
   TRANSACTIONS: 'cardx_transactions',
 };
 
-function normalizeCard(card: UserCard): UserCard {
+function getUserScopedStorageKey(baseKey: string, userId?: string) {
+  return userId ? `${baseKey}_${userId}` : baseKey;
+}
+
+export function normalizeCard(card: Card): Card {
   const bankCard = (creditCardsData as Array<{ id: string; color: [string, string] }>).find(
     (item) => item.id === card.bankCardId
   );
@@ -27,7 +31,7 @@ function normalizeCard(card: UserCard): UserCard {
   const normalizedRenewalMonth =
     typeof card.renewalMonth === "string" && /^\d{4}-\d{2}$/.test(card.renewalMonth)
       ? card.renewalMonth
-      : card.createdAt?.slice(0, 7) ?? new Date().toISOString().slice(0, 7);
+      : card.created_at?.slice(0, 7) ?? new Date().toISOString().slice(0, 7);
 
   const normalizedLast4 = (card.last4 ?? card.id.slice(-4) ?? "0000")
     .replace(/\D/g, "")
@@ -50,30 +54,56 @@ function normalizeCard(card: UserCard): UserCard {
   };
 }
 
-export function getStoredCards(): UserCard[] {
-  if (typeof window === 'undefined') return [];
-  const stored = localStorage.getItem(STORAGE_KEYS.CARDS);
-  return stored ? (JSON.parse(stored) as UserCard[]).map(normalizeCard) : [];
+export function normalizeStoredCards(cards: Card[]): Card[] {
+  return cards.map(normalizeCard);
 }
 
-export function saveCards(cards: UserCard[]) {
+export function normalizeStoredTransactions(transactions: Transaction[]): Transaction[] {
+  return transactions.map((tx) => ({
+    ...tx,
+    status: tx.status ?? 'unbilled',
+    created_at: tx.created_at ?? new Date().toISOString(),
+  }));
+}
+
+export function getStoredCards(userId?: string): Card[] {
+  if (typeof window === 'undefined') return [];
+  const scopedKey = getUserScopedStorageKey(STORAGE_KEYS.CARDS, userId);
+  const stored = localStorage.getItem(scopedKey);
+  return stored ? normalizeStoredCards(JSON.parse(stored) as Card[]) : [];
+}
+
+export function saveCards(cards: Card[], userId?: string) {
   if (typeof window !== 'undefined') {
-    localStorage.setItem(STORAGE_KEYS.CARDS, JSON.stringify(cards));
+    const scopedKey = getUserScopedStorageKey(STORAGE_KEYS.CARDS, userId);
+    localStorage.setItem(scopedKey, JSON.stringify(cards));
   }
 }
 
-export function getStoredTransactions(): Transaction[] {
+export function getStoredTransactions(userId?: string): Transaction[] {
   if (typeof window === 'undefined') return [];
-  const stored = localStorage.getItem(STORAGE_KEYS.TRANSACTIONS);
-  return stored ? (JSON.parse(stored) as Transaction[]).map((tx) => ({
-    ...tx,
-    status: tx.status ?? 'unbilled',
-    createdAt: tx.createdAt ?? new Date().toISOString(),
-  })) : [];
+  const scopedKey = getUserScopedStorageKey(STORAGE_KEYS.TRANSACTIONS, userId);
+  const stored = localStorage.getItem(scopedKey);
+  return stored ? normalizeStoredTransactions(JSON.parse(stored) as Transaction[]) : [];
 }
 
-export function saveTransactions(transactions: Transaction[]) {
+export function saveTransactions(transactions: Transaction[], userId?: string) {
   if (typeof window !== 'undefined') {
-    localStorage.setItem(STORAGE_KEYS.TRANSACTIONS, JSON.stringify(transactions));
+    const scopedKey = getUserScopedStorageKey(STORAGE_KEYS.TRANSACTIONS, userId);
+    localStorage.setItem(scopedKey, JSON.stringify(transactions));
+  }
+}
+
+export function getLocal<T>(key: string, defaultValue: T): T {
+  if (typeof window === "undefined") {
+    return defaultValue;
+  }
+  const value = localStorage.getItem(key);
+  return value ? (JSON.parse(value) as T) : defaultValue;
+}
+
+export function setLocal<T>(key: string, value: T) {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 }

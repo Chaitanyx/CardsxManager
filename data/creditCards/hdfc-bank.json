@@ -742,12 +742,12 @@
         {
           "category": "Department stores",
           "rate": 5,
-          "unit": "points per INR 150"
+          "unit": "points per INR 200"
         },
         {
           "category": "Dining and groceries",
           "rate": 5,
-          "unit": "points per INR 150"
+          "unit": "points per INR 200"
         }
       ],
       "pointValue": 0.2,

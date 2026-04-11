@@ -197,28 +197,48 @@ export function importAllFromCsv(csvText: string) {
         creditLimit: Number(row[13]),
         sharedLimitGroupId: hasSharedLimitColumn ? row[14] || undefined : undefined,
         color: [row[hasSharedLimitColumn ? 15 : 14], row[hasSharedLimitColumn ? 16 : 15]],
-        createdAt: row[cardCreatedAtIndex]
+        createdAt: row[cardCreatedAtIndex],
+        annualFee: 0,
+        isLtf: true,
+        annualFeeWaiverTarget: 0,
+        includePastCumulativeSpend: false,
+        pastCumulativeSpend: 0,
+        renewalMonth: (row[cardCreatedAtIndex] || new Date().toISOString()).slice(0, 7)
       });
       return;
     }
 
     if (recordType === "transaction") {
+      const statusIndex = row.length - 1;
+      const rewardPointValueIndex = row.length - 2;
+      const rewardEarnedIndex = row.length - 3;
+      const rewardUnitIndex = row.length - 4;
+      const rewardRateModeIndex = row.length - 5;
+      const rewardRateIndex = row.length - 6;
+      const rewardTypeIndex = row.length - 7;
+      const isRewardEligibleIndex = row.length - 8;
+      const categoryIndex = row.length - 9;
+      const dateIndex = row.length - 10;
+      const amountIndex = row.length - 11;
+      const merchantIndex = row.length - 12;
+      const createdAtIndex = row.length - 13;
+
       transactions.push({
         id: row[1],
         cardId: row[2],
-        merchant: row[txIdx.merchant],
-        amount: Number(row[txIdx.amount]),
-        date: row[txIdx.date],
-        category: row[txIdx.category],
-        isRewardEligible: row[txIdx.isRewardEligible] === "true",
-        rewardType: row[txIdx.rewardType] as Transaction["rewardType"],
-        rewardRate: row[txIdx.rewardRate] ? Number(row[txIdx.rewardRate]) : undefined,
-        rewardRateMode: row[txIdx.rewardRateMode] as Transaction["rewardRateMode"],
-        rewardUnit: row[txIdx.rewardUnit] || undefined,
-        rewardEarned: row[txIdx.rewardEarned] ? Number(row[txIdx.rewardEarned]) : undefined,
-        rewardPointValue: row[txIdx.rewardPointValue] ? Number(row[txIdx.rewardPointValue]) : undefined,
-        status: (row[txIdx.status] as Transaction["status"]) || "unbilled",
-        createdAt: row[txIdx.createdAt]
+        merchant: row[merchantIndex],
+        amount: Number(row[amountIndex]),
+        date: row[dateIndex],
+        category: row[categoryIndex],
+        isRewardEligible: row[isRewardEligibleIndex] === "true",
+        rewardType: row[rewardTypeIndex] as Transaction["rewardType"],
+        rewardRate: row[rewardRateIndex] ? Number(row[rewardRateIndex]) : undefined,
+        rewardRateMode: row[rewardRateModeIndex] as Transaction["rewardRateMode"],
+        rewardUnit: (row[rewardUnitIndex] as Transaction["rewardUnit"]) || undefined,
+        rewardEarned: row[rewardEarnedIndex] ? Number(row[rewardEarnedIndex]) : undefined,
+        rewardPointValue: row[rewardPointValueIndex] ? Number(row[rewardPointValueIndex]) : undefined,
+        status: (row[statusIndex] as Transaction["status"]) || "unbilled",
+        createdAt: row[createdAtIndex]
       });
     }
   });
